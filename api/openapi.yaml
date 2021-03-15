@@ -1,0 +1,3898 @@
+openapi: 3.0.2
+info:
+  description: The E-fulfilment Shop API allows you to integrate your service with
+    our warehouse.
+  title: E-fulfilment Shop API
+  version: 1.1.0
+servers:
+- url: /v1
+security:
+- bearerAuth: []
+paths:
+  /addresses:
+    get:
+      operationId: getAddressCollection
+      parameters:
+      - description: The collection page number
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          type: integer
+        style: form
+      - description: The number of items per page
+        explode: true
+        in: query
+        name: items
+        required: false
+        schema:
+          default: 30
+          minimum: 0
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Address-read'
+                type: array
+            application/ld+json:
+              schema:
+                properties:
+                  hydra:member:
+                    items:
+                      $ref: '#/components/schemas/Address:jsonld-read'
+                    type: array
+                  hydra:search:
+                    properties:
+                      '@type':
+                        type: string
+                      hydra:mapping:
+                        items:
+                          properties:
+                            '@type':
+                              type: string
+                            property:
+                              type: string
+                            required:
+                              type: boolean
+                            variable:
+                              type: string
+                          type: object
+                        type: array
+                      hydra:template:
+                        type: string
+                      hydra:variableRepresentation:
+                        type: string
+                    type: object
+                  hydra:totalItems:
+                    minimum: 0
+                    type: integer
+                  hydra:view:
+                    properties:
+                      '@id':
+                        format: iri-reference
+                        type: string
+                      '@type':
+                        type: string
+                      hydra:first:
+                        format: iri-reference
+                        type: string
+                      hydra:last:
+                        format: iri-reference
+                        type: string
+                      hydra:next:
+                        format: iri-reference
+                        type: string
+                    type: object
+                required:
+                - hydra:member
+                type: object
+            text/html:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Address-read'
+                type: array
+          description: Address collection response
+      summary: Retrieves the collection of Address resources.
+      tags:
+      - Address
+    post:
+      operationId: postAddressCollection
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Address-write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Address:jsonld-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Address-write'
+        description: The new Address resource
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Address-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Address:jsonld-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Address-read'
+          description: Address resource created
+          links:
+            GetAddressItem:
+              description: The `id` value returned in the response can be used as
+                the `id` parameter in `GET /addresses/{id}`.
+              operationId: getAddressItem
+              parameters:
+                id: $response.body#/id
+        "400":
+          description: Invalid input
+        "404":
+          description: Resource not found
+      summary: Creates a Address resource.
+      tags:
+      - Address
+  /addresses/{id}:
+    delete:
+      operationId: deleteAddressItem
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Address resource deleted
+        "404":
+          description: Resource not found
+      summary: Removes the Address resource.
+      tags:
+      - Address
+    get:
+      operationId: getAddressItem
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Address-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Address:jsonld-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Address-read'
+          description: Address resource response
+        "404":
+          description: Resource not found
+      summary: Retrieves a Address resource.
+      tags:
+      - Address
+    patch:
+      operationId: patchAddressItem
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/Address-write'
+        description: The updated Address resource
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Address-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Address:jsonld-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Address-read'
+          description: Address resource updated
+        "400":
+          description: Invalid input
+        "404":
+          description: Resource not found
+      summary: Updates the Address resource.
+      tags:
+      - Address
+    put:
+      operationId: putAddressItem
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Address-write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Address:jsonld-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Address-write'
+        description: The updated Address resource
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Address-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Address:jsonld-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Address-read'
+          description: Address resource updated
+        "400":
+          description: Invalid input
+        "404":
+          description: Resource not found
+      summary: Replaces the Address resource.
+      tags:
+      - Address
+  /authentication_token:
+    post:
+      operationId: postAuthentication
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User-authenticate'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/User:jsonld-authenticate'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+          description: Valid credentials, returning a new token
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_401'
+          description: Invalid credentials
+      summary: Performs login, returning a token on success.
+      tags:
+      - Authentication token
+  /carriers:
+    get:
+      operationId: getCarrierCollection
+      parameters:
+      - description: The collection page number
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          type: integer
+        style: form
+      - description: The number of items per page
+        explode: true
+        in: query
+        name: items
+        required: false
+        schema:
+          default: 30
+          minimum: 0
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Carrier-read'
+                type: array
+            application/ld+json:
+              schema:
+                properties:
+                  hydra:member:
+                    items:
+                      $ref: '#/components/schemas/Carrier:jsonld-read'
+                    type: array
+                  hydra:search:
+                    properties:
+                      '@type':
+                        type: string
+                      hydra:mapping:
+                        items:
+                          properties:
+                            '@type':
+                              type: string
+                            property:
+                              type: string
+                            required:
+                              type: boolean
+                            variable:
+                              type: string
+                          type: object
+                        type: array
+                      hydra:template:
+                        type: string
+                      hydra:variableRepresentation:
+                        type: string
+                    type: object
+                  hydra:totalItems:
+                    minimum: 0
+                    type: integer
+                  hydra:view:
+                    properties:
+                      '@id':
+                        format: iri-reference
+                        type: string
+                      '@type':
+                        type: string
+                      hydra:first:
+                        format: iri-reference
+                        type: string
+                      hydra:last:
+                        format: iri-reference
+                        type: string
+                      hydra:next:
+                        format: iri-reference
+                        type: string
+                    type: object
+                required:
+                - hydra:member
+                type: object
+            text/html:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Carrier-read'
+                type: array
+          description: Carrier collection response
+      summary: Retrieves the collection of Carrier resources.
+      tags:
+      - Carrier
+  /carriers/{id}:
+    get:
+      operationId: getCarrierItem
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Carrier-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Carrier:jsonld-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Carrier-read'
+          description: Carrier resource response
+        "404":
+          description: Resource not found
+      summary: Retrieves a Carrier resource.
+      tags:
+      - Carrier
+  /channels:
+    get:
+      operationId: getChannelCollection
+      parameters:
+      - description: The collection page number
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          type: integer
+        style: form
+      - description: The number of items per page
+        explode: true
+        in: query
+        name: items
+        required: false
+        schema:
+          default: 30
+          minimum: 0
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Channel-read'
+                type: array
+            application/ld+json:
+              schema:
+                properties:
+                  hydra:member:
+                    items:
+                      $ref: '#/components/schemas/Channel:jsonld-read'
+                    type: array
+                  hydra:search:
+                    properties:
+                      '@type':
+                        type: string
+                      hydra:mapping:
+                        items:
+                          properties:
+                            '@type':
+                              type: string
+                            property:
+                              type: string
+                            required:
+                              type: boolean
+                            variable:
+                              type: string
+                          type: object
+                        type: array
+                      hydra:template:
+                        type: string
+                      hydra:variableRepresentation:
+                        type: string
+                    type: object
+                  hydra:totalItems:
+                    minimum: 0
+                    type: integer
+                  hydra:view:
+                    properties:
+                      '@id':
+                        format: iri-reference
+                        type: string
+                      '@type':
+                        type: string
+                      hydra:first:
+                        format: iri-reference
+                        type: string
+                      hydra:last:
+                        format: iri-reference
+                        type: string
+                      hydra:next:
+                        format: iri-reference
+                        type: string
+                    type: object
+                required:
+                - hydra:member
+                type: object
+            text/html:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Channel-read'
+                type: array
+          description: Channel collection response
+      summary: Retrieves the collection of Channel resources.
+      tags:
+      - Channel
+  /channels/{id}:
+    get:
+      operationId: getChannelItem
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Channel-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Channel:jsonld-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Channel-read'
+          description: Channel resource response
+        "404":
+          description: Resource not found
+      summary: Retrieves a Channel resource.
+      tags:
+      - Channel
+  /products:
+    get:
+      operationId: getProductCollection
+      parameters:
+      - description: The product name
+        explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: The product warehouse SKU
+        explode: true
+        in: query
+        name: sku
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: The product barcode
+        explode: true
+        in: query
+        name: barcode
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: The product channel
+        explode: true
+        in: query
+        name: channelId
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: The product channel reference
+        explode: true
+        in: query
+        name: channelReference
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: The product channel SKU
+        explode: true
+        in: query
+        name: channelSku
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: The collection page number
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          type: integer
+        style: form
+      - description: The number of items per page
+        explode: true
+        in: query
+        name: items
+        required: false
+        schema:
+          default: 30
+          minimum: 0
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Product-read_collection'
+                type: array
+            application/ld+json:
+              schema:
+                properties:
+                  hydra:member:
+                    items:
+                      $ref: '#/components/schemas/Product:jsonld-read_collection'
+                    type: array
+                  hydra:search:
+                    properties:
+                      '@type':
+                        type: string
+                      hydra:mapping:
+                        items:
+                          properties:
+                            '@type':
+                              type: string
+                            property:
+                              type: string
+                            required:
+                              type: boolean
+                            variable:
+                              type: string
+                          type: object
+                        type: array
+                      hydra:template:
+                        type: string
+                      hydra:variableRepresentation:
+                        type: string
+                    type: object
+                  hydra:totalItems:
+                    minimum: 0
+                    type: integer
+                  hydra:view:
+                    properties:
+                      '@id':
+                        format: iri-reference
+                        type: string
+                      '@type':
+                        type: string
+                      hydra:first:
+                        format: iri-reference
+                        type: string
+                      hydra:last:
+                        format: iri-reference
+                        type: string
+                      hydra:next:
+                        format: iri-reference
+                        type: string
+                    type: object
+                required:
+                - hydra:member
+                type: object
+            text/html:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Product-read_collection'
+                type: array
+          description: Product collection response
+      summary: Retrieves the collection of Product resources.
+      tags:
+      - Product
+    post:
+      operationId: postProductCollection
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product-write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Product:jsonld-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Product-write'
+        description: The new Product resource
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product-read_item'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Product:jsonld-read_item'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Product-read_item'
+          description: Product resource created
+          links:
+            GetProductItem:
+              description: The `id` value returned in the response can be used as
+                the `id` parameter in `GET /products/{id}`.
+              operationId: getProductItem
+              parameters:
+                id: $response.body#/id
+        "400":
+          description: Invalid input
+        "404":
+          description: Resource not found
+      summary: Creates a Product resource.
+      tags:
+      - Product
+  /products/{id}:
+    delete:
+      operationId: deleteProductItem
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Product resource deleted
+        "404":
+          description: Resource not found
+      summary: Removes the Product resource.
+      tags:
+      - Product
+    get:
+      operationId: getProductItem
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product-read_item'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Product:jsonld-read_item'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Product-read_item'
+          description: Product resource response
+        "404":
+          description: Resource not found
+      summary: Retrieves a Product resource.
+      tags:
+      - Product
+    patch:
+      operationId: patchProductItem
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/Product-write'
+        description: The updated Product resource
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product-read_item'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Product:jsonld-read_item'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Product-read_item'
+          description: Product resource updated
+        "400":
+          description: Invalid input
+        "404":
+          description: Resource not found
+      summary: Updates the Product resource.
+      tags:
+      - Product
+    put:
+      operationId: putProductItem
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product-write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Product:jsonld-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Product-write'
+        description: The updated Product resource
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product-read_item'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Product:jsonld-read_item'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Product-read_item'
+          description: Product resource updated
+        "400":
+          description: Invalid input
+        "404":
+          description: Resource not found
+      summary: Replaces the Product resource.
+      tags:
+      - Product
+  /purchase_lines:
+    get:
+      operationId: getPurchaseLineCollection
+      parameters:
+      - description: The purchase ID
+        explode: true
+        in: query
+        name: purchaseId
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: The collection page number
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          type: integer
+        style: form
+      - description: The number of items per page
+        explode: true
+        in: query
+        name: items
+        required: false
+        schema:
+          default: 30
+          minimum: 0
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/PurchaseLine-read'
+                type: array
+            application/ld+json:
+              schema:
+                properties:
+                  hydra:member:
+                    items:
+                      $ref: '#/components/schemas/PurchaseLine:jsonld-read'
+                    type: array
+                  hydra:search:
+                    properties:
+                      '@type':
+                        type: string
+                      hydra:mapping:
+                        items:
+                          properties:
+                            '@type':
+                              type: string
+                            property:
+                              type: string
+                            required:
+                              type: boolean
+                            variable:
+                              type: string
+                          type: object
+                        type: array
+                      hydra:template:
+                        type: string
+                      hydra:variableRepresentation:
+                        type: string
+                    type: object
+                  hydra:totalItems:
+                    minimum: 0
+                    type: integer
+                  hydra:view:
+                    properties:
+                      '@id':
+                        format: iri-reference
+                        type: string
+                      '@type':
+                        type: string
+                      hydra:first:
+                        format: iri-reference
+                        type: string
+                      hydra:last:
+                        format: iri-reference
+                        type: string
+                      hydra:next:
+                        format: iri-reference
+                        type: string
+                    type: object
+                required:
+                - hydra:member
+                type: object
+            text/html:
+              schema:
+                items:
+                  $ref: '#/components/schemas/PurchaseLine-read'
+                type: array
+          description: PurchaseLine collection response
+      summary: Retrieves the collection of PurchaseLine resources.
+      tags:
+      - PurchaseLine
+    post:
+      operationId: postPurchaseLineCollection
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PurchaseLine-write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/PurchaseLine:jsonld-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/PurchaseLine-write'
+        description: The new PurchaseLine resource
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseLine-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/PurchaseLine:jsonld-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/PurchaseLine-read'
+          description: PurchaseLine resource created
+          links:
+            GetPurchaseLineItem:
+              description: The `id` value returned in the response can be used as
+                the `id` parameter in `GET /purchase_lines/{id}`.
+              operationId: getPurchaseLineItem
+              parameters:
+                id: $response.body#/id
+        "400":
+          description: Invalid input
+        "404":
+          description: Resource not found
+      summary: Creates a PurchaseLine resource.
+      tags:
+      - PurchaseLine
+  /purchase_lines/{id}:
+    get:
+      operationId: getPurchaseLineItem
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseLine-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/PurchaseLine:jsonld-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/PurchaseLine-read'
+          description: PurchaseLine resource response
+        "404":
+          description: Resource not found
+      summary: Retrieves a PurchaseLine resource.
+      tags:
+      - PurchaseLine
+    patch:
+      operationId: patchPurchaseLineItem
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/PurchaseLine-write'
+        description: The updated PurchaseLine resource
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseLine-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/PurchaseLine:jsonld-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/PurchaseLine-read'
+          description: PurchaseLine resource updated
+        "400":
+          description: Invalid input
+        "404":
+          description: Resource not found
+      summary: Updates the PurchaseLine resource.
+      tags:
+      - PurchaseLine
+    put:
+      operationId: putPurchaseLineItem
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PurchaseLine-write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/PurchaseLine:jsonld-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/PurchaseLine-write'
+        description: The updated PurchaseLine resource
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseLine-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/PurchaseLine:jsonld-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/PurchaseLine-read'
+          description: PurchaseLine resource updated
+        "400":
+          description: Invalid input
+        "404":
+          description: Resource not found
+      summary: Replaces the PurchaseLine resource.
+      tags:
+      - PurchaseLine
+  /purchases:
+    get:
+      operationId: getPurchaseCollection
+      parameters:
+      - description: The purchase channel
+        explode: true
+        in: query
+        name: channelId
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: The purchase channel reference
+        explode: true
+        in: query
+        name: channelReference
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: The collection page number
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          type: integer
+        style: form
+      - description: The number of items per page
+        explode: true
+        in: query
+        name: items
+        required: false
+        schema:
+          default: 30
+          minimum: 0
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Purchase-read'
+                type: array
+            application/ld+json:
+              schema:
+                properties:
+                  hydra:member:
+                    items:
+                      $ref: '#/components/schemas/Purchase:jsonld-read'
+                    type: array
+                  hydra:search:
+                    properties:
+                      '@type':
+                        type: string
+                      hydra:mapping:
+                        items:
+                          properties:
+                            '@type':
+                              type: string
+                            property:
+                              type: string
+                            required:
+                              type: boolean
+                            variable:
+                              type: string
+                          type: object
+                        type: array
+                      hydra:template:
+                        type: string
+                      hydra:variableRepresentation:
+                        type: string
+                    type: object
+                  hydra:totalItems:
+                    minimum: 0
+                    type: integer
+                  hydra:view:
+                    properties:
+                      '@id':
+                        format: iri-reference
+                        type: string
+                      '@type':
+                        type: string
+                      hydra:first:
+                        format: iri-reference
+                        type: string
+                      hydra:last:
+                        format: iri-reference
+                        type: string
+                      hydra:next:
+                        format: iri-reference
+                        type: string
+                    type: object
+                required:
+                - hydra:member
+                type: object
+            text/html:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Purchase-read'
+                type: array
+          description: Purchase collection response
+      summary: Retrieves the collection of Purchase resources.
+      tags:
+      - Purchase
+    post:
+      operationId: postPurchaseCollection
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Purchase-write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Purchase:jsonld-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Purchase-write'
+        description: The new Purchase resource
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Purchase-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Purchase:jsonld-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Purchase-read'
+          description: Purchase resource created
+          links:
+            GetPurchaseItem:
+              description: The `id` value returned in the response can be used as
+                the `id` parameter in `GET /purchases/{id}`.
+              operationId: getPurchaseItem
+              parameters:
+                id: $response.body#/id
+        "400":
+          description: Invalid input
+        "404":
+          description: Resource not found
+      summary: Creates a Purchase resource.
+      tags:
+      - Purchase
+  /purchases/{id}:
+    delete:
+      operationId: deletePurchaseItem
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Purchase resource deleted
+        "404":
+          description: Resource not found
+      summary: Removes the Purchase resource.
+      tags:
+      - Purchase
+    get:
+      operationId: getPurchaseItem
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Purchase-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Purchase:jsonld-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Purchase-read'
+          description: Purchase resource response
+        "404":
+          description: Resource not found
+      summary: Retrieves a Purchase resource.
+      tags:
+      - Purchase
+    patch:
+      operationId: patchPurchaseItem
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/Purchase-write'
+        description: The updated Purchase resource
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Purchase-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Purchase:jsonld-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Purchase-read'
+          description: Purchase resource updated
+        "400":
+          description: Invalid input
+        "404":
+          description: Resource not found
+      summary: Updates the Purchase resource.
+      tags:
+      - Purchase
+    put:
+      operationId: putPurchaseItem
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Purchase-write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Purchase:jsonld-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Purchase-write'
+        description: The updated Purchase resource
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Purchase-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Purchase:jsonld-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Purchase-read'
+          description: Purchase resource updated
+        "400":
+          description: Invalid input
+        "404":
+          description: Resource not found
+      summary: Replaces the Purchase resource.
+      tags:
+      - Purchase
+  /sale_lines:
+    get:
+      operationId: getSaleLineCollection
+      parameters:
+      - description: The sale ID
+        explode: true
+        in: query
+        name: saleId
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: The collection page number
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          type: integer
+        style: form
+      - description: The number of items per page
+        explode: true
+        in: query
+        name: items
+        required: false
+        schema:
+          default: 30
+          minimum: 0
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/SaleLine-read'
+                type: array
+            application/ld+json:
+              schema:
+                properties:
+                  hydra:member:
+                    items:
+                      $ref: '#/components/schemas/SaleLine:jsonld-read'
+                    type: array
+                  hydra:search:
+                    properties:
+                      '@type':
+                        type: string
+                      hydra:mapping:
+                        items:
+                          properties:
+                            '@type':
+                              type: string
+                            property:
+                              type: string
+                            required:
+                              type: boolean
+                            variable:
+                              type: string
+                          type: object
+                        type: array
+                      hydra:template:
+                        type: string
+                      hydra:variableRepresentation:
+                        type: string
+                    type: object
+                  hydra:totalItems:
+                    minimum: 0
+                    type: integer
+                  hydra:view:
+                    properties:
+                      '@id':
+                        format: iri-reference
+                        type: string
+                      '@type':
+                        type: string
+                      hydra:first:
+                        format: iri-reference
+                        type: string
+                      hydra:last:
+                        format: iri-reference
+                        type: string
+                      hydra:next:
+                        format: iri-reference
+                        type: string
+                    type: object
+                required:
+                - hydra:member
+                type: object
+            text/html:
+              schema:
+                items:
+                  $ref: '#/components/schemas/SaleLine-read'
+                type: array
+          description: SaleLine collection response
+      summary: Retrieves the collection of SaleLine resources.
+      tags:
+      - SaleLine
+    post:
+      operationId: postSaleLineCollection
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SaleLine-write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/SaleLine:jsonld-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/SaleLine-write'
+        description: The new SaleLine resource
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SaleLine-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/SaleLine:jsonld-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/SaleLine-read'
+          description: SaleLine resource created
+          links:
+            GetSaleLineItem:
+              description: The `id` value returned in the response can be used as
+                the `id` parameter in `GET /sale_lines/{id}`.
+              operationId: getSaleLineItem
+              parameters:
+                id: $response.body#/id
+        "400":
+          description: Invalid input
+        "404":
+          description: Resource not found
+      summary: Creates a SaleLine resource.
+      tags:
+      - SaleLine
+  /sale_lines/{id}:
+    get:
+      operationId: getSaleLineItem
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SaleLine-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/SaleLine:jsonld-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/SaleLine-read'
+          description: SaleLine resource response
+        "404":
+          description: Resource not found
+      summary: Retrieves a SaleLine resource.
+      tags:
+      - SaleLine
+    patch:
+      operationId: patchSaleLineItem
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/SaleLine-write'
+        description: The updated SaleLine resource
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SaleLine-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/SaleLine:jsonld-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/SaleLine-read'
+          description: SaleLine resource updated
+        "400":
+          description: Invalid input
+        "404":
+          description: Resource not found
+      summary: Updates the SaleLine resource.
+      tags:
+      - SaleLine
+    put:
+      operationId: putSaleLineItem
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SaleLine-write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/SaleLine:jsonld-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/SaleLine-write'
+        description: The updated SaleLine resource
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SaleLine-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/SaleLine:jsonld-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/SaleLine-read'
+          description: SaleLine resource updated
+        "400":
+          description: Invalid input
+        "404":
+          description: Resource not found
+      summary: Replaces the SaleLine resource.
+      tags:
+      - SaleLine
+  /sales:
+    get:
+      operationId: getSaleCollection
+      parameters:
+      - description: The sale channel
+        explode: true
+        in: query
+        name: channelId
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: The sale channel reference
+        explode: true
+        in: query
+        name: channelReference
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: The collection page number
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          type: integer
+        style: form
+      - description: The number of items per page
+        explode: true
+        in: query
+        name: items
+        required: false
+        schema:
+          default: 30
+          minimum: 0
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Sale-read'
+                type: array
+            application/ld+json:
+              schema:
+                properties:
+                  hydra:member:
+                    items:
+                      $ref: '#/components/schemas/Sale:jsonld-read'
+                    type: array
+                  hydra:search:
+                    properties:
+                      '@type':
+                        type: string
+                      hydra:mapping:
+                        items:
+                          properties:
+                            '@type':
+                              type: string
+                            property:
+                              type: string
+                            required:
+                              type: boolean
+                            variable:
+                              type: string
+                          type: object
+                        type: array
+                      hydra:template:
+                        type: string
+                      hydra:variableRepresentation:
+                        type: string
+                    type: object
+                  hydra:totalItems:
+                    minimum: 0
+                    type: integer
+                  hydra:view:
+                    properties:
+                      '@id':
+                        format: iri-reference
+                        type: string
+                      '@type':
+                        type: string
+                      hydra:first:
+                        format: iri-reference
+                        type: string
+                      hydra:last:
+                        format: iri-reference
+                        type: string
+                      hydra:next:
+                        format: iri-reference
+                        type: string
+                    type: object
+                required:
+                - hydra:member
+                type: object
+            text/html:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Sale-read'
+                type: array
+          description: Sale collection response
+      summary: Retrieves the collection of Sale resources.
+      tags:
+      - Sale
+    post:
+      operationId: postSaleCollection
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Sale-write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Sale:jsonld-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Sale-write'
+        description: The new Sale resource
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sale-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Sale:jsonld-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Sale-read'
+          description: Sale resource created
+          links:
+            GetSaleItem:
+              description: The `id` value returned in the response can be used as
+                the `id` parameter in `GET /sales/{id}`.
+              operationId: getSaleItem
+              parameters:
+                id: $response.body#/id
+        "400":
+          description: Invalid input
+        "404":
+          description: Resource not found
+      summary: Creates a Sale resource.
+      tags:
+      - Sale
+  /sales/{id}:
+    delete:
+      operationId: deleteSaleItem
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Sale resource deleted
+        "404":
+          description: Resource not found
+      summary: Removes the Sale resource.
+      tags:
+      - Sale
+    get:
+      operationId: getSaleItem
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sale-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Sale:jsonld-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Sale-read'
+          description: Sale resource response
+        "404":
+          description: Resource not found
+      summary: Retrieves a Sale resource.
+      tags:
+      - Sale
+    patch:
+      operationId: patchSaleItem
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/Sale-write'
+        description: The updated Sale resource
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sale-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Sale:jsonld-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Sale-read'
+          description: Sale resource updated
+        "400":
+          description: Invalid input
+        "404":
+          description: Resource not found
+      summary: Updates the Sale resource.
+      tags:
+      - Sale
+    put:
+      operationId: putSaleItem
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Sale-write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Sale:jsonld-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Sale-write'
+        description: The updated Sale resource
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sale-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Sale:jsonld-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Sale-read'
+          description: Sale resource updated
+        "400":
+          description: Invalid input
+        "404":
+          description: Resource not found
+      summary: Replaces the Sale resource.
+      tags:
+      - Sale
+  /shipments:
+    get:
+      operationId: getShipmentCollection
+      parameters:
+      - description: The sale ID
+        explode: true
+        in: query
+        name: saleId
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: The collection page number
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          type: integer
+        style: form
+      - description: The number of items per page
+        explode: true
+        in: query
+        name: items
+        required: false
+        schema:
+          default: 30
+          minimum: 0
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Shipment-read'
+                type: array
+            application/ld+json:
+              schema:
+                properties:
+                  hydra:member:
+                    items:
+                      $ref: '#/components/schemas/Shipment:jsonld-read'
+                    type: array
+                  hydra:search:
+                    properties:
+                      '@type':
+                        type: string
+                      hydra:mapping:
+                        items:
+                          properties:
+                            '@type':
+                              type: string
+                            property:
+                              type: string
+                            required:
+                              type: boolean
+                            variable:
+                              type: string
+                          type: object
+                        type: array
+                      hydra:template:
+                        type: string
+                      hydra:variableRepresentation:
+                        type: string
+                    type: object
+                  hydra:totalItems:
+                    minimum: 0
+                    type: integer
+                  hydra:view:
+                    properties:
+                      '@id':
+                        format: iri-reference
+                        type: string
+                      '@type':
+                        type: string
+                      hydra:first:
+                        format: iri-reference
+                        type: string
+                      hydra:last:
+                        format: iri-reference
+                        type: string
+                      hydra:next:
+                        format: iri-reference
+                        type: string
+                    type: object
+                required:
+                - hydra:member
+                type: object
+            text/html:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Shipment-read'
+                type: array
+          description: Shipment collection response
+      summary: Retrieves the collection of Shipment resources.
+      tags:
+      - Shipment
+  /shipments/{id}:
+    get:
+      operationId: getShipmentItem
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Shipment-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Shipment:jsonld-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Shipment-read'
+          description: Shipment resource response
+        "404":
+          description: Resource not found
+      summary: Retrieves a Shipment resource.
+      tags:
+      - Shipment
+  /suppliers:
+    get:
+      operationId: getSupplierCollection
+      parameters:
+      - description: The collection page number
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          type: integer
+        style: form
+      - description: The number of items per page
+        explode: true
+        in: query
+        name: items
+        required: false
+        schema:
+          default: 30
+          minimum: 0
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Supplier-read'
+                type: array
+            application/ld+json:
+              schema:
+                properties:
+                  hydra:member:
+                    items:
+                      $ref: '#/components/schemas/Supplier:jsonld-read'
+                    type: array
+                  hydra:search:
+                    properties:
+                      '@type':
+                        type: string
+                      hydra:mapping:
+                        items:
+                          properties:
+                            '@type':
+                              type: string
+                            property:
+                              type: string
+                            required:
+                              type: boolean
+                            variable:
+                              type: string
+                          type: object
+                        type: array
+                      hydra:template:
+                        type: string
+                      hydra:variableRepresentation:
+                        type: string
+                    type: object
+                  hydra:totalItems:
+                    minimum: 0
+                    type: integer
+                  hydra:view:
+                    properties:
+                      '@id':
+                        format: iri-reference
+                        type: string
+                      '@type':
+                        type: string
+                      hydra:first:
+                        format: iri-reference
+                        type: string
+                      hydra:last:
+                        format: iri-reference
+                        type: string
+                      hydra:next:
+                        format: iri-reference
+                        type: string
+                    type: object
+                required:
+                - hydra:member
+                type: object
+            text/html:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Supplier-read'
+                type: array
+          description: Supplier collection response
+      summary: Retrieves the collection of Supplier resources.
+      tags:
+      - Supplier
+    post:
+      operationId: postSupplierCollection
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Supplier-write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Supplier:jsonld-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Supplier-write'
+        description: The new Supplier resource
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Supplier-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Supplier:jsonld-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Supplier-read'
+          description: Supplier resource created
+          links:
+            GetSupplierItem:
+              description: The `id` value returned in the response can be used as
+                the `id` parameter in `GET /suppliers/{id}`.
+              operationId: getSupplierItem
+              parameters:
+                id: $response.body#/id
+        "400":
+          description: Invalid input
+        "404":
+          description: Resource not found
+      summary: Creates a Supplier resource.
+      tags:
+      - Supplier
+  /suppliers/{id}:
+    delete:
+      operationId: deleteSupplierItem
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Supplier resource deleted
+        "404":
+          description: Resource not found
+      summary: Removes the Supplier resource.
+      tags:
+      - Supplier
+    get:
+      operationId: getSupplierItem
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Supplier-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Supplier:jsonld-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Supplier-read'
+          description: Supplier resource response
+        "404":
+          description: Resource not found
+      summary: Retrieves a Supplier resource.
+      tags:
+      - Supplier
+    patch:
+      operationId: patchSupplierItem
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/Supplier-write'
+        description: The updated Supplier resource
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Supplier-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Supplier:jsonld-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Supplier-read'
+          description: Supplier resource updated
+        "400":
+          description: Invalid input
+        "404":
+          description: Resource not found
+      summary: Updates the Supplier resource.
+      tags:
+      - Supplier
+    put:
+      operationId: putSupplierItem
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Supplier-write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Supplier:jsonld-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Supplier-write'
+        description: The updated Supplier resource
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Supplier-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Supplier:jsonld-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Supplier-read'
+          description: Supplier resource updated
+        "400":
+          description: Invalid input
+        "404":
+          description: Resource not found
+      summary: Replaces the Supplier resource.
+      tags:
+      - Supplier
+components:
+  schemas:
+    Address-read:
+      description: Address entity
+      example:
+        zip: zip
+        city: city
+        phone: phone
+        countryCode: countryCode
+        street: street
+        houseNumber: houseNumber
+        name: name
+        company: company
+        id: 0
+        street2: street2
+        email: email
+      properties:
+        city:
+          description: The address city
+          type: string
+        company:
+          description: The address company
+          type: string
+        countryCode:
+          description: The address country code (ISO 3166-1 alpha-2 format)
+          type: string
+        email:
+          description: The address email
+          type: string
+        houseNumber:
+          description: The address house number
+          type: string
+        id:
+          description: The address ID
+          readOnly: true
+          type: integer
+        name:
+          description: The address name
+          type: string
+        phone:
+          description: The address phone
+          type: string
+        street:
+          description: The address street
+          type: string
+        street2:
+          description: The address street 2
+          type: string
+        zip:
+          description: The address zip
+          type: string
+      required:
+      - city
+      - countryCode
+      - name
+      - street
+      - zip
+      type: object
+    Address-write:
+      description: Address entity
+      properties:
+        city:
+          description: The address city
+          type: string
+        company:
+          description: The address company
+          type: string
+        countryCode:
+          description: The address country code (ISO 3166-1 alpha-2 format)
+          type: string
+        email:
+          description: The address email
+          type: string
+        houseNumber:
+          description: The address house number
+          type: string
+        name:
+          description: The address name
+          type: string
+        phone:
+          description: The address phone
+          type: string
+        street:
+          description: The address street
+          type: string
+        street2:
+          description: The address street 2
+          type: string
+        zip:
+          description: The address zip
+          type: string
+      required:
+      - city
+      - countryCode
+      - name
+      - street
+      - zip
+      type: object
+    Address:jsonld-read:
+      description: Address entity
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        city:
+          description: The address city
+          type: string
+        company:
+          description: The address company
+          type: string
+        countryCode:
+          description: The address country code (ISO 3166-1 alpha-2 format)
+          type: string
+        email:
+          description: The address email
+          type: string
+        houseNumber:
+          description: The address house number
+          type: string
+        id:
+          description: The address ID
+          readOnly: true
+          type: integer
+        name:
+          description: The address name
+          type: string
+        phone:
+          description: The address phone
+          type: string
+        street:
+          description: The address street
+          type: string
+        street2:
+          description: The address street 2
+          type: string
+        zip:
+          description: The address zip
+          type: string
+      required:
+      - city
+      - countryCode
+      - name
+      - street
+      - zip
+      type: object
+    Address:jsonld-write:
+      description: Address entity
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        city:
+          description: The address city
+          type: string
+        company:
+          description: The address company
+          type: string
+        countryCode:
+          description: The address country code (ISO 3166-1 alpha-2 format)
+          type: string
+        email:
+          description: The address email
+          type: string
+        houseNumber:
+          description: The address house number
+          type: string
+        name:
+          description: The address name
+          type: string
+        phone:
+          description: The address phone
+          type: string
+        street:
+          description: The address street
+          type: string
+        street2:
+          description: The address street 2
+          type: string
+        zip:
+          description: The address zip
+          type: string
+      required:
+      - city
+      - countryCode
+      - name
+      - street
+      - zip
+      type: object
+    Carrier-read:
+      description: Carrier entity
+      example:
+        name: name
+        id: 0
+      properties:
+        id:
+          description: The carrier ID
+          readOnly: true
+          type: integer
+        name:
+          description: The carrier name
+          readOnly: true
+          type: string
+      type: object
+    Carrier:jsonld-read:
+      description: Carrier entity
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        id:
+          description: The carrier ID
+          readOnly: true
+          type: integer
+        name:
+          description: The carrier name
+          readOnly: true
+          type: string
+      type: object
+    Channel-read:
+      description: Channel entity
+      example:
+        name: name
+        id: 0
+      properties:
+        id:
+          description: The channel ID
+          readOnly: true
+          type: integer
+        name:
+          description: The channel name
+          readOnly: true
+          type: string
+      type: object
+    Channel:jsonld-read:
+      description: Channel entity
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        id:
+          description: The channel ID
+          readOnly: true
+          type: integer
+        name:
+          description: The channel name
+          readOnly: true
+          type: string
+      type: object
+    Product-read_collection:
+      description: Product entity
+      example:
+        dimensionX: 1.4658129805029452
+        dimensionY: 5.962133916683182
+        quantityAvailable: 7
+        quantityOutgoing: 2
+        dimensionZ: 5.637376656633329
+        costPrice: 6.027456183070403
+        weight: 1.0246457001441578
+        channelSku: channelSku
+        volume: 1.2315135367772556
+        channelReference: channelReference
+        sellingPrice: 7.386281948385884
+        hsCode: hsCode
+        quantityOnHand: 3
+        name: name
+        id: 2
+        quantitySold: 4
+        sku: sku
+        barcode: barcode
+        channelId: 0
+        quantityIncoming: 9
+      properties:
+        barcode:
+          description: The product barcode
+          type: string
+        channelId:
+          description: The product channel
+          type: integer
+        channelReference:
+          description: The product channel reference
+          type: string
+        channelSku:
+          description: The product channel SKU
+          type: string
+        costPrice:
+          description: The product cost price (Excluding taxes)
+          type: number
+        dimensionX:
+          description: The product dimension X in cm
+          type: number
+        dimensionY:
+          description: The product dimension Y in cm
+          type: number
+        dimensionZ:
+          description: The product dimension Z in cm
+          type: number
+        hsCode:
+          description: The product HS code
+          type: string
+        id:
+          description: The product ID
+          readOnly: true
+          type: integer
+        name:
+          description: The product name
+          type: string
+        quantityAvailable:
+          description: The physical available product quantity
+          readOnly: true
+          type: integer
+        quantityIncoming:
+          description: The incoming product quantity
+          readOnly: true
+          type: integer
+        quantityOnHand:
+          description: The product quantity on hand
+          readOnly: true
+          type: integer
+        quantityOutgoing:
+          description: The outgoing product quantity
+          readOnly: true
+          type: integer
+        quantitySold:
+          description: The sold product quantity
+          readOnly: true
+          type: integer
+        sellingPrice:
+          description: The product selling price (Excluding taxes)
+          type: number
+        sku:
+          description: The product warehouse SKU
+          readOnly: true
+          type: string
+        volume:
+          description: The product volume in L (Calculated using dimensions)
+          readOnly: true
+          type: number
+        weight:
+          description: The product weight in kg
+          type: number
+      required:
+      - barcode
+      - channelId
+      - channelReference
+      - name
+      type: object
+    Product-read_item:
+      description: Product entity
+      example:
+        dimensionX: 1.4658129805029452
+        dimensionY: 5.962133916683182
+        image: image
+        quantityAvailable: 7
+        quantityOutgoing: 2
+        dimensionZ: 5.637376656633329
+        costPrice: 6.027456183070403
+        weight: 1.0246457001441578
+        channelSku: channelSku
+        volume: 1.2315135367772556
+        channelReference: channelReference
+        sellingPrice: 7.386281948385884
+        hsCode: hsCode
+        quantityOnHand: 3
+        name: name
+        id: 2
+        quantitySold: 4
+        sku: sku
+        barcode: barcode
+        channelId: 0
+        quantityIncoming: 9
+      properties:
+        barcode:
+          description: The product barcode
+          type: string
+        channelId:
+          description: The product channel
+          type: integer
+        channelReference:
+          description: The product channel reference
+          type: string
+        channelSku:
+          description: The product channel SKU
+          type: string
+        costPrice:
+          description: The product cost price (Excluding taxes)
+          type: number
+        dimensionX:
+          description: The product dimension X in cm
+          type: number
+        dimensionY:
+          description: The product dimension Y in cm
+          type: number
+        dimensionZ:
+          description: The product dimension Z in cm
+          type: number
+        hsCode:
+          description: The product HS code
+          type: string
+        id:
+          description: The product ID
+          readOnly: true
+          type: integer
+        image:
+          description: The product image (As a base64 encoded string)
+          type: string
+        name:
+          description: The product name
+          type: string
+        quantityAvailable:
+          description: The physical available product quantity
+          readOnly: true
+          type: integer
+        quantityIncoming:
+          description: The incoming product quantity
+          readOnly: true
+          type: integer
+        quantityOnHand:
+          description: The product quantity on hand
+          readOnly: true
+          type: integer
+        quantityOutgoing:
+          description: The outgoing product quantity
+          readOnly: true
+          type: integer
+        quantitySold:
+          description: The sold product quantity
+          readOnly: true
+          type: integer
+        sellingPrice:
+          description: The product selling price (Excluding taxes)
+          type: number
+        sku:
+          description: The product warehouse SKU
+          readOnly: true
+          type: string
+        volume:
+          description: The product volume in L (Calculated using dimensions)
+          readOnly: true
+          type: number
+        weight:
+          description: The product weight in kg
+          type: number
+      required:
+      - barcode
+      - channelId
+      - channelReference
+      - name
+      type: object
+    Product-write:
+      description: Product entity
+      properties:
+        barcode:
+          description: The product barcode
+          type: string
+        channelId:
+          description: The product channel
+          type: integer
+        channelReference:
+          description: The product channel reference
+          type: string
+        channelSku:
+          description: The product channel SKU
+          type: string
+        costPrice:
+          description: The product cost price (Excluding taxes)
+          type: number
+        dimensionX:
+          description: The product dimension X in cm
+          type: number
+        dimensionY:
+          description: The product dimension Y in cm
+          type: number
+        dimensionZ:
+          description: The product dimension Z in cm
+          type: number
+        hsCode:
+          description: The product HS code
+          type: string
+        image:
+          description: The product image (As a base64 encoded string)
+          type: string
+        name:
+          description: The product name
+          type: string
+        sellingPrice:
+          description: The product selling price (Excluding taxes)
+          type: number
+        weight:
+          description: The product weight in kg
+          type: number
+      required:
+      - barcode
+      - channelId
+      - channelReference
+      - name
+      type: object
+    Product:jsonld-read_collection:
+      description: Product entity
+      properties:
+        barcode:
+          description: The product barcode
+          type: string
+        channelId:
+          description: The product channel
+          type: integer
+        channelReference:
+          description: The product channel reference
+          type: string
+        channelSku:
+          description: The product channel SKU
+          type: string
+        costPrice:
+          description: The product cost price (Excluding taxes)
+          type: number
+        dimensionX:
+          description: The product dimension X in cm
+          type: number
+        dimensionY:
+          description: The product dimension Y in cm
+          type: number
+        dimensionZ:
+          description: The product dimension Z in cm
+          type: number
+        hsCode:
+          description: The product HS code
+          type: string
+        id:
+          description: The product ID
+          readOnly: true
+          type: integer
+        name:
+          description: The product name
+          type: string
+        quantityAvailable:
+          description: The physical available product quantity
+          readOnly: true
+          type: integer
+        quantityIncoming:
+          description: The incoming product quantity
+          readOnly: true
+          type: integer
+        quantityOnHand:
+          description: The product quantity on hand
+          readOnly: true
+          type: integer
+        quantityOutgoing:
+          description: The outgoing product quantity
+          readOnly: true
+          type: integer
+        quantitySold:
+          description: The sold product quantity
+          readOnly: true
+          type: integer
+        sellingPrice:
+          description: The product selling price (Excluding taxes)
+          type: number
+        sku:
+          description: The product warehouse SKU
+          readOnly: true
+          type: string
+        volume:
+          description: The product volume in L (Calculated using dimensions)
+          readOnly: true
+          type: number
+        weight:
+          description: The product weight in kg
+          type: number
+      required:
+      - barcode
+      - channelId
+      - channelReference
+      - name
+      type: object
+    Product:jsonld-read_item:
+      description: Product entity
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        barcode:
+          description: The product barcode
+          type: string
+        channelId:
+          description: The product channel
+          type: integer
+        channelReference:
+          description: The product channel reference
+          type: string
+        channelSku:
+          description: The product channel SKU
+          type: string
+        costPrice:
+          description: The product cost price (Excluding taxes)
+          type: number
+        dimensionX:
+          description: The product dimension X in cm
+          type: number
+        dimensionY:
+          description: The product dimension Y in cm
+          type: number
+        dimensionZ:
+          description: The product dimension Z in cm
+          type: number
+        hsCode:
+          description: The product HS code
+          type: string
+        id:
+          description: The product ID
+          readOnly: true
+          type: integer
+        image:
+          description: The product image (As a base64 encoded string)
+          type: string
+        name:
+          description: The product name
+          type: string
+        quantityAvailable:
+          description: The physical available product quantity
+          readOnly: true
+          type: integer
+        quantityIncoming:
+          description: The incoming product quantity
+          readOnly: true
+          type: integer
+        quantityOnHand:
+          description: The product quantity on hand
+          readOnly: true
+          type: integer
+        quantityOutgoing:
+          description: The outgoing product quantity
+          readOnly: true
+          type: integer
+        quantitySold:
+          description: The sold product quantity
+          readOnly: true
+          type: integer
+        sellingPrice:
+          description: The product selling price (Excluding taxes)
+          type: number
+        sku:
+          description: The product warehouse SKU
+          readOnly: true
+          type: string
+        volume:
+          description: The product volume in L (Calculated using dimensions)
+          readOnly: true
+          type: number
+        weight:
+          description: The product weight in kg
+          type: number
+      required:
+      - barcode
+      - channelId
+      - channelReference
+      - name
+      type: object
+    Product:jsonld-write:
+      description: Product entity
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        barcode:
+          description: The product barcode
+          type: string
+        channelId:
+          description: The product channel
+          type: integer
+        channelReference:
+          description: The product channel reference
+          type: string
+        channelSku:
+          description: The product channel SKU
+          type: string
+        costPrice:
+          description: The product cost price (Excluding taxes)
+          type: number
+        dimensionX:
+          description: The product dimension X in cm
+          type: number
+        dimensionY:
+          description: The product dimension Y in cm
+          type: number
+        dimensionZ:
+          description: The product dimension Z in cm
+          type: number
+        hsCode:
+          description: The product HS code
+          type: string
+        image:
+          description: The product image (As a base64 encoded string)
+          type: string
+        name:
+          description: The product name
+          type: string
+        sellingPrice:
+          description: The product selling price (Excluding taxes)
+          type: number
+        weight:
+          description: The product weight in kg
+          type: number
+      required:
+      - barcode
+      - channelId
+      - channelReference
+      - name
+      type: object
+    Purchase-read:
+      description: Purchase entity
+      example:
+        channelReference: channelReference
+        plannedDate: 2000-01-23T04:56:07.000+00:00
+        supplierId: 1
+        name: name
+        id: 6
+        channelId: 0
+      properties:
+        channelId:
+          description: The purchase channel
+          type: integer
+        channelReference:
+          description: The purchase channel reference
+          type: string
+        id:
+          description: The purchase ID
+          readOnly: true
+          type: integer
+        name:
+          description: The purchase name
+          readOnly: true
+          type: string
+        plannedDate:
+          description: The purchase planned delivery date
+          format: date-time
+          type: string
+        supplierId:
+          description: The purchase supplier ID
+          type: integer
+      required:
+      - channelId
+      - channelReference
+      - plannedDate
+      - supplierId
+      type: object
+    Purchase-write:
+      description: Purchase entity
+      properties:
+        channelId:
+          description: The purchase channel
+          type: integer
+        channelReference:
+          description: The purchase channel reference
+          type: string
+        plannedDate:
+          description: The purchase planned delivery date
+          format: date-time
+          type: string
+        supplierId:
+          description: The purchase supplier ID
+          type: integer
+      required:
+      - channelId
+      - channelReference
+      - plannedDate
+      - supplierId
+      type: object
+    Purchase:jsonld-read:
+      description: Purchase entity
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        channelId:
+          description: The purchase channel
+          type: integer
+        channelReference:
+          description: The purchase channel reference
+          type: string
+        id:
+          description: The purchase ID
+          readOnly: true
+          type: integer
+        name:
+          description: The purchase name
+          readOnly: true
+          type: string
+        plannedDate:
+          description: The purchase planned delivery date
+          format: date-time
+          type: string
+        supplierId:
+          description: The purchase supplier ID
+          type: integer
+      required:
+      - channelId
+      - channelReference
+      - plannedDate
+      - supplierId
+      type: object
+    Purchase:jsonld-write:
+      description: Purchase entity
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        channelId:
+          description: The purchase channel
+          type: integer
+        channelReference:
+          description: The purchase channel reference
+          type: string
+        plannedDate:
+          description: The purchase planned delivery date
+          format: date-time
+          type: string
+        supplierId:
+          description: The purchase supplier ID
+          type: integer
+      required:
+      - channelId
+      - channelReference
+      - plannedDate
+      - supplierId
+      type: object
+    PurchaseLine-read:
+      description: Purchase Line entity
+      example:
+        plannedDate: 2000-01-23T04:56:07.000+00:00
+        quantity: 5
+        productId: 6
+        purchaseId: 1
+        description: description
+        id: 0
+        qtyReceived: 5
+      properties:
+        description:
+          description: The purchase line description
+          type: string
+        id:
+          description: The purchase line ID
+          readOnly: true
+          type: integer
+        plannedDate:
+          description: The purchase line planned delivery date
+          format: date-time
+          type: string
+        productId:
+          description: The product ID
+          type: integer
+        purchaseId:
+          description: The purchase ID
+          type: integer
+        qtyReceived:
+          description: The purchase line quantity received
+          readOnly: true
+          type: integer
+        quantity:
+          description: The purchase line quantity
+          type: integer
+      required:
+      - description
+      - productId
+      - purchaseId
+      - quantity
+      type: object
+    PurchaseLine-write:
+      description: Purchase Line entity
+      properties:
+        description:
+          description: The purchase line description
+          type: string
+        plannedDate:
+          description: The purchase line planned delivery date
+          format: date-time
+          type: string
+        productId:
+          description: The product ID
+          type: integer
+        purchaseId:
+          description: The purchase ID
+          type: integer
+        quantity:
+          description: The purchase line quantity
+          type: integer
+      required:
+      - description
+      - productId
+      - purchaseId
+      - quantity
+      type: object
+    PurchaseLine:jsonld-read:
+      description: Purchase Line entity
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        description:
+          description: The purchase line description
+          type: string
+        id:
+          description: The purchase line ID
+          readOnly: true
+          type: integer
+        plannedDate:
+          description: The purchase line planned delivery date
+          format: date-time
+          type: string
+        productId:
+          description: The product ID
+          type: integer
+        purchaseId:
+          description: The purchase ID
+          type: integer
+        qtyReceived:
+          description: The purchase line quantity received
+          readOnly: true
+          type: integer
+        quantity:
+          description: The purchase line quantity
+          type: integer
+      required:
+      - description
+      - productId
+      - purchaseId
+      - quantity
+      type: object
+    PurchaseLine:jsonld-write:
+      description: Purchase Line entity
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        description:
+          description: The purchase line description
+          type: string
+        plannedDate:
+          description: The purchase line planned delivery date
+          format: date-time
+          type: string
+        productId:
+          description: The product ID
+          type: integer
+        purchaseId:
+          description: The purchase ID
+          type: integer
+        quantity:
+          description: The purchase line quantity
+          type: integer
+      required:
+      - description
+      - productId
+      - purchaseId
+      - quantity
+      type: object
+    Sale-read:
+      description: Sale entity
+      example:
+        channelReference: channelReference
+        invoiceAddressId: 5
+        shipmentIds:
+        - 2
+        - 2
+        name: name
+        shippingAddressId: 7
+        id: 1
+        carrierId: 0
+        channelId: 6
+        lineIds:
+        - 5
+        - 5
+        status: none
+      properties:
+        carrierId:
+          description: The sale carrier ID
+          type: integer
+        channelId:
+          description: The sale channel
+          type: integer
+        channelReference:
+          description: The sale channel reference
+          type: string
+        id:
+          description: The sale ID
+          readOnly: true
+          type: integer
+        invoiceAddressId:
+          description: The sale invoice address ID
+          type: integer
+        lineIds:
+          description: The sale line IDs
+          items:
+            type: integer
+          readOnly: true
+          type: array
+        name:
+          description: The sale name
+          readOnly: true
+          type: string
+        shipmentIds:
+          description: The sale shipment IDs
+          items:
+            type: integer
+          readOnly: true
+          type: array
+        shippingAddressId:
+          description: The sale shipping address ID
+          type: integer
+        status:
+          description: The sale warehouse status
+          enum:
+          - none
+          - hold
+          - stock
+          - pick
+          - pack
+          - ship
+          readOnly: true
+          type: string
+      required:
+      - channelId
+      - channelReference
+      - invoiceAddressId
+      - shippingAddressId
+      type: object
+    Sale-write:
+      description: Sale entity
+      properties:
+        carrierId:
+          description: The sale carrier ID
+          type: integer
+        channelId:
+          description: The sale channel
+          type: integer
+        channelReference:
+          description: The sale channel reference
+          type: string
+        invoiceAddressId:
+          description: The sale invoice address ID
+          type: integer
+        shippingAddressId:
+          description: The sale shipping address ID
+          type: integer
+      required:
+      - channelId
+      - channelReference
+      - invoiceAddressId
+      - shippingAddressId
+      type: object
+    Sale:jsonld-read:
+      description: Sale entity
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        carrierId:
+          description: The sale carrier ID
+          type: integer
+        channelId:
+          description: The sale channel
+          type: integer
+        channelReference:
+          description: The sale channel reference
+          type: string
+        id:
+          description: The sale ID
+          readOnly: true
+          type: integer
+        invoiceAddressId:
+          description: The sale invoice address ID
+          type: integer
+        lineIds:
+          description: The sale line IDs
+          items:
+            type: integer
+          readOnly: true
+          type: array
+        name:
+          description: The sale name
+          readOnly: true
+          type: string
+        shipmentIds:
+          description: The sale shipment IDs
+          items:
+            type: integer
+          readOnly: true
+          type: array
+        shippingAddressId:
+          description: The sale shipping address ID
+          type: integer
+        status:
+          description: The sale warehouse status
+          enum:
+          - none
+          - hold
+          - stock
+          - pick
+          - pack
+          - ship
+          readOnly: true
+          type: string
+      required:
+      - channelId
+      - channelReference
+      - invoiceAddressId
+      - shippingAddressId
+      type: object
+    Sale:jsonld-write:
+      description: Sale entity
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        carrierId:
+          description: The sale carrier ID
+          type: integer
+        channelId:
+          description: The sale channel
+          type: integer
+        channelReference:
+          description: The sale channel reference
+          type: string
+        invoiceAddressId:
+          description: The sale invoice address ID
+          type: integer
+        shippingAddressId:
+          description: The sale shipping address ID
+          type: integer
+      required:
+      - channelId
+      - channelReference
+      - invoiceAddressId
+      - shippingAddressId
+      type: object
+    SaleLine-read:
+      description: Sale Line entity
+      example:
+        quantityDelivered: 5
+        quantity: 1
+        productId: 6
+        saleId: 5
+        description: description
+        id: 0
+      properties:
+        description:
+          description: The sale line description
+          type: string
+        id:
+          description: The sale line ID
+          readOnly: true
+          type: integer
+        productId:
+          description: The product ID
+          type: integer
+        quantity:
+          description: The sale line quantity
+          type: integer
+        quantityDelivered:
+          description: The sale line quantity delivered
+          readOnly: true
+          type: integer
+        saleId:
+          description: The sale ID
+          type: integer
+      required:
+      - description
+      - productId
+      - quantity
+      - saleId
+      type: object
+    SaleLine-write:
+      description: Sale Line entity
+      properties:
+        description:
+          description: The sale line description
+          type: string
+        productId:
+          description: The product ID
+          type: integer
+        quantity:
+          description: The sale line quantity
+          type: integer
+        saleId:
+          description: The sale ID
+          type: integer
+      required:
+      - description
+      - productId
+      - quantity
+      - saleId
+      type: object
+    SaleLine:jsonld-read:
+      description: Sale Line entity
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        description:
+          description: The sale line description
+          type: string
+        id:
+          description: The sale line ID
+          readOnly: true
+          type: integer
+        productId:
+          description: The product ID
+          type: integer
+        quantity:
+          description: The sale line quantity
+          type: integer
+        quantityDelivered:
+          description: The sale line quantity delivered
+          readOnly: true
+          type: integer
+        saleId:
+          description: The sale ID
+          type: integer
+      required:
+      - description
+      - productId
+      - quantity
+      - saleId
+      type: object
+    SaleLine:jsonld-write:
+      description: Sale Line entity
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        description:
+          description: The sale line description
+          type: string
+        productId:
+          description: The product ID
+          type: integer
+        quantity:
+          description: The sale line quantity
+          type: integer
+        saleId:
+          description: The sale ID
+          type: integer
+      required:
+      - description
+      - productId
+      - quantity
+      - saleId
+      type: object
+    Shipment-read:
+      description: Shipment entity
+      example:
+        saleId: 1
+        shippedAt: 2000-01-23T04:56:07.000+00:00
+        id: 6
+        carrierId: 0
+        trackingCodes:
+        - trackingCodes
+        - trackingCodes
+      properties:
+        carrierId:
+          description: The shipment carrier ID
+          readOnly: true
+          type: integer
+        id:
+          description: The shipment ID
+          readOnly: true
+          type: integer
+        saleId:
+          description: The sale ID
+          readOnly: true
+          type: integer
+        shippedAt:
+          description: The shipment date
+          format: date-time
+          readOnly: true
+          type: string
+        trackingCodes:
+          description: The shipment tracking codes
+          items:
+            type: string
+          readOnly: true
+          type: array
+      type: object
+    Shipment:jsonld-read:
+      description: Shipment entity
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        carrierId:
+          description: The shipment carrier ID
+          readOnly: true
+          type: integer
+        id:
+          description: The shipment ID
+          readOnly: true
+          type: integer
+        saleId:
+          description: The sale ID
+          readOnly: true
+          type: integer
+        shippedAt:
+          description: The shipment date
+          format: date-time
+          readOnly: true
+          type: string
+        trackingCodes:
+          description: The shipment tracking codes
+          items:
+            type: string
+          readOnly: true
+          type: array
+      type: object
+    Supplier-read:
+      description: Supplier entity
+      example:
+        zip: zip
+        city: city
+        phone: phone
+        countryCode: countryCode
+        street: street
+        houseNumber: houseNumber
+        name: name
+        id: 0
+        street2: street2
+        email: email
+      properties:
+        city:
+          description: The supplier city
+          type: string
+        countryCode:
+          description: The supplier country code (ISO 3166-1 alpha-2 format)
+          type: string
+        email:
+          description: The supplier email
+          type: string
+        houseNumber:
+          description: The supplier house number
+          type: string
+        id:
+          description: The supplier ID
+          readOnly: true
+          type: integer
+        name:
+          description: The supplier name
+          type: string
+        phone:
+          description: The supplier phone
+          type: string
+        street:
+          description: The supplier street
+          type: string
+        street2:
+          description: The supplier street 2
+          type: string
+        zip:
+          description: The supplier zip
+          type: string
+      required:
+      - name
+      type: object
+    Supplier-write:
+      description: Supplier entity
+      properties:
+        city:
+          description: The supplier city
+          type: string
+        countryCode:
+          description: The supplier country code (ISO 3166-1 alpha-2 format)
+          type: string
+        email:
+          description: The supplier email
+          type: string
+        houseNumber:
+          description: The supplier house number
+          type: string
+        name:
+          description: The supplier name
+          type: string
+        phone:
+          description: The supplier phone
+          type: string
+        street:
+          description: The supplier street
+          type: string
+        street2:
+          description: The supplier street 2
+          type: string
+        zip:
+          description: The supplier zip
+          type: string
+      required:
+      - name
+      type: object
+    Supplier:jsonld-read:
+      description: Supplier entity
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        city:
+          description: The supplier city
+          type: string
+        countryCode:
+          description: The supplier country code (ISO 3166-1 alpha-2 format)
+          type: string
+        email:
+          description: The supplier email
+          type: string
+        houseNumber:
+          description: The supplier house number
+          type: string
+        id:
+          description: The supplier ID
+          readOnly: true
+          type: integer
+        name:
+          description: The supplier name
+          type: string
+        phone:
+          description: The supplier phone
+          type: string
+        street:
+          description: The supplier street
+          type: string
+        street2:
+          description: The supplier street 2
+          type: string
+        zip:
+          description: The supplier zip
+          type: string
+      required:
+      - name
+      type: object
+    Supplier:jsonld-write:
+      description: Supplier entity
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        city:
+          description: The supplier city
+          type: string
+        countryCode:
+          description: The supplier country code (ISO 3166-1 alpha-2 format)
+          type: string
+        email:
+          description: The supplier email
+          type: string
+        houseNumber:
+          description: The supplier house number
+          type: string
+        name:
+          description: The supplier name
+          type: string
+        phone:
+          description: The supplier phone
+          type: string
+        street:
+          description: The supplier street
+          type: string
+        street2:
+          description: The supplier street 2
+          type: string
+        zip:
+          description: The supplier zip
+          type: string
+      required:
+      - name
+      type: object
+    User-authenticate:
+      properties:
+        email:
+          description: The user email address
+          type: string
+        password:
+          description: The user password
+          type: string
+      required:
+      - email
+      - password
+      type: object
+    User:jsonld-authenticate:
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        email:
+          description: The user email address
+          type: string
+        password:
+          description: The user password
+          type: string
+      required:
+      - email
+      - password
+      type: object
+    inline_response_200:
+      example:
+        token: token
+      properties:
+        token:
+          type: string
+      type: object
+    inline_response_401:
+      properties:
+        code:
+          example: 401
+          type: integer
+        message:
+          type: string
+      type: object
+  securitySchemes:
+    bearerAuth:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
