@@ -1,4 +1,4 @@
-module github.com/stryd/cloud/efulfillment_go
+module github.com/stryd/efulfillment_go
 
 go 1.13
 
