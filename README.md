@@ -1,4 +1,4 @@
-# Go API client for efulfillment_go
+# Go API client for efulfillmentshop
 
 The E-fulfilment Shop API allows you to integrate your service with our warehouse.
 
@@ -22,7 +22,7 @@ go get golang.org/x/net/context
 Put the package under your project folder and add the following in import:
 
 ```golang
-import sw "./efulfillment_go"
+import sw "./efulfillmentshop"
 ```
 
 To use a proxy, set the environment variable `HTTP_PROXY`:

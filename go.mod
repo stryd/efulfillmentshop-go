@@ -1,4 +1,4 @@
-module github.com/stryd/efulfillment_go
+module github.com/stryd/efulfillmentshop-go
 
 go 1.13
 
