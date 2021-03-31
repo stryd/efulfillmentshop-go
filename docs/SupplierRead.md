@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **CountryCode** | Pointer to **string** | The supplier country code (ISO 3166-1 alpha-2 format) | [optional] 
 **Email** | Pointer to **string** | The supplier email | [optional] 
 **HouseNumber** | Pointer to **string** | The supplier house number | [optional] 
-**Id** | Pointer to **int32** | The supplier ID | [optional] [readonly] 
+**Id** | Pointer to **int32** | The supplier ID | [optional] 
 **Name** | **string** | The supplier name | 
 **Phone** | Pointer to **string** | The supplier phone | [optional] 
 **Street** | Pointer to **string** | The supplier street | [optional] 

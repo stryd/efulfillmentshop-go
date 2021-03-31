@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Context** | Pointer to **string** |  | [optional] [readonly] 
-**Id** | Pointer to **string** |  | [optional] [readonly] 
-**Type** | Pointer to **string** |  | [optional] [readonly] 
+**JsonContext** | Pointer to **string** |  | [optional] [readonly] 
+**JsonId** | Pointer to **string** |  | [optional] [readonly] 
+**JsonType** | Pointer to **string** |  | [optional] [readonly] 
 **City** | **string** | The address city | 
 **Company** | Pointer to **string** | The address company | [optional] 
 **CountryCode** | **string** | The address country code (ISO 3166-1 alpha-2 format) | 
 **Email** | Pointer to **string** | The address email | [optional] 
 **HouseNumber** | Pointer to **string** | The address house number | [optional] 
-**Id** | Pointer to **int32** | The address ID | [optional] [readonly] 
+**Id** | Pointer to **int32** | The address ID | [optional] 
 **Name** | **string** | The address name | 
 **Phone** | Pointer to **string** | The address phone | [optional] 
 **Street** | **string** | The address street | 
@@ -38,80 +38,80 @@ NewAddressjsonldReadWithDefaults instantiates a new AddressjsonldRead object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetContext
+### GetJsonContext
 
-`func (o *AddressjsonldRead) GetContext() string`
+`func (o *AddressjsonldRead) GetJsonContext() string`
 
-GetContext returns the Context field if non-nil, zero value otherwise.
+GetJsonContext returns the JsonContext field if non-nil, zero value otherwise.
 
-### GetContextOk
+### GetJsonContextOk
 
-`func (o *AddressjsonldRead) GetContextOk() (*string, bool)`
+`func (o *AddressjsonldRead) GetJsonContextOk() (*string, bool)`
 
-GetContextOk returns a tuple with the Context field if it's non-nil, zero value otherwise
+GetJsonContextOk returns a tuple with the JsonContext field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetContext
+### SetJsonContext
 
-`func (o *AddressjsonldRead) SetContext(v string)`
+`func (o *AddressjsonldRead) SetJsonContext(v string)`
 
-SetContext sets Context field to given value.
+SetJsonContext sets JsonContext field to given value.
 
-### HasContext
+### HasJsonContext
 
-`func (o *AddressjsonldRead) HasContext() bool`
+`func (o *AddressjsonldRead) HasJsonContext() bool`
 
-HasContext returns a boolean if a field has been set.
+HasJsonContext returns a boolean if a field has been set.
 
-### GetId
+### GetJsonId
 
-`func (o *AddressjsonldRead) GetId() string`
+`func (o *AddressjsonldRead) GetJsonId() string`
 
-GetId returns the Id field if non-nil, zero value otherwise.
+GetJsonId returns the JsonId field if non-nil, zero value otherwise.
 
-### GetIdOk
+### GetJsonIdOk
 
-`func (o *AddressjsonldRead) GetIdOk() (*string, bool)`
+`func (o *AddressjsonldRead) GetJsonIdOk() (*string, bool)`
 
-GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
+GetJsonIdOk returns a tuple with the JsonId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetId
+### SetJsonId
 
-`func (o *AddressjsonldRead) SetId(v string)`
+`func (o *AddressjsonldRead) SetJsonId(v string)`
 
-SetId sets Id field to given value.
+SetJsonId sets JsonId field to given value.
 
-### HasId
+### HasJsonId
 
-`func (o *AddressjsonldRead) HasId() bool`
+`func (o *AddressjsonldRead) HasJsonId() bool`
 
-HasId returns a boolean if a field has been set.
+HasJsonId returns a boolean if a field has been set.
 
-### GetType
+### GetJsonType
 
-`func (o *AddressjsonldRead) GetType() string`
+`func (o *AddressjsonldRead) GetJsonType() string`
 
-GetType returns the Type field if non-nil, zero value otherwise.
+GetJsonType returns the JsonType field if non-nil, zero value otherwise.
 
-### GetTypeOk
+### GetJsonTypeOk
 
-`func (o *AddressjsonldRead) GetTypeOk() (*string, bool)`
+`func (o *AddressjsonldRead) GetJsonTypeOk() (*string, bool)`
 
-GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
+GetJsonTypeOk returns a tuple with the JsonType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetType
+### SetJsonType
 
-`func (o *AddressjsonldRead) SetType(v string)`
+`func (o *AddressjsonldRead) SetJsonType(v string)`
 
-SetType sets Type field to given value.
+SetJsonType sets JsonType field to given value.
 
-### HasType
+### HasJsonType
 
-`func (o *AddressjsonldRead) HasType() bool`
+`func (o *AddressjsonldRead) HasJsonType() bool`
 
-HasType returns a boolean if a field has been set.
+HasJsonType returns a boolean if a field has been set.
 
 ### GetCity
 

@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ChannelId** | **int32** | The purchase channel | 
 **ChannelReference** | **string** | The purchase channel reference | 
-**Id** | Pointer to **int32** | The purchase ID | [optional] [readonly] 
-**Name** | Pointer to **string** | The purchase name | [optional] [readonly] 
+**Id** | Pointer to **int32** | The purchase ID | [optional] 
+**Name** | Pointer to **string** | The purchase name | [optional] 
 **PlannedDate** | **time.Time** | The purchase planned delivery date | 
 **SupplierId** | **int32** | The purchase supplier ID | 
 

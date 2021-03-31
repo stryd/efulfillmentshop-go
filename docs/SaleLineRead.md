@@ -5,10 +5,10 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Description** | **string** | The sale line description | 
-**Id** | Pointer to **int32** | The sale line ID | [optional] [readonly] 
+**Id** | Pointer to **int32** | The sale line ID | [optional] 
 **ProductId** | **int32** | The product ID | 
 **Quantity** | **int32** | The sale line quantity | 
-**QuantityDelivered** | Pointer to **int32** | The sale line quantity delivered | [optional] [readonly] 
+**QuantityDelivered** | Pointer to **int32** | The sale line quantity delivered | [optional] 
 **SaleId** | **int32** | The sale ID | 
 
 ## Methods

@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Context** | Pointer to **string** |  | [optional] [readonly] 
-**Id** | Pointer to **string** |  | [optional] [readonly] 
-**Type** | Pointer to **string** |  | [optional] [readonly] 
+**JsonContext** | Pointer to **string** |  | [optional] [readonly] 
+**JsonId** | Pointer to **string** |  | [optional] [readonly] 
+**JsonType** | Pointer to **string** |  | [optional] [readonly] 
 **Barcode** | **string** | The product barcode | 
 **ChannelId** | **int32** | The product channel | 
 **ChannelReference** | **string** | The product channel reference | 
@@ -16,17 +16,17 @@ Name | Type | Description | Notes
 **DimensionY** | Pointer to **float32** | The product dimension Y in cm | [optional] 
 **DimensionZ** | Pointer to **float32** | The product dimension Z in cm | [optional] 
 **HsCode** | Pointer to **string** | The product HS code | [optional] 
-**Id** | Pointer to **int32** | The product ID | [optional] [readonly] 
+**Id** | Pointer to **int32** | The product ID | [optional] 
 **Image** | Pointer to **string** | The product image (As a base64 encoded string) | [optional] 
 **Name** | **string** | The product name | 
-**QuantityAvailable** | Pointer to **int32** | The physical available product quantity | [optional] [readonly] 
-**QuantityIncoming** | Pointer to **int32** | The incoming product quantity | [optional] [readonly] 
-**QuantityOnHand** | Pointer to **int32** | The product quantity on hand | [optional] [readonly] 
-**QuantityOutgoing** | Pointer to **int32** | The outgoing product quantity | [optional] [readonly] 
-**QuantitySold** | Pointer to **int32** | The sold product quantity | [optional] [readonly] 
+**QuantityAvailable** | Pointer to **int32** | The physical available product quantity | [optional] 
+**QuantityIncoming** | Pointer to **int32** | The incoming product quantity | [optional] 
+**QuantityOnHand** | Pointer to **int32** | The product quantity on hand | [optional] 
+**QuantityOutgoing** | Pointer to **int32** | The outgoing product quantity | [optional] 
+**QuantitySold** | Pointer to **int32** | The sold product quantity | [optional] 
 **SellingPrice** | Pointer to **float32** | The product selling price (Excluding taxes) | [optional] 
-**Sku** | Pointer to **string** | The product warehouse SKU | [optional] [readonly] 
-**Volume** | Pointer to **float32** | The product volume in L (Calculated using dimensions) | [optional] [readonly] 
+**Sku** | Pointer to **string** | The product warehouse SKU | [optional] 
+**Volume** | Pointer to **float32** | The product volume in L (Calculated using dimensions) | [optional] 
 **Weight** | Pointer to **float32** | The product weight in kg | [optional] 
 
 ## Methods
@@ -48,80 +48,80 @@ NewProductjsonldReadItemWithDefaults instantiates a new ProductjsonldReadItem ob
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetContext
+### GetJsonContext
 
-`func (o *ProductjsonldReadItem) GetContext() string`
+`func (o *ProductjsonldReadItem) GetJsonContext() string`
 
-GetContext returns the Context field if non-nil, zero value otherwise.
+GetJsonContext returns the JsonContext field if non-nil, zero value otherwise.
 
-### GetContextOk
+### GetJsonContextOk
 
-`func (o *ProductjsonldReadItem) GetContextOk() (*string, bool)`
+`func (o *ProductjsonldReadItem) GetJsonContextOk() (*string, bool)`
 
-GetContextOk returns a tuple with the Context field if it's non-nil, zero value otherwise
+GetJsonContextOk returns a tuple with the JsonContext field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetContext
+### SetJsonContext
 
-`func (o *ProductjsonldReadItem) SetContext(v string)`
+`func (o *ProductjsonldReadItem) SetJsonContext(v string)`
 
-SetContext sets Context field to given value.
+SetJsonContext sets JsonContext field to given value.
 
-### HasContext
+### HasJsonContext
 
-`func (o *ProductjsonldReadItem) HasContext() bool`
+`func (o *ProductjsonldReadItem) HasJsonContext() bool`
 
-HasContext returns a boolean if a field has been set.
+HasJsonContext returns a boolean if a field has been set.
 
-### GetId
+### GetJsonId
 
-`func (o *ProductjsonldReadItem) GetId() string`
+`func (o *ProductjsonldReadItem) GetJsonId() string`
 
-GetId returns the Id field if non-nil, zero value otherwise.
+GetJsonId returns the JsonId field if non-nil, zero value otherwise.
 
-### GetIdOk
+### GetJsonIdOk
 
-`func (o *ProductjsonldReadItem) GetIdOk() (*string, bool)`
+`func (o *ProductjsonldReadItem) GetJsonIdOk() (*string, bool)`
 
-GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
+GetJsonIdOk returns a tuple with the JsonId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetId
+### SetJsonId
 
-`func (o *ProductjsonldReadItem) SetId(v string)`
+`func (o *ProductjsonldReadItem) SetJsonId(v string)`
 
-SetId sets Id field to given value.
+SetJsonId sets JsonId field to given value.
 
-### HasId
+### HasJsonId
 
-`func (o *ProductjsonldReadItem) HasId() bool`
+`func (o *ProductjsonldReadItem) HasJsonId() bool`
 
-HasId returns a boolean if a field has been set.
+HasJsonId returns a boolean if a field has been set.
 
-### GetType
+### GetJsonType
 
-`func (o *ProductjsonldReadItem) GetType() string`
+`func (o *ProductjsonldReadItem) GetJsonType() string`
 
-GetType returns the Type field if non-nil, zero value otherwise.
+GetJsonType returns the JsonType field if non-nil, zero value otherwise.
 
-### GetTypeOk
+### GetJsonTypeOk
 
-`func (o *ProductjsonldReadItem) GetTypeOk() (*string, bool)`
+`func (o *ProductjsonldReadItem) GetJsonTypeOk() (*string, bool)`
 
-GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
+GetJsonTypeOk returns a tuple with the JsonType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetType
+### SetJsonType
 
-`func (o *ProductjsonldReadItem) SetType(v string)`
+`func (o *ProductjsonldReadItem) SetJsonType(v string)`
 
-SetType sets Type field to given value.
+SetJsonType sets JsonType field to given value.
 
-### HasType
+### HasJsonType
 
-`func (o *ProductjsonldReadItem) HasType() bool`
+`func (o *ProductjsonldReadItem) HasJsonType() bool`
 
-HasType returns a boolean if a field has been set.
+HasJsonType returns a boolean if a field has been set.
 
 ### GetBarcode
 

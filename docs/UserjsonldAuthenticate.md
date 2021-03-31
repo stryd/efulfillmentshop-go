@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Context** | Pointer to **string** |  | [optional] [readonly] 
-**Id** | Pointer to **string** |  | [optional] [readonly] 
-**Type** | Pointer to **string** |  | [optional] [readonly] 
+**JsonContext** | Pointer to **string** |  | [optional] [readonly] 
+**JsonId** | Pointer to **string** |  | [optional] [readonly] 
+**JsonType** | Pointer to **string** |  | [optional] [readonly] 
 **Email** | **string** | The user email address | 
 **Password** | **string** | The user password | 
 
@@ -29,80 +29,80 @@ NewUserjsonldAuthenticateWithDefaults instantiates a new UserjsonldAuthenticate 
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetContext
+### GetJsonContext
 
-`func (o *UserjsonldAuthenticate) GetContext() string`
+`func (o *UserjsonldAuthenticate) GetJsonContext() string`
 
-GetContext returns the Context field if non-nil, zero value otherwise.
+GetJsonContext returns the JsonContext field if non-nil, zero value otherwise.
 
-### GetContextOk
+### GetJsonContextOk
 
-`func (o *UserjsonldAuthenticate) GetContextOk() (*string, bool)`
+`func (o *UserjsonldAuthenticate) GetJsonContextOk() (*string, bool)`
 
-GetContextOk returns a tuple with the Context field if it's non-nil, zero value otherwise
+GetJsonContextOk returns a tuple with the JsonContext field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetContext
+### SetJsonContext
 
-`func (o *UserjsonldAuthenticate) SetContext(v string)`
+`func (o *UserjsonldAuthenticate) SetJsonContext(v string)`
 
-SetContext sets Context field to given value.
+SetJsonContext sets JsonContext field to given value.
 
-### HasContext
+### HasJsonContext
 
-`func (o *UserjsonldAuthenticate) HasContext() bool`
+`func (o *UserjsonldAuthenticate) HasJsonContext() bool`
 
-HasContext returns a boolean if a field has been set.
+HasJsonContext returns a boolean if a field has been set.
 
-### GetId
+### GetJsonId
 
-`func (o *UserjsonldAuthenticate) GetId() string`
+`func (o *UserjsonldAuthenticate) GetJsonId() string`
 
-GetId returns the Id field if non-nil, zero value otherwise.
+GetJsonId returns the JsonId field if non-nil, zero value otherwise.
 
-### GetIdOk
+### GetJsonIdOk
 
-`func (o *UserjsonldAuthenticate) GetIdOk() (*string, bool)`
+`func (o *UserjsonldAuthenticate) GetJsonIdOk() (*string, bool)`
 
-GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
+GetJsonIdOk returns a tuple with the JsonId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetId
+### SetJsonId
 
-`func (o *UserjsonldAuthenticate) SetId(v string)`
+`func (o *UserjsonldAuthenticate) SetJsonId(v string)`
 
-SetId sets Id field to given value.
+SetJsonId sets JsonId field to given value.
 
-### HasId
+### HasJsonId
 
-`func (o *UserjsonldAuthenticate) HasId() bool`
+`func (o *UserjsonldAuthenticate) HasJsonId() bool`
 
-HasId returns a boolean if a field has been set.
+HasJsonId returns a boolean if a field has been set.
 
-### GetType
+### GetJsonType
 
-`func (o *UserjsonldAuthenticate) GetType() string`
+`func (o *UserjsonldAuthenticate) GetJsonType() string`
 
-GetType returns the Type field if non-nil, zero value otherwise.
+GetJsonType returns the JsonType field if non-nil, zero value otherwise.
 
-### GetTypeOk
+### GetJsonTypeOk
 
-`func (o *UserjsonldAuthenticate) GetTypeOk() (*string, bool)`
+`func (o *UserjsonldAuthenticate) GetJsonTypeOk() (*string, bool)`
 
-GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
+GetJsonTypeOk returns a tuple with the JsonType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetType
+### SetJsonType
 
-`func (o *UserjsonldAuthenticate) SetType(v string)`
+`func (o *UserjsonldAuthenticate) SetJsonType(v string)`
 
-SetType sets Type field to given value.
+SetJsonType sets JsonType field to given value.
 
-### HasType
+### HasJsonType
 
-`func (o *UserjsonldAuthenticate) HasType() bool`
+`func (o *UserjsonldAuthenticate) HasJsonType() bool`
 
-HasType returns a boolean if a field has been set.
+HasJsonType returns a boolean if a field has been set.
 
 ### GetEmail
 

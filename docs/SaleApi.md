@@ -4,20 +4,18 @@ All URIs are relative to *http://localhost/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**DeleteSaleItem**](SaleApi.md#DeleteSaleItem) | **Delete** /sales/{id} | Removes the Sale resource.
+[**ConfirmSale**](SaleApi.md#ConfirmSale) | **Post** /sales/{id}/confirm | Confirms a sale.
 [**GetSaleCollection**](SaleApi.md#GetSaleCollection) | **Get** /sales | Retrieves the collection of Sale resources.
 [**GetSaleItem**](SaleApi.md#GetSaleItem) | **Get** /sales/{id} | Retrieves a Sale resource.
-[**PatchSaleItem**](SaleApi.md#PatchSaleItem) | **Patch** /sales/{id} | Updates the Sale resource.
 [**PostSaleCollection**](SaleApi.md#PostSaleCollection) | **Post** /sales | Creates a Sale resource.
-[**PutSaleItem**](SaleApi.md#PutSaleItem) | **Put** /sales/{id} | Replaces the Sale resource.
 
 
 
-## DeleteSaleItem
+## ConfirmSale
 
-> DeleteSaleItem(ctx, id).Execute()
+> SaleRead ConfirmSale(ctx, id).Body(body).Execute()
 
-Removes the Sale resource.
+Confirms a sale.
 
 ### Example
 
@@ -33,14 +31,17 @@ import (
 
 func main() {
     id := "id_example" // string | 
+    body := map[string]interface{}(Object) // map[string]interface{} |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SaleApi.DeleteSaleItem(context.Background(), id).Execute()
+    resp, r, err := api_client.SaleApi.ConfirmSale(context.Background(), id).Body(body).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SaleApi.DeleteSaleItem``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `SaleApi.ConfirmSale``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
+    // response from `ConfirmSale`: SaleRead
+    fmt.Fprintf(os.Stdout, "Response from `SaleApi.ConfirmSale`: %v\n", resp)
 }
 ```
 
@@ -54,16 +55,17 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiDeleteSaleItemRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiConfirmSaleRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **body** | **map[string]interface{}** |  | 
 
 ### Return type
 
- (empty response body)
+[**SaleRead**](Sale-read.md)
 
 ### Authorization
 
@@ -71,8 +73,8 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Content-Type**: application/json, application/ld+json
+- **Accept**: application/json, application/ld+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -217,76 +219,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## PatchSaleItem
-
-> SaleRead PatchSaleItem(ctx, id).SaleWrite(saleWrite).Execute()
-
-Updates the Sale resource.
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    id := "id_example" // string | 
-    saleWrite := *openapiclient.NewSaleWrite(int32(123), "ChannelReference_example", int32(123), int32(123)) // SaleWrite | The updated Sale resource (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SaleApi.PatchSaleItem(context.Background(), id).SaleWrite(saleWrite).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SaleApi.PatchSaleItem``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `PatchSaleItem`: SaleRead
-    fmt.Fprintf(os.Stdout, "Response from `SaleApi.PatchSaleItem`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiPatchSaleItemRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **saleWrite** | [**SaleWrite**](SaleWrite.md) | The updated Sale resource | 
-
-### Return type
-
-[**SaleRead**](Sale-read.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/merge-patch+json
-- **Accept**: application/json, application/ld+json, text/html
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## PostSaleCollection
 
 > SaleRead PostSaleCollection(ctx).SaleWrite(saleWrite).Execute()
@@ -332,76 +264,6 @@ Other parameters are passed through a pointer to a apiPostSaleCollectionRequest 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **saleWrite** | [**SaleWrite**](SaleWrite.md) | The new Sale resource | 
-
-### Return type
-
-[**SaleRead**](Sale-read.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, application/ld+json, text/html
-- **Accept**: application/json, application/ld+json, text/html
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## PutSaleItem
-
-> SaleRead PutSaleItem(ctx, id).SaleWrite(saleWrite).Execute()
-
-Replaces the Sale resource.
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    id := "id_example" // string | 
-    saleWrite := *openapiclient.NewSaleWrite(int32(123), "ChannelReference_example", int32(123), int32(123)) // SaleWrite | The updated Sale resource (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SaleApi.PutSaleItem(context.Background(), id).SaleWrite(saleWrite).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SaleApi.PutSaleItem``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `PutSaleItem`: SaleRead
-    fmt.Fprintf(os.Stdout, "Response from `SaleApi.PutSaleItem`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiPutSaleItemRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **saleWrite** | [**SaleWrite**](SaleWrite.md) | The updated Sale resource | 
 
 ### Return type
 

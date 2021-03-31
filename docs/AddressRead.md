@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **CountryCode** | **string** | The address country code (ISO 3166-1 alpha-2 format) | 
 **Email** | Pointer to **string** | The address email | [optional] 
 **HouseNumber** | Pointer to **string** | The address house number | [optional] 
-**Id** | Pointer to **int32** | The address ID | [optional] [readonly] 
+**Id** | Pointer to **int32** | The address ID | [optional] 
 **Name** | **string** | The address name | 
 **Phone** | Pointer to **string** | The address phone | [optional] 
 **Street** | **string** | The address street | 

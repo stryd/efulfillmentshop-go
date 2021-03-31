@@ -5,11 +5,11 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Description** | **string** | The purchase line description | 
-**Id** | Pointer to **int32** | The purchase line ID | [optional] [readonly] 
+**Id** | Pointer to **int32** | The purchase line ID | [optional] 
 **PlannedDate** | Pointer to **time.Time** | The purchase line planned delivery date | [optional] 
 **ProductId** | **int32** | The product ID | 
 **PurchaseId** | **int32** | The purchase ID | 
-**QtyReceived** | Pointer to **int32** | The purchase line quantity received | [optional] [readonly] 
+**QtyReceived** | Pointer to **int32** | The purchase line quantity received | [optional] 
 **Quantity** | **int32** | The purchase line quantity | 
 
 ## Methods

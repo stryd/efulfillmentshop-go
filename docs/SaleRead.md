@@ -7,13 +7,13 @@ Name | Type | Description | Notes
 **CarrierId** | Pointer to **int32** | The sale carrier ID | [optional] 
 **ChannelId** | **int32** | The sale channel | 
 **ChannelReference** | **string** | The sale channel reference | 
-**Id** | Pointer to **int32** | The sale ID | [optional] [readonly] 
+**Id** | Pointer to **int32** | The sale ID | [optional] 
 **InvoiceAddressId** | **int32** | The sale invoice address ID | 
-**LineIds** | Pointer to **[]int32** | The sale line IDs | [optional] [readonly] 
-**Name** | Pointer to **string** | The sale name | [optional] [readonly] 
-**ShipmentIds** | Pointer to **[]int32** | The sale shipment IDs | [optional] [readonly] 
+**LineIds** | Pointer to **[]int32** | The sale line IDs | [optional] 
+**Name** | Pointer to **string** | The sale name | [optional] 
+**ShipmentIds** | Pointer to **[]int32** | The sale shipment IDs | [optional] 
 **ShippingAddressId** | **int32** | The sale shipping address ID | 
-**Status** | Pointer to **string** | The sale warehouse status | [optional] [readonly] 
+**Status** | Pointer to **string** | The sale warehouse status | [optional] 
 
 ## Methods
 

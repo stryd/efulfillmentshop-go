@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **int32** | The carrier ID | [optional] [readonly] 
-**Name** | Pointer to **string** | The carrier name | [optional] [readonly] 
+**Id** | Pointer to **int32** | The carrier ID | [optional] 
+**Name** | Pointer to **string** | The carrier name | [optional] 
 
 ## Methods
 

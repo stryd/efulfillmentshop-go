@@ -4,11 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Context** | Pointer to **string** |  | [optional] [readonly] 
-**Id** | Pointer to **string** |  | [optional] [readonly] 
-**Type** | Pointer to **string** |  | [optional] [readonly] 
-**Id** | Pointer to **int32** | The channel ID | [optional] [readonly] 
-**Name** | Pointer to **string** | The channel name | [optional] [readonly] 
+**JsonContext** | Pointer to **string** |  | [optional] [readonly] 
+**JsonId** | Pointer to **string** |  | [optional] [readonly] 
+**JsonType** | Pointer to **string** |  | [optional] [readonly] 
+**Id** | Pointer to **int32** | The channel ID | [optional] 
+**Name** | Pointer to **string** | The channel name | [optional] 
 
 ## Methods
 
@@ -29,80 +29,80 @@ NewChanneljsonldReadWithDefaults instantiates a new ChanneljsonldRead object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetContext
+### GetJsonContext
 
-`func (o *ChanneljsonldRead) GetContext() string`
+`func (o *ChanneljsonldRead) GetJsonContext() string`
 
-GetContext returns the Context field if non-nil, zero value otherwise.
+GetJsonContext returns the JsonContext field if non-nil, zero value otherwise.
 
-### GetContextOk
+### GetJsonContextOk
 
-`func (o *ChanneljsonldRead) GetContextOk() (*string, bool)`
+`func (o *ChanneljsonldRead) GetJsonContextOk() (*string, bool)`
 
-GetContextOk returns a tuple with the Context field if it's non-nil, zero value otherwise
+GetJsonContextOk returns a tuple with the JsonContext field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetContext
+### SetJsonContext
 
-`func (o *ChanneljsonldRead) SetContext(v string)`
+`func (o *ChanneljsonldRead) SetJsonContext(v string)`
 
-SetContext sets Context field to given value.
+SetJsonContext sets JsonContext field to given value.
 
-### HasContext
+### HasJsonContext
 
-`func (o *ChanneljsonldRead) HasContext() bool`
+`func (o *ChanneljsonldRead) HasJsonContext() bool`
 
-HasContext returns a boolean if a field has been set.
+HasJsonContext returns a boolean if a field has been set.
 
-### GetId
+### GetJsonId
 
-`func (o *ChanneljsonldRead) GetId() string`
+`func (o *ChanneljsonldRead) GetJsonId() string`
 
-GetId returns the Id field if non-nil, zero value otherwise.
+GetJsonId returns the JsonId field if non-nil, zero value otherwise.
 
-### GetIdOk
+### GetJsonIdOk
 
-`func (o *ChanneljsonldRead) GetIdOk() (*string, bool)`
+`func (o *ChanneljsonldRead) GetJsonIdOk() (*string, bool)`
 
-GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
+GetJsonIdOk returns a tuple with the JsonId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetId
+### SetJsonId
 
-`func (o *ChanneljsonldRead) SetId(v string)`
+`func (o *ChanneljsonldRead) SetJsonId(v string)`
 
-SetId sets Id field to given value.
+SetJsonId sets JsonId field to given value.
 
-### HasId
+### HasJsonId
 
-`func (o *ChanneljsonldRead) HasId() bool`
+`func (o *ChanneljsonldRead) HasJsonId() bool`
 
-HasId returns a boolean if a field has been set.
+HasJsonId returns a boolean if a field has been set.
 
-### GetType
+### GetJsonType
 
-`func (o *ChanneljsonldRead) GetType() string`
+`func (o *ChanneljsonldRead) GetJsonType() string`
 
-GetType returns the Type field if non-nil, zero value otherwise.
+GetJsonType returns the JsonType field if non-nil, zero value otherwise.
 
-### GetTypeOk
+### GetJsonTypeOk
 
-`func (o *ChanneljsonldRead) GetTypeOk() (*string, bool)`
+`func (o *ChanneljsonldRead) GetJsonTypeOk() (*string, bool)`
 
-GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
+GetJsonTypeOk returns a tuple with the JsonType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetType
+### SetJsonType
 
-`func (o *ChanneljsonldRead) SetType(v string)`
+`func (o *ChanneljsonldRead) SetJsonType(v string)`
 
-SetType sets Type field to given value.
+SetJsonType sets JsonType field to given value.
 
-### HasType
+### HasJsonType
 
-`func (o *ChanneljsonldRead) HasType() bool`
+`func (o *ChanneljsonldRead) HasJsonType() bool`
 
-HasType returns a boolean if a field has been set.
+HasJsonType returns a boolean if a field has been set.
 
 ### GetId
 

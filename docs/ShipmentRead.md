@@ -4,17 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CarrierId** | Pointer to **int32** | The shipment carrier ID | [optional] [readonly] 
-**Id** | Pointer to **int32** | The shipment ID | [optional] [readonly] 
-**SaleId** | Pointer to **int32** | The sale ID | [optional] [readonly] 
-**ShippedAt** | Pointer to **time.Time** | The shipment date | [optional] [readonly] 
-**TrackingCodes** | Pointer to **[]string** | The shipment tracking codes | [optional] [readonly] 
+**CarrierId** | Pointer to **int32** | The shipment carrier ID | [optional] 
+**Id** | Pointer to **int32** | The shipment ID | [optional] 
+**SaleId** | **int32** | The sale ID | 
+**ShippedAt** | **time.Time** | The shipment date | 
+**TrackingCodes** | Pointer to **[]string** | The shipment tracking codes | [optional] 
 
 ## Methods
 
 ### NewShipmentRead
 
-`func NewShipmentRead() *ShipmentRead`
+`func NewShipmentRead(saleId int32, shippedAt time.Time, ) *ShipmentRead`
 
 NewShipmentRead instantiates a new ShipmentRead object
 This constructor will assign default values to properties that have it defined,
@@ -98,11 +98,6 @@ and a boolean to check if the value has been set.
 
 SetSaleId sets SaleId field to given value.
 
-### HasSaleId
-
-`func (o *ShipmentRead) HasSaleId() bool`
-
-HasSaleId returns a boolean if a field has been set.
 
 ### GetShippedAt
 
@@ -123,11 +118,6 @@ and a boolean to check if the value has been set.
 
 SetShippedAt sets ShippedAt field to given value.
 
-### HasShippedAt
-
-`func (o *ShipmentRead) HasShippedAt() bool`
-
-HasShippedAt returns a boolean if a field has been set.
 
 ### GetTrackingCodes
 
