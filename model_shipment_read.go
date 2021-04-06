@@ -12,6 +12,8 @@ package efulfilmentshop
 
 import (
 	"encoding/json"
+	"fmt"
+	"strings"
 	"time"
 )
 
@@ -24,9 +26,31 @@ type ShipmentRead struct {
 	// The sale ID
 	SaleId int32 `json:"saleId"`
 	// The shipment date
-	ShippedAt time.Time `json:"shippedAt"`
+	ShippedAt CustomTime `json:"shippedAt"`
 	// The shipment tracking codes
 	TrackingCodes *[]string `json:"trackingCodes,omitempty"`
+}
+type CustomTime struct {
+	time.Time
+}
+
+const ctLayout = "2006-01-02 15:04:05"
+
+func (ct *CustomTime) UnmarshalJSON(b []byte) (err error) {
+	s := strings.Trim(string(b), "\"")
+	if s == "null" {
+		ct.Time = time.Time{}
+		return
+	}
+	ct.Time, err = time.Parse(ctLayout, s)
+	return
+}
+
+func (ct *CustomTime) MarshalJSON() ([]byte, error) {
+	if ct.Time.UnixNano() == 0 {
+		return []byte("null"), nil
+	}
+	return []byte(fmt.Sprintf("\"%s\"", ct.Time.Format(ctLayout))), nil
 }
 
 // NewShipmentRead instantiates a new ShipmentRead object
@@ -36,7 +60,7 @@ type ShipmentRead struct {
 func NewShipmentRead(saleId int32, shippedAt time.Time, ) *ShipmentRead {
 	this := ShipmentRead{}
 	this.SaleId = saleId
-	this.ShippedAt = shippedAt
+	this.ShippedAt = CustomTime{shippedAt}
 	return &this
 }
 
@@ -143,7 +167,7 @@ func (o *ShipmentRead) GetShippedAt() time.Time {
 		return ret
 	}
 
-	return o.ShippedAt
+	return o.ShippedAt.Time
 }
 
 // GetShippedAtOk returns a tuple with the ShippedAt field value
@@ -152,12 +176,12 @@ func (o *ShipmentRead) GetShippedAtOk() (*time.Time, bool) {
 	if o == nil  {
 		return nil, false
 	}
-	return &o.ShippedAt, true
+	return &o.ShippedAt.Time, true
 }
 
 // SetShippedAt sets field value
 func (o *ShipmentRead) SetShippedAt(v time.Time) {
-	o.ShippedAt = v
+	o.ShippedAt = CustomTime{v}
 }
 
 // GetTrackingCodes returns the TrackingCodes field value if set, zero value otherwise.

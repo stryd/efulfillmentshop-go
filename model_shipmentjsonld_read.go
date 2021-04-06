@@ -27,7 +27,7 @@ type ShipmentjsonldRead struct {
 	// The sale ID
 	SaleId int32 `json:"saleId"`
 	// The shipment date
-	ShippedAt time.Time `json:"shippedAt"`
+	ShippedAt CustomTime `json:"shippedAt"`
 	// The shipment tracking codes
 	TrackingCodes *[]string `json:"trackingCodes,omitempty"`
 }
@@ -39,7 +39,7 @@ type ShipmentjsonldRead struct {
 func NewShipmentjsonldRead(saleId int32, shippedAt time.Time, ) *ShipmentjsonldRead {
 	this := ShipmentjsonldRead{}
 	this.SaleId = saleId
-	this.ShippedAt = shippedAt
+	this.ShippedAt = CustomTime{shippedAt}
 	return &this
 }
 
@@ -242,7 +242,7 @@ func (o *ShipmentjsonldRead) GetShippedAt() time.Time {
 		return ret
 	}
 
-	return o.ShippedAt
+	return o.ShippedAt.Time
 }
 
 // GetShippedAtOk returns a tuple with the ShippedAt field value
@@ -251,12 +251,12 @@ func (o *ShipmentjsonldRead) GetShippedAtOk() (*time.Time, bool) {
 	if o == nil  {
 		return nil, false
 	}
-	return &o.ShippedAt, true
+	return &o.ShippedAt.Time, true
 }
 
 // SetShippedAt sets field value
 func (o *ShipmentjsonldRead) SetShippedAt(v time.Time) {
-	o.ShippedAt = v
+	o.ShippedAt = CustomTime{v}
 }
 
 // GetTrackingCodes returns the TrackingCodes field value if set, zero value otherwise.
