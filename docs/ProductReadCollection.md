@@ -5,9 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Barcode** | **string** | The product barcode | 
-**ChannelId** | **int32** | The product channel | 
-**ChannelReference** | **string** | The product channel reference | 
-**ChannelSku** | Pointer to **string** | The product channel SKU | [optional] 
+**ChannelReference** | Pointer to **string** | The product channel reference (DEPRECATED) | [optional] 
 **CostPrice** | Pointer to **float32** | The product cost price (Excluding taxes) | [optional] 
 **DimensionX** | Pointer to **float32** | The product dimension X in cm | [optional] 
 **DimensionY** | Pointer to **float32** | The product dimension Y in cm | [optional] 
@@ -20,6 +18,7 @@ Name | Type | Description | Notes
 **QuantityOnHand** | Pointer to **int32** | The product quantity on hand | [optional] 
 **QuantityOutgoing** | Pointer to **int32** | The outgoing product quantity | [optional] 
 **QuantitySold** | Pointer to **int32** | The sold product quantity | [optional] 
+**Reference** | Pointer to **string** | Your product reference (This could be your product ID) | [optional] 
 **SellingPrice** | Pointer to **float32** | The product selling price (Excluding taxes) | [optional] 
 **Sku** | Pointer to **string** | The product warehouse SKU | [optional] 
 **Volume** | Pointer to **float32** | The product volume in L (Calculated using dimensions) | [optional] 
@@ -29,7 +28,7 @@ Name | Type | Description | Notes
 
 ### NewProductReadCollection
 
-`func NewProductReadCollection(barcode string, channelId int32, channelReference string, name string, ) *ProductReadCollection`
+`func NewProductReadCollection(barcode string, name string, ) *ProductReadCollection`
 
 NewProductReadCollection instantiates a new ProductReadCollection object
 This constructor will assign default values to properties that have it defined,
@@ -64,26 +63,6 @@ and a boolean to check if the value has been set.
 SetBarcode sets Barcode field to given value.
 
 
-### GetChannelId
-
-`func (o *ProductReadCollection) GetChannelId() int32`
-
-GetChannelId returns the ChannelId field if non-nil, zero value otherwise.
-
-### GetChannelIdOk
-
-`func (o *ProductReadCollection) GetChannelIdOk() (*int32, bool)`
-
-GetChannelIdOk returns a tuple with the ChannelId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetChannelId
-
-`func (o *ProductReadCollection) SetChannelId(v int32)`
-
-SetChannelId sets ChannelId field to given value.
-
-
 ### GetChannelReference
 
 `func (o *ProductReadCollection) GetChannelReference() string`
@@ -103,31 +82,11 @@ and a boolean to check if the value has been set.
 
 SetChannelReference sets ChannelReference field to given value.
 
+### HasChannelReference
 
-### GetChannelSku
+`func (o *ProductReadCollection) HasChannelReference() bool`
 
-`func (o *ProductReadCollection) GetChannelSku() string`
-
-GetChannelSku returns the ChannelSku field if non-nil, zero value otherwise.
-
-### GetChannelSkuOk
-
-`func (o *ProductReadCollection) GetChannelSkuOk() (*string, bool)`
-
-GetChannelSkuOk returns a tuple with the ChannelSku field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetChannelSku
-
-`func (o *ProductReadCollection) SetChannelSku(v string)`
-
-SetChannelSku sets ChannelSku field to given value.
-
-### HasChannelSku
-
-`func (o *ProductReadCollection) HasChannelSku() bool`
-
-HasChannelSku returns a boolean if a field has been set.
+HasChannelReference returns a boolean if a field has been set.
 
 ### GetCostPrice
 
@@ -423,6 +382,31 @@ SetQuantitySold sets QuantitySold field to given value.
 `func (o *ProductReadCollection) HasQuantitySold() bool`
 
 HasQuantitySold returns a boolean if a field has been set.
+
+### GetReference
+
+`func (o *ProductReadCollection) GetReference() string`
+
+GetReference returns the Reference field if non-nil, zero value otherwise.
+
+### GetReferenceOk
+
+`func (o *ProductReadCollection) GetReferenceOk() (*string, bool)`
+
+GetReferenceOk returns a tuple with the Reference field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReference
+
+`func (o *ProductReadCollection) SetReference(v string)`
+
+SetReference sets Reference field to given value.
+
+### HasReference
+
+`func (o *ProductReadCollection) HasReference() bool`
+
+HasReference returns a boolean if a field has been set.
 
 ### GetSellingPrice
 

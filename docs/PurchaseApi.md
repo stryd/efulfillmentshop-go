@@ -81,7 +81,7 @@ Name | Type | Description  | Notes
 
 ## GetPurchaseCollection
 
-> []PurchaseRead GetPurchaseCollection(ctx).ChannelId(channelId).ChannelReference(channelReference).Page(page).Items(items).Execute()
+> []PurchaseRead GetPurchaseCollection(ctx).ChannelReference(channelReference).Reference(reference).Page(page).Items(items).Execute()
 
 Retrieves the collection of Purchase resources.
 
@@ -98,14 +98,14 @@ import (
 )
 
 func main() {
-    channelId := int32(56) // int32 | The purchase channel (optional)
-    channelReference := "channelReference_example" // string | The purchase channel reference (optional)
+    channelReference := "channelReference_example" // string | The purchase channel reference (DEPRECATED) (optional)
+    reference := "reference_example" // string | Your purchase reference (This could be your purchase ID) (optional)
     page := int32(56) // int32 | The collection page number (optional) (default to 1)
     items := int32(56) // int32 | The number of items per page (optional) (default to 30)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PurchaseApi.GetPurchaseCollection(context.Background()).ChannelId(channelId).ChannelReference(channelReference).Page(page).Items(items).Execute()
+    resp, r, err := api_client.PurchaseApi.GetPurchaseCollection(context.Background()).ChannelReference(channelReference).Reference(reference).Page(page).Items(items).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PurchaseApi.GetPurchaseCollection``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -126,8 +126,8 @@ Other parameters are passed through a pointer to a apiGetPurchaseCollectionReque
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **channelId** | **int32** | The purchase channel | 
- **channelReference** | **string** | The purchase channel reference | 
+ **channelReference** | **string** | The purchase channel reference (DEPRECATED) | 
+ **reference** | **string** | Your purchase reference (This could be your purchase ID) | 
  **page** | **int32** | The collection page number | [default to 1]
  **items** | **int32** | The number of items per page | [default to 30]
 
@@ -238,7 +238,7 @@ import (
 
 func main() {
     id := "id_example" // string | 
-    purchaseWrite := *openapiclient.NewPurchaseWrite(int32(123), "ChannelReference_example", time.Now(), int32(123)) // PurchaseWrite | The updated Purchase resource (optional)
+    purchaseWrite := *openapiclient.NewPurchaseWrite(time.Now(), int32(123)) // PurchaseWrite | The updated Purchase resource (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -308,7 +308,7 @@ import (
 )
 
 func main() {
-    purchaseWrite := *openapiclient.NewPurchaseWrite(int32(123), "ChannelReference_example", time.Now(), int32(123)) // PurchaseWrite | The new Purchase resource (optional)
+    purchaseWrite := *openapiclient.NewPurchaseWrite(time.Now(), int32(123)) // PurchaseWrite | The new Purchase resource (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -374,7 +374,7 @@ import (
 
 func main() {
     id := "id_example" // string | 
-    purchaseWrite := *openapiclient.NewPurchaseWrite(int32(123), "ChannelReference_example", time.Now(), int32(123)) // PurchaseWrite | The updated Purchase resource (optional)
+    purchaseWrite := *openapiclient.NewPurchaseWrite(time.Now(), int32(123)) // PurchaseWrite | The updated Purchase resource (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)

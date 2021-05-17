@@ -7,16 +7,16 @@ Name | Type | Description | Notes
 **JsonContext** | Pointer to **string** |  | [optional] [readonly] 
 **JsonId** | Pointer to **string** |  | [optional] [readonly] 
 **JsonType** | Pointer to **string** |  | [optional] [readonly] 
-**ChannelId** | **int32** | The purchase channel | 
-**ChannelReference** | **string** | The purchase channel reference | 
+**ChannelReference** | Pointer to **string** | The purchase channel reference (DEPRECATED) | [optional] 
 **PlannedDate** | **time.Time** | The purchase planned delivery date | 
+**Reference** | Pointer to **string** | Your purchase reference (This could be your purchase ID) | [optional] 
 **SupplierId** | **int32** | The purchase supplier ID | 
 
 ## Methods
 
 ### NewPurchasejsonldWrite
 
-`func NewPurchasejsonldWrite(channelId int32, channelReference string, plannedDate time.Time, supplierId int32, ) *PurchasejsonldWrite`
+`func NewPurchasejsonldWrite(plannedDate time.Time, supplierId int32, ) *PurchasejsonldWrite`
 
 NewPurchasejsonldWrite instantiates a new PurchasejsonldWrite object
 This constructor will assign default values to properties that have it defined,
@@ -106,26 +106,6 @@ SetJsonType sets JsonType field to given value.
 
 HasJsonType returns a boolean if a field has been set.
 
-### GetChannelId
-
-`func (o *PurchasejsonldWrite) GetChannelId() int32`
-
-GetChannelId returns the ChannelId field if non-nil, zero value otherwise.
-
-### GetChannelIdOk
-
-`func (o *PurchasejsonldWrite) GetChannelIdOk() (*int32, bool)`
-
-GetChannelIdOk returns a tuple with the ChannelId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetChannelId
-
-`func (o *PurchasejsonldWrite) SetChannelId(v int32)`
-
-SetChannelId sets ChannelId field to given value.
-
-
 ### GetChannelReference
 
 `func (o *PurchasejsonldWrite) GetChannelReference() string`
@@ -145,6 +125,11 @@ and a boolean to check if the value has been set.
 
 SetChannelReference sets ChannelReference field to given value.
 
+### HasChannelReference
+
+`func (o *PurchasejsonldWrite) HasChannelReference() bool`
+
+HasChannelReference returns a boolean if a field has been set.
 
 ### GetPlannedDate
 
@@ -165,6 +150,31 @@ and a boolean to check if the value has been set.
 
 SetPlannedDate sets PlannedDate field to given value.
 
+
+### GetReference
+
+`func (o *PurchasejsonldWrite) GetReference() string`
+
+GetReference returns the Reference field if non-nil, zero value otherwise.
+
+### GetReferenceOk
+
+`func (o *PurchasejsonldWrite) GetReferenceOk() (*string, bool)`
+
+GetReferenceOk returns a tuple with the Reference field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReference
+
+`func (o *PurchasejsonldWrite) SetReference(v string)`
+
+SetReference sets Reference field to given value.
+
+### HasReference
+
+`func (o *PurchasejsonldWrite) HasReference() bool`
+
+HasReference returns a boolean if a field has been set.
 
 ### GetSupplierId
 

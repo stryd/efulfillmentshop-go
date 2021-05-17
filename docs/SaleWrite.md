@@ -5,16 +5,16 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CarrierId** | Pointer to **int32** | The sale carrier ID | [optional] 
-**ChannelId** | **int32** | The sale channel | 
-**ChannelReference** | **string** | The sale channel reference | 
+**ChannelReference** | Pointer to **string** | The sale channel reference (DEPRECATED) | [optional] 
 **InvoiceAddressId** | **int32** | The sale invoice address ID | 
+**Reference** | Pointer to **string** | Your sale reference (This could be your sale ID) | [optional] 
 **ShippingAddressId** | **int32** | The sale shipping address ID | 
 
 ## Methods
 
 ### NewSaleWrite
 
-`func NewSaleWrite(channelId int32, channelReference string, invoiceAddressId int32, shippingAddressId int32, ) *SaleWrite`
+`func NewSaleWrite(invoiceAddressId int32, shippingAddressId int32, ) *SaleWrite`
 
 NewSaleWrite instantiates a new SaleWrite object
 This constructor will assign default values to properties that have it defined,
@@ -54,26 +54,6 @@ SetCarrierId sets CarrierId field to given value.
 
 HasCarrierId returns a boolean if a field has been set.
 
-### GetChannelId
-
-`func (o *SaleWrite) GetChannelId() int32`
-
-GetChannelId returns the ChannelId field if non-nil, zero value otherwise.
-
-### GetChannelIdOk
-
-`func (o *SaleWrite) GetChannelIdOk() (*int32, bool)`
-
-GetChannelIdOk returns a tuple with the ChannelId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetChannelId
-
-`func (o *SaleWrite) SetChannelId(v int32)`
-
-SetChannelId sets ChannelId field to given value.
-
-
 ### GetChannelReference
 
 `func (o *SaleWrite) GetChannelReference() string`
@@ -93,6 +73,11 @@ and a boolean to check if the value has been set.
 
 SetChannelReference sets ChannelReference field to given value.
 
+### HasChannelReference
+
+`func (o *SaleWrite) HasChannelReference() bool`
+
+HasChannelReference returns a boolean if a field has been set.
 
 ### GetInvoiceAddressId
 
@@ -113,6 +98,31 @@ and a boolean to check if the value has been set.
 
 SetInvoiceAddressId sets InvoiceAddressId field to given value.
 
+
+### GetReference
+
+`func (o *SaleWrite) GetReference() string`
+
+GetReference returns the Reference field if non-nil, zero value otherwise.
+
+### GetReferenceOk
+
+`func (o *SaleWrite) GetReferenceOk() (*string, bool)`
+
+GetReferenceOk returns a tuple with the Reference field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReference
+
+`func (o *SaleWrite) SetReference(v string)`
+
+SetReference sets Reference field to given value.
+
+### HasReference
+
+`func (o *SaleWrite) HasReference() bool`
+
+HasReference returns a boolean if a field has been set.
 
 ### GetShippingAddressId
 

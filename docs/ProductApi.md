@@ -81,7 +81,7 @@ Name | Type | Description  | Notes
 
 ## GetProductCollection
 
-> []ProductReadCollection GetProductCollection(ctx).Name(name).Sku(sku).Barcode(barcode).ChannelId(channelId).ChannelReference(channelReference).ChannelSku(channelSku).Page(page).Items(items).Execute()
+> []ProductReadCollection GetProductCollection(ctx).Name(name).Sku(sku).Barcode(barcode).ChannelReference(channelReference).Reference(reference).Page(page).Items(items).Execute()
 
 Retrieves the collection of Product resources.
 
@@ -101,15 +101,14 @@ func main() {
     name := "name_example" // string | The product name (optional)
     sku := "sku_example" // string | The product warehouse SKU (optional)
     barcode := "barcode_example" // string | The product barcode (optional)
-    channelId := int32(56) // int32 | The product channel (optional)
-    channelReference := "channelReference_example" // string | The product channel reference (optional)
-    channelSku := "channelSku_example" // string | The product channel SKU (optional)
+    channelReference := "channelReference_example" // string | The product channel reference (DEPRECATED) (optional)
+    reference := "reference_example" // string | Your product reference (This could be your product ID) (optional)
     page := int32(56) // int32 | The collection page number (optional) (default to 1)
     items := int32(56) // int32 | The number of items per page (optional) (default to 30)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ProductApi.GetProductCollection(context.Background()).Name(name).Sku(sku).Barcode(barcode).ChannelId(channelId).ChannelReference(channelReference).ChannelSku(channelSku).Page(page).Items(items).Execute()
+    resp, r, err := api_client.ProductApi.GetProductCollection(context.Background()).Name(name).Sku(sku).Barcode(barcode).ChannelReference(channelReference).Reference(reference).Page(page).Items(items).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ProductApi.GetProductCollection``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -133,9 +132,8 @@ Name | Type | Description  | Notes
  **name** | **string** | The product name | 
  **sku** | **string** | The product warehouse SKU | 
  **barcode** | **string** | The product barcode | 
- **channelId** | **int32** | The product channel | 
- **channelReference** | **string** | The product channel reference | 
- **channelSku** | **string** | The product channel SKU | 
+ **channelReference** | **string** | The product channel reference (DEPRECATED) | 
+ **reference** | **string** | Your product reference (This could be your product ID) | 
  **page** | **int32** | The collection page number | [default to 1]
  **items** | **int32** | The number of items per page | [default to 30]
 
@@ -245,7 +243,7 @@ import (
 
 func main() {
     id := "id_example" // string | 
-    productWrite := *openapiclient.NewProductWrite("Barcode_example", int32(123), "ChannelReference_example", "Name_example") // ProductWrite | The updated Product resource (optional)
+    productWrite := *openapiclient.NewProductWrite("Barcode_example", "Name_example") // ProductWrite | The updated Product resource (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -314,7 +312,7 @@ import (
 )
 
 func main() {
-    productWrite := *openapiclient.NewProductWrite("Barcode_example", int32(123), "ChannelReference_example", "Name_example") // ProductWrite | The new Product resource (optional)
+    productWrite := *openapiclient.NewProductWrite("Barcode_example", "Name_example") // ProductWrite | The new Product resource (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -379,7 +377,7 @@ import (
 
 func main() {
     id := "id_example" // string | 
-    productWrite := *openapiclient.NewProductWrite("Barcode_example", int32(123), "ChannelReference_example", "Name_example") // ProductWrite | The updated Product resource (optional)
+    productWrite := *openapiclient.NewProductWrite("Barcode_example", "Name_example") // ProductWrite | The updated Product resource (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)

@@ -4,16 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ChannelId** | **int32** | The purchase channel | 
-**ChannelReference** | **string** | The purchase channel reference | 
+**ChannelReference** | Pointer to **string** | The purchase channel reference (DEPRECATED) | [optional] 
 **PlannedDate** | **time.Time** | The purchase planned delivery date | 
+**Reference** | Pointer to **string** | Your purchase reference (This could be your purchase ID) | [optional] 
 **SupplierId** | **int32** | The purchase supplier ID | 
 
 ## Methods
 
 ### NewPurchaseWrite
 
-`func NewPurchaseWrite(channelId int32, channelReference string, plannedDate time.Time, supplierId int32, ) *PurchaseWrite`
+`func NewPurchaseWrite(plannedDate time.Time, supplierId int32, ) *PurchaseWrite`
 
 NewPurchaseWrite instantiates a new PurchaseWrite object
 This constructor will assign default values to properties that have it defined,
@@ -27,26 +27,6 @@ will change when the set of required properties is changed
 NewPurchaseWriteWithDefaults instantiates a new PurchaseWrite object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetChannelId
-
-`func (o *PurchaseWrite) GetChannelId() int32`
-
-GetChannelId returns the ChannelId field if non-nil, zero value otherwise.
-
-### GetChannelIdOk
-
-`func (o *PurchaseWrite) GetChannelIdOk() (*int32, bool)`
-
-GetChannelIdOk returns a tuple with the ChannelId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetChannelId
-
-`func (o *PurchaseWrite) SetChannelId(v int32)`
-
-SetChannelId sets ChannelId field to given value.
-
 
 ### GetChannelReference
 
@@ -67,6 +47,11 @@ and a boolean to check if the value has been set.
 
 SetChannelReference sets ChannelReference field to given value.
 
+### HasChannelReference
+
+`func (o *PurchaseWrite) HasChannelReference() bool`
+
+HasChannelReference returns a boolean if a field has been set.
 
 ### GetPlannedDate
 
@@ -87,6 +72,31 @@ and a boolean to check if the value has been set.
 
 SetPlannedDate sets PlannedDate field to given value.
 
+
+### GetReference
+
+`func (o *PurchaseWrite) GetReference() string`
+
+GetReference returns the Reference field if non-nil, zero value otherwise.
+
+### GetReferenceOk
+
+`func (o *PurchaseWrite) GetReferenceOk() (*string, bool)`
+
+GetReferenceOk returns a tuple with the Reference field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReference
+
+`func (o *PurchaseWrite) SetReference(v string)`
+
+SetReference sets Reference field to given value.
+
+### HasReference
+
+`func (o *PurchaseWrite) HasReference() bool`
+
+HasReference returns a boolean if a field has been set.
 
 ### GetSupplierId
 

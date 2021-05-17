@@ -1,12 +1,10 @@
 .gitignore
-.openapi-generator-ignore
 .travis.yml
 README.md
 api/openapi.yaml
 api_address.go
 api_authentication_token.go
 api_carrier.go
-api_channel.go
 api_product.go
 api_purchase.go
 api_purchase_line.go
@@ -25,9 +23,6 @@ docs/AuthenticationTokenApi.md
 docs/CarrierApi.md
 docs/CarrierRead.md
 docs/CarrierjsonldRead.md
-docs/ChannelApi.md
-docs/ChannelRead.md
-docs/ChanneljsonldRead.md
 docs/InlineResponse200.md
 docs/InlineResponse401.md
 docs/ProductApi.md
@@ -76,8 +71,6 @@ model_addressjsonld_read.go
 model_addressjsonld_write.go
 model_carrier_read.go
 model_carrierjsonld_read.go
-model_channel_read.go
-model_channeljsonld_read.go
 model_inline_response_200.go
 model_inline_response_401.go
 model_product_read_collection.go

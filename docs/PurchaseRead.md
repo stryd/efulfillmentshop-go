@@ -4,8 +4,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ChannelId** | **int32** | The purchase channel | 
-**ChannelReference** | **string** | The purchase channel reference | 
 **Id** | Pointer to **int32** | The purchase ID | [optional] 
 **Name** | Pointer to **string** | The purchase name | [optional] 
 **PlannedDate** | **time.Time** | The purchase planned delivery date | 
@@ -15,7 +13,7 @@ Name | Type | Description | Notes
 
 ### NewPurchaseRead
 
-`func NewPurchaseRead(channelId int32, channelReference string, plannedDate time.Time, supplierId int32, ) *PurchaseRead`
+`func NewPurchaseRead(plannedDate time.Time, supplierId int32, ) *PurchaseRead`
 
 NewPurchaseRead instantiates a new PurchaseRead object
 This constructor will assign default values to properties that have it defined,
@@ -29,46 +27,6 @@ will change when the set of required properties is changed
 NewPurchaseReadWithDefaults instantiates a new PurchaseRead object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetChannelId
-
-`func (o *PurchaseRead) GetChannelId() int32`
-
-GetChannelId returns the ChannelId field if non-nil, zero value otherwise.
-
-### GetChannelIdOk
-
-`func (o *PurchaseRead) GetChannelIdOk() (*int32, bool)`
-
-GetChannelIdOk returns a tuple with the ChannelId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetChannelId
-
-`func (o *PurchaseRead) SetChannelId(v int32)`
-
-SetChannelId sets ChannelId field to given value.
-
-
-### GetChannelReference
-
-`func (o *PurchaseRead) GetChannelReference() string`
-
-GetChannelReference returns the ChannelReference field if non-nil, zero value otherwise.
-
-### GetChannelReferenceOk
-
-`func (o *PurchaseRead) GetChannelReferenceOk() (*string, bool)`
-
-GetChannelReferenceOk returns a tuple with the ChannelReference field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetChannelReference
-
-`func (o *PurchaseRead) SetChannelReference(v string)`
-
-SetChannelReference sets ChannelReference field to given value.
-
 
 ### GetId
 

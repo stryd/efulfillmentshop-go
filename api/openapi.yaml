@@ -3,7 +3,7 @@ info:
   description: The E-fulfilment Shop API allows you to integrate your service with
     our warehouse.
   title: E-fulfilment Shop API
-  version: 1.2.0
+  version: 1.3.0
 servers:
 - url: /v1
 security:
@@ -415,127 +415,6 @@ paths:
       summary: Retrieves a Carrier resource.
       tags:
       - Carrier
-  /channels:
-    get:
-      operationId: getChannelCollection
-      parameters:
-      - description: The collection page number
-        explode: true
-        in: query
-        name: page
-        required: false
-        schema:
-          default: 1
-          type: integer
-        style: form
-      - description: The number of items per page
-        explode: true
-        in: query
-        name: items
-        required: false
-        schema:
-          default: 30
-          minimum: 0
-          type: integer
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/Channel-read'
-                type: array
-            application/ld+json:
-              schema:
-                properties:
-                  hydra:member:
-                    items:
-                      $ref: '#/components/schemas/Channel:jsonld-read'
-                    type: array
-                  hydra:search:
-                    properties:
-                      '@type':
-                        type: string
-                      hydra:mapping:
-                        items:
-                          properties:
-                            '@type':
-                              type: string
-                            property:
-                              type: string
-                            required:
-                              type: boolean
-                            variable:
-                              type: string
-                          type: object
-                        type: array
-                      hydra:template:
-                        type: string
-                      hydra:variableRepresentation:
-                        type: string
-                    type: object
-                  hydra:totalItems:
-                    minimum: 0
-                    type: integer
-                  hydra:view:
-                    properties:
-                      '@id':
-                        format: iri-reference
-                        type: string
-                      '@type':
-                        type: string
-                      hydra:first:
-                        format: iri-reference
-                        type: string
-                      hydra:last:
-                        format: iri-reference
-                        type: string
-                      hydra:next:
-                        format: iri-reference
-                        type: string
-                    type: object
-                required:
-                - hydra:member
-                type: object
-            text/html:
-              schema:
-                items:
-                  $ref: '#/components/schemas/Channel-read'
-                type: array
-          description: Channel collection response
-      summary: Retrieves the collection of Channel resources.
-      tags:
-      - Channel
-  /channels/{id}:
-    get:
-      operationId: getChannelItem
-      parameters:
-      - explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Channel-read'
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/Channel:jsonld-read'
-            text/html:
-              schema:
-                $ref: '#/components/schemas/Channel-read'
-          description: Channel resource response
-        "404":
-          description: Resource not found
-      summary: Retrieves a Channel resource.
-      tags:
-      - Channel
   /products:
     get:
       operationId: getProductCollection
@@ -564,15 +443,7 @@ paths:
         schema:
           type: string
         style: form
-      - description: The product channel
-        explode: true
-        in: query
-        name: channelId
-        required: false
-        schema:
-          type: integer
-        style: form
-      - description: The product channel reference
+      - description: The product channel reference (DEPRECATED)
         explode: true
         in: query
         name: channelReference
@@ -580,10 +451,10 @@ paths:
         schema:
           type: string
         style: form
-      - description: The product channel SKU
+      - description: Your product reference (This could be your product ID)
         explode: true
         in: query
-        name: channelSku
+        name: reference
         required: false
         schema:
           type: string
@@ -1094,18 +965,18 @@ paths:
     get:
       operationId: getPurchaseCollection
       parameters:
-      - description: The purchase channel
-        explode: true
-        in: query
-        name: channelId
-        required: false
-        schema:
-          type: integer
-        style: form
-      - description: The purchase channel reference
+      - description: The purchase channel reference (DEPRECATED)
         explode: true
         in: query
         name: channelReference
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Your purchase reference (This could be your purchase ID)
+        explode: true
+        in: query
+        name: reference
         required: false
         schema:
           type: string
@@ -1616,18 +1487,18 @@ paths:
     get:
       operationId: getSaleCollection
       parameters:
-      - description: The sale channel
-        explode: true
-        in: query
-        name: channelId
-        required: false
-        schema:
-          type: integer
-        style: form
-      - description: The sale channel reference
+      - description: The sale channel reference (DEPRECATED)
         explode: true
         in: query
         name: channelReference
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Your sale reference (This could be your sale ID)
+        explode: true
+        in: query
+        name: reference
         required: false
         schema:
           type: string
@@ -1762,6 +1633,24 @@ paths:
       tags:
       - Sale
   /sales/{id}:
+    delete:
+      operationId: deleteSaleItem
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Sale resource deleted
+        "404":
+          description: Resource not found
+      summary: Removes the Sale resource.
+      tags:
+      - Sale
     get:
       operationId: getSaleItem
       parameters:
@@ -1788,6 +1677,115 @@ paths:
         "404":
           description: Resource not found
       summary: Retrieves a Sale resource.
+      tags:
+      - Sale
+    patch:
+      operationId: patchSaleItem
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/Sale-write'
+        description: The updated Sale resource
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sale-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Sale:jsonld-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Sale-read'
+          description: Sale resource updated
+        "400":
+          description: Invalid input
+        "404":
+          description: Resource not found
+      summary: Updates the Sale resource.
+      tags:
+      - Sale
+    put:
+      operationId: putSaleItem
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Sale-write'
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Sale:jsonld-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Sale-write'
+        description: The updated Sale resource
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sale-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Sale:jsonld-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Sale-read'
+          description: Sale resource updated
+        "400":
+          description: Invalid input
+        "404":
+          description: Resource not found
+      summary: Replaces the Sale resource.
+      tags:
+      - Sale
+  /sales/{id}/cancel:
+    post:
+      operationId: cancelSale
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+          application/ld+json:
+            schema:
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sale-read'
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Sale:jsonld-read'
+      summary: Cancels a sale.
       tags:
       - Sale
   /sales/{id}/confirm:
@@ -2438,73 +2436,34 @@ components:
           description: The carrier name
           type: string
       type: object
-    Channel-read:
-      description: Channel entity
-      example:
-        name: name
-        id: 0
-      properties:
-        id:
-          description: The channel ID
-          type: integer
-        name:
-          description: The channel name
-          type: string
-      type: object
-    Channel:jsonld-read:
-      description: Channel entity
-      properties:
-        json_context:
-          readOnly: true
-          type: string
-        json_id:
-          readOnly: true
-          type: string
-        json_type:
-          readOnly: true
-          type: string
-        id:
-          description: The channel ID
-          type: integer
-        name:
-          description: The channel name
-          type: string
-      type: object
     Product-read_collection:
       description: Product entity
       example:
-        dimensionX: 1.4658129805029452
-        dimensionY: 5.962133916683182
-        quantityAvailable: 7
-        quantityOutgoing: 2
-        dimensionZ: 5.637376656633329
-        costPrice: 6.027456183070403
-        weight: 1.0246457001441578
-        channelSku: channelSku
-        volume: 1.2315135367772556
+        dimensionX: 6.027456183070403
+        dimensionY: 1.4658129805029452
+        quantityAvailable: 2
+        quantityOutgoing: 3
+        dimensionZ: 5.962133916683182
+        costPrice: 0.8008281904610115
+        weight: 1.2315135367772556
+        reference: reference
+        volume: 7.386281948385884
         channelReference: channelReference
-        sellingPrice: 7.386281948385884
+        sellingPrice: 4.145608029883936
         hsCode: hsCode
-        quantityOnHand: 3
+        quantityOnHand: 9
         name: name
-        id: 2
-        quantitySold: 4
+        id: 5
+        quantitySold: 2
         sku: sku
         barcode: barcode
-        channelId: 0
-        quantityIncoming: 9
+        quantityIncoming: 7
       properties:
         barcode:
           description: The product barcode
           type: string
-        channelId:
-          description: The product channel
-          type: integer
         channelReference:
-          description: The product channel reference
-          type: string
-        channelSku:
-          description: The product channel SKU
+          description: The product channel reference (DEPRECATED)
           type: string
         costPrice:
           description: The product cost price (Excluding taxes)
@@ -2542,6 +2501,9 @@ components:
         quantitySold:
           description: The sold product quantity
           type: integer
+        reference:
+          description: Your product reference (This could be your product ID)
+          type: string
         sellingPrice:
           description: The product selling price (Excluding taxes)
           type: number
@@ -2556,46 +2518,37 @@ components:
           type: number
       required:
       - barcode
-      - channelId
-      - channelReference
       - name
       type: object
     Product-read_item:
       description: Product entity
       example:
-        dimensionX: 1.4658129805029452
-        dimensionY: 5.962133916683182
+        dimensionX: 6.027456183070403
+        dimensionY: 1.4658129805029452
         image: image
-        quantityAvailable: 7
-        quantityOutgoing: 2
-        dimensionZ: 5.637376656633329
-        costPrice: 6.027456183070403
-        weight: 1.0246457001441578
-        channelSku: channelSku
-        volume: 1.2315135367772556
+        quantityAvailable: 2
+        quantityOutgoing: 3
+        dimensionZ: 5.962133916683182
+        costPrice: 0.8008281904610115
+        weight: 1.2315135367772556
+        reference: reference
+        volume: 7.386281948385884
         channelReference: channelReference
-        sellingPrice: 7.386281948385884
+        sellingPrice: 4.145608029883936
         hsCode: hsCode
-        quantityOnHand: 3
+        quantityOnHand: 9
         name: name
-        id: 2
-        quantitySold: 4
+        id: 5
+        quantitySold: 2
         sku: sku
         barcode: barcode
-        channelId: 0
-        quantityIncoming: 9
+        quantityIncoming: 7
       properties:
         barcode:
           description: The product barcode
           type: string
-        channelId:
-          description: The product channel
-          type: integer
         channelReference:
-          description: The product channel reference
-          type: string
-        channelSku:
-          description: The product channel SKU
+          description: The product channel reference (DEPRECATED)
           type: string
         costPrice:
           description: The product cost price (Excluding taxes)
@@ -2636,6 +2589,9 @@ components:
         quantitySold:
           description: The sold product quantity
           type: integer
+        reference:
+          description: Your product reference (This could be your product ID)
+          type: string
         sellingPrice:
           description: The product selling price (Excluding taxes)
           type: number
@@ -2650,8 +2606,6 @@ components:
           type: number
       required:
       - barcode
-      - channelId
-      - channelReference
       - name
       type: object
     Product-write:
@@ -2660,14 +2614,8 @@ components:
         barcode:
           description: The product barcode
           type: string
-        channelId:
-          description: The product channel
-          type: integer
         channelReference:
-          description: The product channel reference
-          type: string
-        channelSku:
-          description: The product channel SKU
+          description: The product channel reference (DEPRECATED)
           type: string
         costPrice:
           description: The product cost price (Excluding taxes)
@@ -2690,6 +2638,9 @@ components:
         name:
           description: The product name
           type: string
+        reference:
+          description: Your product reference (This could be your product ID)
+          type: string
         sellingPrice:
           description: The product selling price (Excluding taxes)
           type: number
@@ -2698,8 +2649,6 @@ components:
           type: number
       required:
       - barcode
-      - channelId
-      - channelReference
       - name
       type: object
     Product:jsonld-read_collection:
@@ -2708,14 +2657,8 @@ components:
         barcode:
           description: The product barcode
           type: string
-        channelId:
-          description: The product channel
-          type: integer
         channelReference:
-          description: The product channel reference
-          type: string
-        channelSku:
-          description: The product channel SKU
+          description: The product channel reference (DEPRECATED)
           type: string
         costPrice:
           description: The product cost price (Excluding taxes)
@@ -2753,6 +2696,9 @@ components:
         quantitySold:
           description: The sold product quantity
           type: integer
+        reference:
+          description: Your product reference (This could be your product ID)
+          type: string
         sellingPrice:
           description: The product selling price (Excluding taxes)
           type: number
@@ -2767,8 +2713,6 @@ components:
           type: number
       required:
       - barcode
-      - channelId
-      - channelReference
       - name
       type: object
     Product:jsonld-read_item:
@@ -2786,14 +2730,8 @@ components:
         barcode:
           description: The product barcode
           type: string
-        channelId:
-          description: The product channel
-          type: integer
         channelReference:
-          description: The product channel reference
-          type: string
-        channelSku:
-          description: The product channel SKU
+          description: The product channel reference (DEPRECATED)
           type: string
         costPrice:
           description: The product cost price (Excluding taxes)
@@ -2834,6 +2772,9 @@ components:
         quantitySold:
           description: The sold product quantity
           type: integer
+        reference:
+          description: Your product reference (This could be your product ID)
+          type: string
         sellingPrice:
           description: The product selling price (Excluding taxes)
           type: number
@@ -2848,8 +2789,6 @@ components:
           type: number
       required:
       - barcode
-      - channelId
-      - channelReference
       - name
       type: object
     Product:jsonld-write:
@@ -2867,14 +2806,8 @@ components:
         barcode:
           description: The product barcode
           type: string
-        channelId:
-          description: The product channel
-          type: integer
         channelReference:
-          description: The product channel reference
-          type: string
-        channelSku:
-          description: The product channel SKU
+          description: The product channel reference (DEPRECATED)
           type: string
         costPrice:
           description: The product cost price (Excluding taxes)
@@ -2897,6 +2830,9 @@ components:
         name:
           description: The product name
           type: string
+        reference:
+          description: Your product reference (This could be your product ID)
+          type: string
         sellingPrice:
           description: The product selling price (Excluding taxes)
           type: number
@@ -2905,26 +2841,16 @@ components:
           type: number
       required:
       - barcode
-      - channelId
-      - channelReference
       - name
       type: object
     Purchase-read:
       description: Purchase entity
       example:
-        channelReference: channelReference
         plannedDate: 2000-01-23T04:56:07.000+00:00
-        supplierId: 1
+        supplierId: 6
         name: name
-        id: 6
-        channelId: 0
+        id: 0
       properties:
-        channelId:
-          description: The purchase channel
-          type: integer
-        channelReference:
-          description: The purchase channel reference
-          type: string
         id:
           description: The purchase ID
           type: integer
@@ -2939,30 +2865,26 @@ components:
           description: The purchase supplier ID
           type: integer
       required:
-      - channelId
-      - channelReference
       - plannedDate
       - supplierId
       type: object
     Purchase-write:
       description: Purchase entity
       properties:
-        channelId:
-          description: The purchase channel
-          type: integer
         channelReference:
-          description: The purchase channel reference
+          description: The purchase channel reference (DEPRECATED)
           type: string
         plannedDate:
           description: The purchase planned delivery date
           format: date-time
           type: string
+        reference:
+          description: Your purchase reference (This could be your purchase ID)
+          type: string
         supplierId:
           description: The purchase supplier ID
           type: integer
       required:
-      - channelId
-      - channelReference
       - plannedDate
       - supplierId
       type: object
@@ -2978,12 +2900,6 @@ components:
         json_type:
           readOnly: true
           type: string
-        channelId:
-          description: The purchase channel
-          type: integer
-        channelReference:
-          description: The purchase channel reference
-          type: string
         id:
           description: The purchase ID
           type: integer
@@ -2998,8 +2914,6 @@ components:
           description: The purchase supplier ID
           type: integer
       required:
-      - channelId
-      - channelReference
       - plannedDate
       - supplierId
       type: object
@@ -3015,22 +2929,20 @@ components:
         json_type:
           readOnly: true
           type: string
-        channelId:
-          description: The purchase channel
-          type: integer
         channelReference:
-          description: The purchase channel reference
+          description: The purchase channel reference (DEPRECATED)
           type: string
         plannedDate:
           description: The purchase planned delivery date
           format: date-time
           type: string
+        reference:
+          description: Your purchase reference (This could be your purchase ID)
+          type: string
         supplierId:
           description: The purchase supplier ID
           type: integer
       required:
-      - channelId
-      - channelReference
       - plannedDate
       - supplierId
       type: object
@@ -3175,16 +3087,14 @@ components:
     Sale-read:
       description: Sale entity
       example:
-        channelReference: channelReference
-        invoiceAddressId: 5
+        invoiceAddressId: 1
         shipmentIds:
-        - 2
-        - 2
+        - 5
+        - 5
         name: name
-        shippingAddressId: 7
-        id: 1
+        shippingAddressId: 2
+        id: 6
         carrierId: 0
-        channelId: 6
         lineIds:
         - 5
         - 5
@@ -3193,12 +3103,6 @@ components:
         carrierId:
           description: The sale carrier ID
           type: integer
-        channelId:
-          description: The sale channel
-          type: integer
-        channelReference:
-          description: The sale channel reference
-          type: string
         id:
           description: The sale ID
           type: integer
@@ -3230,10 +3134,9 @@ components:
           - pick
           - pack
           - ship
+          - cancel
           type: string
       required:
-      - channelId
-      - channelReference
       - invoiceAddressId
       - shippingAddressId
       type: object
@@ -3243,21 +3146,19 @@ components:
         carrierId:
           description: The sale carrier ID
           type: integer
-        channelId:
-          description: The sale channel
-          type: integer
         channelReference:
-          description: The sale channel reference
+          description: The sale channel reference (DEPRECATED)
           type: string
         invoiceAddressId:
           description: The sale invoice address ID
           type: integer
+        reference:
+          description: Your sale reference (This could be your sale ID)
+          type: string
         shippingAddressId:
           description: The sale shipping address ID
           type: integer
       required:
-      - channelId
-      - channelReference
       - invoiceAddressId
       - shippingAddressId
       type: object
@@ -3276,12 +3177,6 @@ components:
         carrierId:
           description: The sale carrier ID
           type: integer
-        channelId:
-          description: The sale channel
-          type: integer
-        channelReference:
-          description: The sale channel reference
-          type: string
         id:
           description: The sale ID
           type: integer
@@ -3313,10 +3208,9 @@ components:
           - pick
           - pack
           - ship
+          - cancel
           type: string
       required:
-      - channelId
-      - channelReference
       - invoiceAddressId
       - shippingAddressId
       type: object
@@ -3335,21 +3229,19 @@ components:
         carrierId:
           description: The sale carrier ID
           type: integer
-        channelId:
-          description: The sale channel
-          type: integer
         channelReference:
-          description: The sale channel reference
+          description: The sale channel reference (DEPRECATED)
           type: string
         invoiceAddressId:
           description: The sale invoice address ID
           type: integer
+        reference:
+          description: Your sale reference (This could be your sale ID)
+          type: string
         shippingAddressId:
           description: The sale shipping address ID
           type: integer
       required:
-      - channelId
-      - channelReference
       - invoiceAddressId
       - shippingAddressId
       type: object

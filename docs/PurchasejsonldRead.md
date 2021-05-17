@@ -7,8 +7,6 @@ Name | Type | Description | Notes
 **JsonContext** | Pointer to **string** |  | [optional] [readonly] 
 **JsonId** | Pointer to **string** |  | [optional] [readonly] 
 **JsonType** | Pointer to **string** |  | [optional] [readonly] 
-**ChannelId** | **int32** | The purchase channel | 
-**ChannelReference** | **string** | The purchase channel reference | 
 **Id** | Pointer to **int32** | The purchase ID | [optional] 
 **Name** | Pointer to **string** | The purchase name | [optional] 
 **PlannedDate** | **time.Time** | The purchase planned delivery date | 
@@ -18,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewPurchasejsonldRead
 
-`func NewPurchasejsonldRead(channelId int32, channelReference string, plannedDate time.Time, supplierId int32, ) *PurchasejsonldRead`
+`func NewPurchasejsonldRead(plannedDate time.Time, supplierId int32, ) *PurchasejsonldRead`
 
 NewPurchasejsonldRead instantiates a new PurchasejsonldRead object
 This constructor will assign default values to properties that have it defined,
@@ -107,46 +105,6 @@ SetJsonType sets JsonType field to given value.
 `func (o *PurchasejsonldRead) HasJsonType() bool`
 
 HasJsonType returns a boolean if a field has been set.
-
-### GetChannelId
-
-`func (o *PurchasejsonldRead) GetChannelId() int32`
-
-GetChannelId returns the ChannelId field if non-nil, zero value otherwise.
-
-### GetChannelIdOk
-
-`func (o *PurchasejsonldRead) GetChannelIdOk() (*int32, bool)`
-
-GetChannelIdOk returns a tuple with the ChannelId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetChannelId
-
-`func (o *PurchasejsonldRead) SetChannelId(v int32)`
-
-SetChannelId sets ChannelId field to given value.
-
-
-### GetChannelReference
-
-`func (o *PurchasejsonldRead) GetChannelReference() string`
-
-GetChannelReference returns the ChannelReference field if non-nil, zero value otherwise.
-
-### GetChannelReferenceOk
-
-`func (o *PurchasejsonldRead) GetChannelReferenceOk() (*string, bool)`
-
-GetChannelReferenceOk returns a tuple with the ChannelReference field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetChannelReference
-
-`func (o *PurchasejsonldRead) SetChannelReference(v string)`
-
-SetChannelReference sets ChannelReference field to given value.
-
 
 ### GetId
 
