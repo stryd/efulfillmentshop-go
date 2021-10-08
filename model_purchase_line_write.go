@@ -20,7 +20,7 @@ type PurchaseLineWrite struct {
 	// The purchase line description
 	Description string `json:"description"`
 	// The purchase line planned delivery date
-	PlannedDate *time.Time `json:"plannedDate,omitempty"`
+	PlannedDate *CustomTime `json:"plannedDate,omitempty"`
 	// The product ID
 	ProductId int32 `json:"productId"`
 	// The purchase ID
@@ -63,7 +63,7 @@ func (o *PurchaseLineWrite) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value
 // and a boolean to check if the value has been set.
 func (o *PurchaseLineWrite) GetDescriptionOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Description, true
@@ -80,7 +80,7 @@ func (o *PurchaseLineWrite) GetPlannedDate() time.Time {
 		var ret time.Time
 		return ret
 	}
-	return *o.PlannedDate
+	return o.PlannedDate.Time
 }
 
 // GetPlannedDateOk returns a tuple with the PlannedDate field value if set, nil otherwise
@@ -89,7 +89,7 @@ func (o *PurchaseLineWrite) GetPlannedDateOk() (*time.Time, bool) {
 	if o == nil || o.PlannedDate == nil {
 		return nil, false
 	}
-	return o.PlannedDate, true
+	return &o.PlannedDate.Time, true
 }
 
 // HasPlannedDate returns a boolean if a field has been set.
@@ -103,7 +103,7 @@ func (o *PurchaseLineWrite) HasPlannedDate() bool {
 
 // SetPlannedDate gets a reference to the given time.Time and assigns it to the PlannedDate field.
 func (o *PurchaseLineWrite) SetPlannedDate(v time.Time) {
-	o.PlannedDate = &v
+	o.PlannedDate = &CustomTime{v}
 }
 
 // GetProductId returns the ProductId field value
@@ -119,7 +119,7 @@ func (o *PurchaseLineWrite) GetProductId() int32 {
 // GetProductIdOk returns a tuple with the ProductId field value
 // and a boolean to check if the value has been set.
 func (o *PurchaseLineWrite) GetProductIdOk() (*int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.ProductId, true
@@ -143,7 +143,7 @@ func (o *PurchaseLineWrite) GetPurchaseId() int32 {
 // GetPurchaseIdOk returns a tuple with the PurchaseId field value
 // and a boolean to check if the value has been set.
 func (o *PurchaseLineWrite) GetPurchaseIdOk() (*int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.PurchaseId, true
@@ -167,7 +167,7 @@ func (o *PurchaseLineWrite) GetQuantity() int32 {
 // GetQuantityOk returns a tuple with the Quantity field value
 // and a boolean to check if the value has been set.
 func (o *PurchaseLineWrite) GetQuantityOk() (*int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Quantity, true
@@ -233,5 +233,3 @@ func (v *NullablePurchaseLineWrite) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

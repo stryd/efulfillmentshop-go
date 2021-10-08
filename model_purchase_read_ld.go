@@ -25,7 +25,7 @@ type PurchaseReadLd struct {
 	// The purchase name
 	Name *string `json:"name,omitempty"`
 	// The purchase planned delivery date
-	PlannedDate time.Time `json:"plannedDate"`
+	PlannedDate CustomTime `json:"plannedDate"`
 	// The purchase supplier ID
 	SupplierId int32 `json:"supplierId"`
 }
@@ -36,7 +36,7 @@ type PurchaseReadLd struct {
 // will change when the set of required properties is changed
 func NewPurchaseReadLd(plannedDate time.Time, supplierId int32) *PurchaseReadLd {
 	this := PurchaseReadLd{}
-	this.PlannedDate = plannedDate
+	this.PlannedDate = CustomTime{plannedDate}
 	this.SupplierId = supplierId
 	return &this
 }
@@ -216,7 +216,7 @@ func (o *PurchaseReadLd) GetPlannedDate() time.Time {
 		return ret
 	}
 
-	return o.PlannedDate
+	return o.PlannedDate.Time
 }
 
 // GetPlannedDateOk returns a tuple with the PlannedDate field value
@@ -225,12 +225,12 @@ func (o *PurchaseReadLd) GetPlannedDateOk() (*time.Time, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.PlannedDate, true
+	return &o.PlannedDate.Time, true
 }
 
 // SetPlannedDate sets field value
 func (o *PurchaseReadLd) SetPlannedDate(v time.Time) {
-	o.PlannedDate = v
+	o.PlannedDate = CustomTime{v}
 }
 
 // GetSupplierId returns the SupplierId field value

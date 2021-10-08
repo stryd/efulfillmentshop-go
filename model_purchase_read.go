@@ -22,7 +22,7 @@ type PurchaseRead struct {
 	// The purchase name
 	Name *string `json:"name,omitempty"`
 	// The purchase planned delivery date
-	PlannedDate time.Time `json:"plannedDate"`
+	PlannedDate CustomTime `json:"plannedDate"`
 	// The purchase supplier ID
 	SupplierId int32 `json:"supplierId"`
 }
@@ -33,7 +33,7 @@ type PurchaseRead struct {
 // will change when the set of required properties is changed
 func NewPurchaseRead(plannedDate time.Time, supplierId int32) *PurchaseRead {
 	this := PurchaseRead{}
-	this.PlannedDate = plannedDate
+	this.PlannedDate = CustomTime{plannedDate}
 	this.SupplierId = supplierId
 	return &this
 }
@@ -117,21 +117,21 @@ func (o *PurchaseRead) GetPlannedDate() time.Time {
 		return ret
 	}
 
-	return o.PlannedDate
+	return o.PlannedDate.Time
 }
 
 // GetPlannedDateOk returns a tuple with the PlannedDate field value
 // and a boolean to check if the value has been set.
 func (o *PurchaseRead) GetPlannedDateOk() (*time.Time, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
-	return &o.PlannedDate, true
+	return &o.PlannedDate.Time, true
 }
 
 // SetPlannedDate sets field value
 func (o *PurchaseRead) SetPlannedDate(v time.Time) {
-	o.PlannedDate = v
+	o.PlannedDate = CustomTime{v}
 }
 
 // GetSupplierId returns the SupplierId field value
@@ -147,7 +147,7 @@ func (o *PurchaseRead) GetSupplierId() int32 {
 // GetSupplierIdOk returns a tuple with the SupplierId field value
 // and a boolean to check if the value has been set.
 func (o *PurchaseRead) GetSupplierIdOk() (*int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.SupplierId, true
@@ -210,5 +210,3 @@ func (v *NullablePurchaseRead) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

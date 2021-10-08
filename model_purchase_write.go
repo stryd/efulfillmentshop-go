@@ -20,7 +20,7 @@ type PurchaseWrite struct {
 	// The purchase channel reference (DEPRECATED)
 	ChannelReference *string `json:"channelReference,omitempty"`
 	// The purchase planned delivery date
-	PlannedDate time.Time `json:"plannedDate"`
+	PlannedDate CustomTime `json:"plannedDate"`
 	// Your purchase reference (This could be your purchase ID)
 	Reference *string `json:"reference,omitempty"`
 	// The purchase supplier ID
@@ -33,7 +33,7 @@ type PurchaseWrite struct {
 // will change when the set of required properties is changed
 func NewPurchaseWrite(plannedDate time.Time, supplierId int32) *PurchaseWrite {
 	this := PurchaseWrite{}
-	this.PlannedDate = plannedDate
+	this.PlannedDate = CustomTime{plannedDate}
 	this.SupplierId = supplierId
 	return &this
 }
@@ -85,21 +85,21 @@ func (o *PurchaseWrite) GetPlannedDate() time.Time {
 		return ret
 	}
 
-	return o.PlannedDate
+	return o.PlannedDate.Time
 }
 
 // GetPlannedDateOk returns a tuple with the PlannedDate field value
 // and a boolean to check if the value has been set.
 func (o *PurchaseWrite) GetPlannedDateOk() (*time.Time, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
-	return &o.PlannedDate, true
+	return &o.PlannedDate.Time, true
 }
 
 // SetPlannedDate sets field value
 func (o *PurchaseWrite) SetPlannedDate(v time.Time) {
-	o.PlannedDate = v
+	o.PlannedDate = CustomTime{v}
 }
 
 // GetReference returns the Reference field value if set, zero value otherwise.
@@ -147,7 +147,7 @@ func (o *PurchaseWrite) GetSupplierId() int32 {
 // GetSupplierIdOk returns a tuple with the SupplierId field value
 // and a boolean to check if the value has been set.
 func (o *PurchaseWrite) GetSupplierIdOk() (*int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.SupplierId, true
@@ -210,5 +210,3 @@ func (v *NullablePurchaseWrite) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
