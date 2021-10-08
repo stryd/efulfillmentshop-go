@@ -24,7 +24,7 @@ type ShipmentRead struct {
 	// The sale ID
 	SaleId int32 `json:"saleId"`
 	// The shipment date
-	ShippedAt time.Time `json:"shippedAt"`
+	ShippedAt CustomTime `json:"shippedAt"`
 	// The shipment tracking codes
 	TrackingCodes *[]string `json:"trackingCodes,omitempty"`
 }
@@ -36,7 +36,7 @@ type ShipmentRead struct {
 func NewShipmentRead(saleId int32, shippedAt time.Time) *ShipmentRead {
 	this := ShipmentRead{}
 	this.SaleId = saleId
-	this.ShippedAt = shippedAt
+	this.ShippedAt = CustomTime{shippedAt}
 	return &this
 }
 
@@ -125,7 +125,7 @@ func (o *ShipmentRead) GetSaleId() int32 {
 // GetSaleIdOk returns a tuple with the SaleId field value
 // and a boolean to check if the value has been set.
 func (o *ShipmentRead) GetSaleIdOk() (*int32, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return &o.SaleId, true
@@ -143,21 +143,21 @@ func (o *ShipmentRead) GetShippedAt() time.Time {
 		return ret
 	}
 
-	return o.ShippedAt
+	return o.ShippedAt.Time
 }
 
 // GetShippedAtOk returns a tuple with the ShippedAt field value
 // and a boolean to check if the value has been set.
 func (o *ShipmentRead) GetShippedAtOk() (*time.Time, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
-	return &o.ShippedAt, true
+	return &o.ShippedAt.Time, true
 }
 
 // SetShippedAt sets field value
 func (o *ShipmentRead) SetShippedAt(v time.Time) {
-	o.ShippedAt = v
+	o.ShippedAt = CustomTime{v}
 }
 
 // GetTrackingCodes returns the TrackingCodes field value if set, zero value otherwise.
@@ -247,5 +247,3 @@ func (v *NullableShipmentRead) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
