@@ -4,17 +4,85 @@ All URIs are relative to *http://localhost/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetSaleLineCollection**](SaleLineApi.md#GetSaleLineCollection) | **Get** /sale_lines | Retrieves the collection of SaleLine resources.
-[**GetSaleLineItem**](SaleLineApi.md#GetSaleLineItem) | **Get** /sale_lines/{id} | Retrieves a SaleLine resource.
-[**PatchSaleLineItem**](SaleLineApi.md#PatchSaleLineItem) | **Patch** /sale_lines/{id} | Updates the SaleLine resource.
-[**PostSaleLineCollection**](SaleLineApi.md#PostSaleLineCollection) | **Post** /sale_lines | Creates a SaleLine resource.
-[**PutSaleLineItem**](SaleLineApi.md#PutSaleLineItem) | **Put** /sale_lines/{id} | Replaces the SaleLine resource.
+[**GetSaleLine**](SaleLineApi.md#GetSaleLine) | **Get** /sale_lines/{id} | Retrieves a SaleLine resource.
+[**GetSaleLines**](SaleLineApi.md#GetSaleLines) | **Get** /sale_lines | Retrieves the collection of SaleLine resources.
+[**PatchSaleLine**](SaleLineApi.md#PatchSaleLine) | **Patch** /sale_lines/{id} | Updates the SaleLine resource.
+[**PostSaleLine**](SaleLineApi.md#PostSaleLine) | **Post** /sale_lines | Creates a SaleLine resource.
+[**PutSaleLine**](SaleLineApi.md#PutSaleLine) | **Put** /sale_lines/{id} | Replaces the SaleLine resource.
 
 
 
-## GetSaleLineCollection
+## GetSaleLine
 
-> []SaleLineRead GetSaleLineCollection(ctx).SaleId(saleId).Page(page).Items(items).Execute()
+> SaleLineRead GetSaleLine(ctx, id).Execute()
+
+Retrieves a SaleLine resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    id := "id_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.SaleLineApi.GetSaleLine(context.Background(), id).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `SaleLineApi.GetSaleLine``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetSaleLine`: SaleLineRead
+    fmt.Fprintf(os.Stdout, "Response from `SaleLineApi.GetSaleLine`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetSaleLineRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**SaleLineRead**](SaleLineRead.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, application/ld+json, text/html
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetSaleLines
+
+> []SaleLineRead GetSaleLines(ctx).SaleId(saleId).Page(page).Items(items).Execute()
 
 Retrieves the collection of SaleLine resources.
 
@@ -37,13 +105,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SaleLineApi.GetSaleLineCollection(context.Background()).SaleId(saleId).Page(page).Items(items).Execute()
+    resp, r, err := api_client.SaleLineApi.GetSaleLines(context.Background()).SaleId(saleId).Page(page).Items(items).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SaleLineApi.GetSaleLineCollection``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `SaleLineApi.GetSaleLines``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetSaleLineCollection`: []SaleLineRead
-    fmt.Fprintf(os.Stdout, "Response from `SaleLineApi.GetSaleLineCollection`: %v\n", resp)
+    // response from `GetSaleLines`: []SaleLineRead
+    fmt.Fprintf(os.Stdout, "Response from `SaleLineApi.GetSaleLines`: %v\n", resp)
 }
 ```
 
@@ -53,7 +121,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetSaleLineCollectionRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetSaleLinesRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -64,7 +132,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]SaleLineRead**](SaleLine-read.md)
+[**[]SaleLineRead**](SaleLineRead.md)
 
 ### Authorization
 
@@ -80,77 +148,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetSaleLineItem
+## PatchSaleLine
 
-> SaleLineRead GetSaleLineItem(ctx, id).Execute()
-
-Retrieves a SaleLine resource.
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    id := "id_example" // string | 
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SaleLineApi.GetSaleLineItem(context.Background(), id).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SaleLineApi.GetSaleLineItem``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetSaleLineItem`: SaleLineRead
-    fmt.Fprintf(os.Stdout, "Response from `SaleLineApi.GetSaleLineItem`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetSaleLineItemRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
-[**SaleLineRead**](SaleLine-read.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json, application/ld+json, text/html
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## PatchSaleLineItem
-
-> SaleLineRead PatchSaleLineItem(ctx, id).SaleLineWrite(saleLineWrite).Execute()
+> SaleLineRead PatchSaleLine(ctx, id).SaleLineWrite(saleLineWrite).Execute()
 
 Updates the SaleLine resource.
 
@@ -172,13 +172,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SaleLineApi.PatchSaleLineItem(context.Background(), id).SaleLineWrite(saleLineWrite).Execute()
+    resp, r, err := api_client.SaleLineApi.PatchSaleLine(context.Background(), id).SaleLineWrite(saleLineWrite).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SaleLineApi.PatchSaleLineItem``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `SaleLineApi.PatchSaleLine``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PatchSaleLineItem`: SaleLineRead
-    fmt.Fprintf(os.Stdout, "Response from `SaleLineApi.PatchSaleLineItem`: %v\n", resp)
+    // response from `PatchSaleLine`: SaleLineRead
+    fmt.Fprintf(os.Stdout, "Response from `SaleLineApi.PatchSaleLine`: %v\n", resp)
 }
 ```
 
@@ -192,7 +192,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiPatchSaleLineItemRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiPatchSaleLineRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -202,7 +202,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SaleLineRead**](SaleLine-read.md)
+[**SaleLineRead**](SaleLineRead.md)
 
 ### Authorization
 
@@ -218,9 +218,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## PostSaleLineCollection
+## PostSaleLine
 
-> SaleLineRead PostSaleLineCollection(ctx).SaleLineWrite(saleLineWrite).Execute()
+> SaleLineRead PostSaleLine(ctx).SaleLineWrite(saleLineWrite).Execute()
 
 Creates a SaleLine resource.
 
@@ -241,13 +241,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SaleLineApi.PostSaleLineCollection(context.Background()).SaleLineWrite(saleLineWrite).Execute()
+    resp, r, err := api_client.SaleLineApi.PostSaleLine(context.Background()).SaleLineWrite(saleLineWrite).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SaleLineApi.PostSaleLineCollection``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `SaleLineApi.PostSaleLine``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PostSaleLineCollection`: SaleLineRead
-    fmt.Fprintf(os.Stdout, "Response from `SaleLineApi.PostSaleLineCollection`: %v\n", resp)
+    // response from `PostSaleLine`: SaleLineRead
+    fmt.Fprintf(os.Stdout, "Response from `SaleLineApi.PostSaleLine`: %v\n", resp)
 }
 ```
 
@@ -257,7 +257,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiPostSaleLineCollectionRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiPostSaleLineRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -266,7 +266,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SaleLineRead**](SaleLine-read.md)
+[**SaleLineRead**](SaleLineRead.md)
 
 ### Authorization
 
@@ -282,9 +282,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## PutSaleLineItem
+## PutSaleLine
 
-> SaleLineRead PutSaleLineItem(ctx, id).SaleLineWrite(saleLineWrite).Execute()
+> SaleLineRead PutSaleLine(ctx, id).SaleLineWrite(saleLineWrite).Execute()
 
 Replaces the SaleLine resource.
 
@@ -306,13 +306,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.SaleLineApi.PutSaleLineItem(context.Background(), id).SaleLineWrite(saleLineWrite).Execute()
+    resp, r, err := api_client.SaleLineApi.PutSaleLine(context.Background(), id).SaleLineWrite(saleLineWrite).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SaleLineApi.PutSaleLineItem``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `SaleLineApi.PutSaleLine``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PutSaleLineItem`: SaleLineRead
-    fmt.Fprintf(os.Stdout, "Response from `SaleLineApi.PutSaleLineItem`: %v\n", resp)
+    // response from `PutSaleLine`: SaleLineRead
+    fmt.Fprintf(os.Stdout, "Response from `SaleLineApi.PutSaleLine`: %v\n", resp)
 }
 ```
 
@@ -326,7 +326,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiPutSaleLineItemRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiPutSaleLineRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -336,7 +336,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SaleLineRead**](SaleLine-read.md)
+[**SaleLineRead**](SaleLineRead.md)
 
 ### Authorization
 

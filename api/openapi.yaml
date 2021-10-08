@@ -3,7 +3,7 @@ info:
   description: The E-fulfilment Shop API allows you to integrate your service with
     our warehouse.
   title: E-fulfilment Shop API
-  version: 1.3.0
+  version: 1.4.0
 servers:
 - url: /v1
 security:
@@ -11,7 +11,7 @@ security:
 paths:
   /addresses:
     get:
-      operationId: getAddressCollection
+      operationId: getAddresss
       parameters:
       - description: The collection page number
         explode: true
@@ -45,16 +45,16 @@ paths:
                 properties:
                   hydra:member:
                     items:
-                      $ref: '#/components/schemas/Address:jsonld-read'
+                      $ref: '#/components/schemas/Address-read-ld'
                     type: array
                   hydra:search:
                     properties:
-                      '@type':
+                      ld-type:
                         type: string
                       hydra:mapping:
                         items:
                           properties:
-                            '@type':
+                            ld-type:
                               type: string
                             property:
                               type: string
@@ -74,10 +74,10 @@ paths:
                     type: integer
                   hydra:view:
                     properties:
-                      '@id':
+                      ld-id:
                         format: iri-reference
                         type: string
-                      '@type':
+                      ld-type:
                         type: string
                       hydra:first:
                         format: iri-reference
@@ -102,7 +102,7 @@ paths:
       tags:
       - Address
     post:
-      operationId: postAddressCollection
+      operationId: postAddress
       requestBody:
         content:
           application/json:
@@ -110,7 +110,7 @@ paths:
               $ref: '#/components/schemas/Address-write'
           application/ld+json:
             schema:
-              $ref: '#/components/schemas/Address:jsonld-write'
+              $ref: '#/components/schemas/Address-write-ld'
           text/html:
             schema:
               $ref: '#/components/schemas/Address-write'
@@ -123,16 +123,16 @@ paths:
                 $ref: '#/components/schemas/Address-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Address:jsonld-read'
+                $ref: '#/components/schemas/Address-read-ld'
             text/html:
               schema:
                 $ref: '#/components/schemas/Address-read'
           description: Address resource created
           links:
-            GetAddressItem:
+            GetAddress:
               description: The `id` value returned in the response can be used as
                 the `id` parameter in `GET /addresses/{id}`.
-              operationId: getAddressItem
+              operationId: getAddress
               parameters:
                 id: $response.body#/id
         "400":
@@ -144,7 +144,7 @@ paths:
       - Address
   /addresses/{id}:
     delete:
-      operationId: deleteAddressItem
+      operationId: deleteAddress
       parameters:
       - explode: false
         in: path
@@ -162,7 +162,7 @@ paths:
       tags:
       - Address
     get:
-      operationId: getAddressItem
+      operationId: getAddress
       parameters:
       - explode: false
         in: path
@@ -179,7 +179,7 @@ paths:
                 $ref: '#/components/schemas/Address-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Address:jsonld-read'
+                $ref: '#/components/schemas/Address-read-ld'
             text/html:
               schema:
                 $ref: '#/components/schemas/Address-read'
@@ -190,7 +190,7 @@ paths:
       tags:
       - Address
     patch:
-      operationId: patchAddressItem
+      operationId: patchAddress
       parameters:
       - explode: false
         in: path
@@ -213,7 +213,7 @@ paths:
                 $ref: '#/components/schemas/Address-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Address:jsonld-read'
+                $ref: '#/components/schemas/Address-read-ld'
             text/html:
               schema:
                 $ref: '#/components/schemas/Address-read'
@@ -226,7 +226,7 @@ paths:
       tags:
       - Address
     put:
-      operationId: putAddressItem
+      operationId: putAddress
       parameters:
       - explode: false
         in: path
@@ -242,7 +242,7 @@ paths:
               $ref: '#/components/schemas/Address-write'
           application/ld+json:
             schema:
-              $ref: '#/components/schemas/Address:jsonld-write'
+              $ref: '#/components/schemas/Address-write-ld'
           text/html:
             schema:
               $ref: '#/components/schemas/Address-write'
@@ -255,7 +255,7 @@ paths:
                 $ref: '#/components/schemas/Address-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Address:jsonld-read'
+                $ref: '#/components/schemas/Address-read-ld'
             text/html:
               schema:
                 $ref: '#/components/schemas/Address-read'
@@ -277,7 +277,7 @@ paths:
               $ref: '#/components/schemas/User-authenticate'
           application/ld+json:
             schema:
-              $ref: '#/components/schemas/User:jsonld-authenticate'
+              $ref: '#/components/schemas/User-authenticate-ld'
       responses:
         "200":
           content:
@@ -296,7 +296,7 @@ paths:
       - Authentication token
   /carriers:
     get:
-      operationId: getCarrierCollection
+      operationId: getCarriers
       parameters:
       - description: The collection page number
         explode: true
@@ -330,16 +330,16 @@ paths:
                 properties:
                   hydra:member:
                     items:
-                      $ref: '#/components/schemas/Carrier:jsonld-read'
+                      $ref: '#/components/schemas/Carrier-read-ld'
                     type: array
                   hydra:search:
                     properties:
-                      '@type':
+                      ld-type:
                         type: string
                       hydra:mapping:
                         items:
                           properties:
-                            '@type':
+                            ld-type:
                               type: string
                             property:
                               type: string
@@ -359,10 +359,10 @@ paths:
                     type: integer
                   hydra:view:
                     properties:
-                      '@id':
+                      ld-id:
                         format: iri-reference
                         type: string
-                      '@type':
+                      ld-type:
                         type: string
                       hydra:first:
                         format: iri-reference
@@ -388,7 +388,7 @@ paths:
       - Carrier
   /carriers/{id}:
     get:
-      operationId: getCarrierItem
+      operationId: getCarrier
       parameters:
       - explode: false
         in: path
@@ -405,7 +405,7 @@ paths:
                 $ref: '#/components/schemas/Carrier-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Carrier:jsonld-read'
+                $ref: '#/components/schemas/Carrier-read-ld'
             text/html:
               schema:
                 $ref: '#/components/schemas/Carrier-read'
@@ -417,7 +417,7 @@ paths:
       - Carrier
   /products:
     get:
-      operationId: getProductCollection
+      operationId: getProducts
       parameters:
       - description: The product name
         explode: true
@@ -491,16 +491,16 @@ paths:
                 properties:
                   hydra:member:
                     items:
-                      $ref: '#/components/schemas/Product:jsonld-read_collection'
+                      $ref: '#/components/schemas/Product-read-ld_collection'
                     type: array
                   hydra:search:
                     properties:
-                      '@type':
+                      ld-type:
                         type: string
                       hydra:mapping:
                         items:
                           properties:
-                            '@type':
+                            ld-type:
                               type: string
                             property:
                               type: string
@@ -520,10 +520,10 @@ paths:
                     type: integer
                   hydra:view:
                     properties:
-                      '@id':
+                      ld-id:
                         format: iri-reference
                         type: string
-                      '@type':
+                      ld-type:
                         type: string
                       hydra:first:
                         format: iri-reference
@@ -548,7 +548,7 @@ paths:
       tags:
       - Product
     post:
-      operationId: postProductCollection
+      operationId: postProduct
       requestBody:
         content:
           application/json:
@@ -556,7 +556,7 @@ paths:
               $ref: '#/components/schemas/Product-write'
           application/ld+json:
             schema:
-              $ref: '#/components/schemas/Product:jsonld-write'
+              $ref: '#/components/schemas/Product-write-ld'
           text/html:
             schema:
               $ref: '#/components/schemas/Product-write'
@@ -569,16 +569,16 @@ paths:
                 $ref: '#/components/schemas/Product-read_item'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Product:jsonld-read_item'
+                $ref: '#/components/schemas/Product-read-ld_item'
             text/html:
               schema:
                 $ref: '#/components/schemas/Product-read_item'
           description: Product resource created
           links:
-            GetProductItem:
+            GetProduct:
               description: The `id` value returned in the response can be used as
                 the `id` parameter in `GET /products/{id}`.
-              operationId: getProductItem
+              operationId: getProduct
               parameters:
                 id: $response.body#/id
         "400":
@@ -590,7 +590,7 @@ paths:
       - Product
   /products/{id}:
     delete:
-      operationId: deleteProductItem
+      operationId: deleteProduct
       parameters:
       - explode: false
         in: path
@@ -608,7 +608,7 @@ paths:
       tags:
       - Product
     get:
-      operationId: getProductItem
+      operationId: getProduct
       parameters:
       - explode: false
         in: path
@@ -625,7 +625,7 @@ paths:
                 $ref: '#/components/schemas/Product-read_item'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Product:jsonld-read_item'
+                $ref: '#/components/schemas/Product-read-ld_item'
             text/html:
               schema:
                 $ref: '#/components/schemas/Product-read_item'
@@ -636,7 +636,7 @@ paths:
       tags:
       - Product
     patch:
-      operationId: patchProductItem
+      operationId: patchProduct
       parameters:
       - explode: false
         in: path
@@ -659,7 +659,7 @@ paths:
                 $ref: '#/components/schemas/Product-read_item'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Product:jsonld-read_item'
+                $ref: '#/components/schemas/Product-read-ld_item'
             text/html:
               schema:
                 $ref: '#/components/schemas/Product-read_item'
@@ -672,7 +672,7 @@ paths:
       tags:
       - Product
     put:
-      operationId: putProductItem
+      operationId: putProduct
       parameters:
       - explode: false
         in: path
@@ -688,7 +688,7 @@ paths:
               $ref: '#/components/schemas/Product-write'
           application/ld+json:
             schema:
-              $ref: '#/components/schemas/Product:jsonld-write'
+              $ref: '#/components/schemas/Product-write-ld'
           text/html:
             schema:
               $ref: '#/components/schemas/Product-write'
@@ -701,7 +701,7 @@ paths:
                 $ref: '#/components/schemas/Product-read_item'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Product:jsonld-read_item'
+                $ref: '#/components/schemas/Product-read-ld_item'
             text/html:
               schema:
                 $ref: '#/components/schemas/Product-read_item'
@@ -715,7 +715,7 @@ paths:
       - Product
   /purchase_lines:
     get:
-      operationId: getPurchaseLineCollection
+      operationId: getPurchaseLines
       parameters:
       - description: The purchase ID
         explode: true
@@ -757,16 +757,16 @@ paths:
                 properties:
                   hydra:member:
                     items:
-                      $ref: '#/components/schemas/PurchaseLine:jsonld-read'
+                      $ref: '#/components/schemas/PurchaseLine-read-ld'
                     type: array
                   hydra:search:
                     properties:
-                      '@type':
+                      ld-type:
                         type: string
                       hydra:mapping:
                         items:
                           properties:
-                            '@type':
+                            ld-type:
                               type: string
                             property:
                               type: string
@@ -786,10 +786,10 @@ paths:
                     type: integer
                   hydra:view:
                     properties:
-                      '@id':
+                      ld-id:
                         format: iri-reference
                         type: string
-                      '@type':
+                      ld-type:
                         type: string
                       hydra:first:
                         format: iri-reference
@@ -814,7 +814,7 @@ paths:
       tags:
       - PurchaseLine
     post:
-      operationId: postPurchaseLineCollection
+      operationId: postPurchaseLine
       requestBody:
         content:
           application/json:
@@ -822,7 +822,7 @@ paths:
               $ref: '#/components/schemas/PurchaseLine-write'
           application/ld+json:
             schema:
-              $ref: '#/components/schemas/PurchaseLine:jsonld-write'
+              $ref: '#/components/schemas/PurchaseLine-write-ld'
           text/html:
             schema:
               $ref: '#/components/schemas/PurchaseLine-write'
@@ -835,16 +835,16 @@ paths:
                 $ref: '#/components/schemas/PurchaseLine-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/PurchaseLine:jsonld-read'
+                $ref: '#/components/schemas/PurchaseLine-read-ld'
             text/html:
               schema:
                 $ref: '#/components/schemas/PurchaseLine-read'
           description: PurchaseLine resource created
           links:
-            GetPurchaseLineItem:
+            GetPurchaseLine:
               description: The `id` value returned in the response can be used as
                 the `id` parameter in `GET /purchase_lines/{id}`.
-              operationId: getPurchaseLineItem
+              operationId: getPurchaseLine
               parameters:
                 id: $response.body#/id
         "400":
@@ -856,7 +856,7 @@ paths:
       - PurchaseLine
   /purchase_lines/{id}:
     get:
-      operationId: getPurchaseLineItem
+      operationId: getPurchaseLine
       parameters:
       - explode: false
         in: path
@@ -873,7 +873,7 @@ paths:
                 $ref: '#/components/schemas/PurchaseLine-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/PurchaseLine:jsonld-read'
+                $ref: '#/components/schemas/PurchaseLine-read-ld'
             text/html:
               schema:
                 $ref: '#/components/schemas/PurchaseLine-read'
@@ -884,7 +884,7 @@ paths:
       tags:
       - PurchaseLine
     patch:
-      operationId: patchPurchaseLineItem
+      operationId: patchPurchaseLine
       parameters:
       - explode: false
         in: path
@@ -907,7 +907,7 @@ paths:
                 $ref: '#/components/schemas/PurchaseLine-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/PurchaseLine:jsonld-read'
+                $ref: '#/components/schemas/PurchaseLine-read-ld'
             text/html:
               schema:
                 $ref: '#/components/schemas/PurchaseLine-read'
@@ -920,7 +920,7 @@ paths:
       tags:
       - PurchaseLine
     put:
-      operationId: putPurchaseLineItem
+      operationId: putPurchaseLine
       parameters:
       - explode: false
         in: path
@@ -936,7 +936,7 @@ paths:
               $ref: '#/components/schemas/PurchaseLine-write'
           application/ld+json:
             schema:
-              $ref: '#/components/schemas/PurchaseLine:jsonld-write'
+              $ref: '#/components/schemas/PurchaseLine-write-ld'
           text/html:
             schema:
               $ref: '#/components/schemas/PurchaseLine-write'
@@ -949,7 +949,7 @@ paths:
                 $ref: '#/components/schemas/PurchaseLine-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/PurchaseLine:jsonld-read'
+                $ref: '#/components/schemas/PurchaseLine-read-ld'
             text/html:
               schema:
                 $ref: '#/components/schemas/PurchaseLine-read'
@@ -963,7 +963,7 @@ paths:
       - PurchaseLine
   /purchases:
     get:
-      operationId: getPurchaseCollection
+      operationId: getPurchases
       parameters:
       - description: The purchase channel reference (DEPRECATED)
         explode: true
@@ -1013,16 +1013,16 @@ paths:
                 properties:
                   hydra:member:
                     items:
-                      $ref: '#/components/schemas/Purchase:jsonld-read'
+                      $ref: '#/components/schemas/Purchase-read-ld'
                     type: array
                   hydra:search:
                     properties:
-                      '@type':
+                      ld-type:
                         type: string
                       hydra:mapping:
                         items:
                           properties:
-                            '@type':
+                            ld-type:
                               type: string
                             property:
                               type: string
@@ -1042,10 +1042,10 @@ paths:
                     type: integer
                   hydra:view:
                     properties:
-                      '@id':
+                      ld-id:
                         format: iri-reference
                         type: string
-                      '@type':
+                      ld-type:
                         type: string
                       hydra:first:
                         format: iri-reference
@@ -1070,7 +1070,7 @@ paths:
       tags:
       - Purchase
     post:
-      operationId: postPurchaseCollection
+      operationId: postPurchase
       requestBody:
         content:
           application/json:
@@ -1078,7 +1078,7 @@ paths:
               $ref: '#/components/schemas/Purchase-write'
           application/ld+json:
             schema:
-              $ref: '#/components/schemas/Purchase:jsonld-write'
+              $ref: '#/components/schemas/Purchase-write-ld'
           text/html:
             schema:
               $ref: '#/components/schemas/Purchase-write'
@@ -1091,16 +1091,16 @@ paths:
                 $ref: '#/components/schemas/Purchase-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Purchase:jsonld-read'
+                $ref: '#/components/schemas/Purchase-read-ld'
             text/html:
               schema:
                 $ref: '#/components/schemas/Purchase-read'
           description: Purchase resource created
           links:
-            GetPurchaseItem:
+            GetPurchase:
               description: The `id` value returned in the response can be used as
                 the `id` parameter in `GET /purchases/{id}`.
-              operationId: getPurchaseItem
+              operationId: getPurchase
               parameters:
                 id: $response.body#/id
         "400":
@@ -1112,7 +1112,7 @@ paths:
       - Purchase
   /purchases/{id}:
     delete:
-      operationId: deletePurchaseItem
+      operationId: deletePurchase
       parameters:
       - explode: false
         in: path
@@ -1130,7 +1130,7 @@ paths:
       tags:
       - Purchase
     get:
-      operationId: getPurchaseItem
+      operationId: getPurchase
       parameters:
       - explode: false
         in: path
@@ -1147,7 +1147,7 @@ paths:
                 $ref: '#/components/schemas/Purchase-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Purchase:jsonld-read'
+                $ref: '#/components/schemas/Purchase-read-ld'
             text/html:
               schema:
                 $ref: '#/components/schemas/Purchase-read'
@@ -1158,7 +1158,7 @@ paths:
       tags:
       - Purchase
     patch:
-      operationId: patchPurchaseItem
+      operationId: patchPurchase
       parameters:
       - explode: false
         in: path
@@ -1181,7 +1181,7 @@ paths:
                 $ref: '#/components/schemas/Purchase-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Purchase:jsonld-read'
+                $ref: '#/components/schemas/Purchase-read-ld'
             text/html:
               schema:
                 $ref: '#/components/schemas/Purchase-read'
@@ -1194,7 +1194,7 @@ paths:
       tags:
       - Purchase
     put:
-      operationId: putPurchaseItem
+      operationId: putPurchase
       parameters:
       - explode: false
         in: path
@@ -1210,7 +1210,7 @@ paths:
               $ref: '#/components/schemas/Purchase-write'
           application/ld+json:
             schema:
-              $ref: '#/components/schemas/Purchase:jsonld-write'
+              $ref: '#/components/schemas/Purchase-write-ld'
           text/html:
             schema:
               $ref: '#/components/schemas/Purchase-write'
@@ -1223,7 +1223,7 @@ paths:
                 $ref: '#/components/schemas/Purchase-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Purchase:jsonld-read'
+                $ref: '#/components/schemas/Purchase-read-ld'
             text/html:
               schema:
                 $ref: '#/components/schemas/Purchase-read'
@@ -1237,7 +1237,7 @@ paths:
       - Purchase
   /sale_lines:
     get:
-      operationId: getSaleLineCollection
+      operationId: getSaleLines
       parameters:
       - description: The sale ID
         explode: true
@@ -1279,16 +1279,16 @@ paths:
                 properties:
                   hydra:member:
                     items:
-                      $ref: '#/components/schemas/SaleLine:jsonld-read'
+                      $ref: '#/components/schemas/SaleLine-read-ld'
                     type: array
                   hydra:search:
                     properties:
-                      '@type':
+                      ld-type:
                         type: string
                       hydra:mapping:
                         items:
                           properties:
-                            '@type':
+                            ld-type:
                               type: string
                             property:
                               type: string
@@ -1308,10 +1308,10 @@ paths:
                     type: integer
                   hydra:view:
                     properties:
-                      '@id':
+                      ld-id:
                         format: iri-reference
                         type: string
-                      '@type':
+                      ld-type:
                         type: string
                       hydra:first:
                         format: iri-reference
@@ -1336,7 +1336,7 @@ paths:
       tags:
       - SaleLine
     post:
-      operationId: postSaleLineCollection
+      operationId: postSaleLine
       requestBody:
         content:
           application/json:
@@ -1344,7 +1344,7 @@ paths:
               $ref: '#/components/schemas/SaleLine-write'
           application/ld+json:
             schema:
-              $ref: '#/components/schemas/SaleLine:jsonld-write'
+              $ref: '#/components/schemas/SaleLine-write-ld'
           text/html:
             schema:
               $ref: '#/components/schemas/SaleLine-write'
@@ -1357,16 +1357,16 @@ paths:
                 $ref: '#/components/schemas/SaleLine-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/SaleLine:jsonld-read'
+                $ref: '#/components/schemas/SaleLine-read-ld'
             text/html:
               schema:
                 $ref: '#/components/schemas/SaleLine-read'
           description: SaleLine resource created
           links:
-            GetSaleLineItem:
+            GetSaleLine:
               description: The `id` value returned in the response can be used as
                 the `id` parameter in `GET /sale_lines/{id}`.
-              operationId: getSaleLineItem
+              operationId: getSaleLine
               parameters:
                 id: $response.body#/id
         "400":
@@ -1378,7 +1378,7 @@ paths:
       - SaleLine
   /sale_lines/{id}:
     get:
-      operationId: getSaleLineItem
+      operationId: getSaleLine
       parameters:
       - explode: false
         in: path
@@ -1395,7 +1395,7 @@ paths:
                 $ref: '#/components/schemas/SaleLine-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/SaleLine:jsonld-read'
+                $ref: '#/components/schemas/SaleLine-read-ld'
             text/html:
               schema:
                 $ref: '#/components/schemas/SaleLine-read'
@@ -1406,7 +1406,7 @@ paths:
       tags:
       - SaleLine
     patch:
-      operationId: patchSaleLineItem
+      operationId: patchSaleLine
       parameters:
       - explode: false
         in: path
@@ -1429,7 +1429,7 @@ paths:
                 $ref: '#/components/schemas/SaleLine-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/SaleLine:jsonld-read'
+                $ref: '#/components/schemas/SaleLine-read-ld'
             text/html:
               schema:
                 $ref: '#/components/schemas/SaleLine-read'
@@ -1442,7 +1442,7 @@ paths:
       tags:
       - SaleLine
     put:
-      operationId: putSaleLineItem
+      operationId: putSaleLine
       parameters:
       - explode: false
         in: path
@@ -1458,7 +1458,7 @@ paths:
               $ref: '#/components/schemas/SaleLine-write'
           application/ld+json:
             schema:
-              $ref: '#/components/schemas/SaleLine:jsonld-write'
+              $ref: '#/components/schemas/SaleLine-write-ld'
           text/html:
             schema:
               $ref: '#/components/schemas/SaleLine-write'
@@ -1471,7 +1471,7 @@ paths:
                 $ref: '#/components/schemas/SaleLine-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/SaleLine:jsonld-read'
+                $ref: '#/components/schemas/SaleLine-read-ld'
             text/html:
               schema:
                 $ref: '#/components/schemas/SaleLine-read'
@@ -1485,7 +1485,7 @@ paths:
       - SaleLine
   /sales:
     get:
-      operationId: getSaleCollection
+      operationId: getSales
       parameters:
       - description: The sale channel reference (DEPRECATED)
         explode: true
@@ -1535,16 +1535,16 @@ paths:
                 properties:
                   hydra:member:
                     items:
-                      $ref: '#/components/schemas/Sale:jsonld-read'
+                      $ref: '#/components/schemas/Sale-read-ld'
                     type: array
                   hydra:search:
                     properties:
-                      '@type':
+                      ld-type:
                         type: string
                       hydra:mapping:
                         items:
                           properties:
-                            '@type':
+                            ld-type:
                               type: string
                             property:
                               type: string
@@ -1564,10 +1564,10 @@ paths:
                     type: integer
                   hydra:view:
                     properties:
-                      '@id':
+                      ld-id:
                         format: iri-reference
                         type: string
-                      '@type':
+                      ld-type:
                         type: string
                       hydra:first:
                         format: iri-reference
@@ -1592,7 +1592,7 @@ paths:
       tags:
       - Sale
     post:
-      operationId: postSaleCollection
+      operationId: postSale
       requestBody:
         content:
           application/json:
@@ -1600,7 +1600,7 @@ paths:
               $ref: '#/components/schemas/Sale-write'
           application/ld+json:
             schema:
-              $ref: '#/components/schemas/Sale:jsonld-write'
+              $ref: '#/components/schemas/Sale-write-ld'
           text/html:
             schema:
               $ref: '#/components/schemas/Sale-write'
@@ -1613,16 +1613,16 @@ paths:
                 $ref: '#/components/schemas/Sale-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Sale:jsonld-read'
+                $ref: '#/components/schemas/Sale-read-ld'
             text/html:
               schema:
                 $ref: '#/components/schemas/Sale-read'
           description: Sale resource created
           links:
-            GetSaleItem:
+            GetSale:
               description: The `id` value returned in the response can be used as
                 the `id` parameter in `GET /sales/{id}`.
-              operationId: getSaleItem
+              operationId: getSale
               parameters:
                 id: $response.body#/id
         "400":
@@ -1634,7 +1634,7 @@ paths:
       - Sale
   /sales/{id}:
     delete:
-      operationId: deleteSaleItem
+      operationId: deleteSale
       parameters:
       - explode: false
         in: path
@@ -1652,7 +1652,7 @@ paths:
       tags:
       - Sale
     get:
-      operationId: getSaleItem
+      operationId: getSale
       parameters:
       - explode: false
         in: path
@@ -1669,7 +1669,7 @@ paths:
                 $ref: '#/components/schemas/Sale-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Sale:jsonld-read'
+                $ref: '#/components/schemas/Sale-read-ld'
             text/html:
               schema:
                 $ref: '#/components/schemas/Sale-read'
@@ -1680,7 +1680,7 @@ paths:
       tags:
       - Sale
     patch:
-      operationId: patchSaleItem
+      operationId: patchSale
       parameters:
       - explode: false
         in: path
@@ -1703,7 +1703,7 @@ paths:
                 $ref: '#/components/schemas/Sale-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Sale:jsonld-read'
+                $ref: '#/components/schemas/Sale-read-ld'
             text/html:
               schema:
                 $ref: '#/components/schemas/Sale-read'
@@ -1716,7 +1716,7 @@ paths:
       tags:
       - Sale
     put:
-      operationId: putSaleItem
+      operationId: putSale
       parameters:
       - explode: false
         in: path
@@ -1732,7 +1732,7 @@ paths:
               $ref: '#/components/schemas/Sale-write'
           application/ld+json:
             schema:
-              $ref: '#/components/schemas/Sale:jsonld-write'
+              $ref: '#/components/schemas/Sale-write-ld'
           text/html:
             schema:
               $ref: '#/components/schemas/Sale-write'
@@ -1745,7 +1745,7 @@ paths:
                 $ref: '#/components/schemas/Sale-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Sale:jsonld-read'
+                $ref: '#/components/schemas/Sale-read-ld'
             text/html:
               schema:
                 $ref: '#/components/schemas/Sale-read'
@@ -1784,7 +1784,7 @@ paths:
                 $ref: '#/components/schemas/Sale-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Sale:jsonld-read'
+                $ref: '#/components/schemas/Sale-read-ld'
       summary: Cancels a sale.
       tags:
       - Sale
@@ -1815,13 +1815,13 @@ paths:
                 $ref: '#/components/schemas/Sale-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Sale:jsonld-read'
+                $ref: '#/components/schemas/Sale-read-ld'
       summary: Confirms a sale.
       tags:
       - Sale
   /shipments:
     get:
-      operationId: getShipmentCollection
+      operationId: getShipments
       parameters:
       - description: The sale ID
         explode: true
@@ -1863,16 +1863,16 @@ paths:
                 properties:
                   hydra:member:
                     items:
-                      $ref: '#/components/schemas/Shipment:jsonld-read'
+                      $ref: '#/components/schemas/Shipment-read-ld'
                     type: array
                   hydra:search:
                     properties:
-                      '@type':
+                      ld-type:
                         type: string
                       hydra:mapping:
                         items:
                           properties:
-                            '@type':
+                            ld-type:
                               type: string
                             property:
                               type: string
@@ -1892,10 +1892,10 @@ paths:
                     type: integer
                   hydra:view:
                     properties:
-                      '@id':
+                      ld-id:
                         format: iri-reference
                         type: string
-                      '@type':
+                      ld-type:
                         type: string
                       hydra:first:
                         format: iri-reference
@@ -1921,7 +1921,7 @@ paths:
       - Shipment
   /shipments/{id}:
     get:
-      operationId: getShipmentItem
+      operationId: getShipment
       parameters:
       - explode: false
         in: path
@@ -1938,7 +1938,7 @@ paths:
                 $ref: '#/components/schemas/Shipment-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Shipment:jsonld-read'
+                $ref: '#/components/schemas/Shipment-read-ld'
             text/html:
               schema:
                 $ref: '#/components/schemas/Shipment-read'
@@ -1950,7 +1950,7 @@ paths:
       - Shipment
   /suppliers:
     get:
-      operationId: getSupplierCollection
+      operationId: getSuppliers
       parameters:
       - description: The collection page number
         explode: true
@@ -1984,16 +1984,16 @@ paths:
                 properties:
                   hydra:member:
                     items:
-                      $ref: '#/components/schemas/Supplier:jsonld-read'
+                      $ref: '#/components/schemas/Supplier-read-ld'
                     type: array
                   hydra:search:
                     properties:
-                      '@type':
+                      ld-type:
                         type: string
                       hydra:mapping:
                         items:
                           properties:
-                            '@type':
+                            ld-type:
                               type: string
                             property:
                               type: string
@@ -2013,10 +2013,10 @@ paths:
                     type: integer
                   hydra:view:
                     properties:
-                      '@id':
+                      ld-id:
                         format: iri-reference
                         type: string
-                      '@type':
+                      ld-type:
                         type: string
                       hydra:first:
                         format: iri-reference
@@ -2041,7 +2041,7 @@ paths:
       tags:
       - Supplier
     post:
-      operationId: postSupplierCollection
+      operationId: postSupplier
       requestBody:
         content:
           application/json:
@@ -2049,7 +2049,7 @@ paths:
               $ref: '#/components/schemas/Supplier-write'
           application/ld+json:
             schema:
-              $ref: '#/components/schemas/Supplier:jsonld-write'
+              $ref: '#/components/schemas/Supplier-write-ld'
           text/html:
             schema:
               $ref: '#/components/schemas/Supplier-write'
@@ -2062,16 +2062,16 @@ paths:
                 $ref: '#/components/schemas/Supplier-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Supplier:jsonld-read'
+                $ref: '#/components/schemas/Supplier-read-ld'
             text/html:
               schema:
                 $ref: '#/components/schemas/Supplier-read'
           description: Supplier resource created
           links:
-            GetSupplierItem:
+            GetSupplier:
               description: The `id` value returned in the response can be used as
                 the `id` parameter in `GET /suppliers/{id}`.
-              operationId: getSupplierItem
+              operationId: getSupplier
               parameters:
                 id: $response.body#/id
         "400":
@@ -2083,7 +2083,7 @@ paths:
       - Supplier
   /suppliers/{id}:
     delete:
-      operationId: deleteSupplierItem
+      operationId: deleteSupplier
       parameters:
       - explode: false
         in: path
@@ -2101,7 +2101,7 @@ paths:
       tags:
       - Supplier
     get:
-      operationId: getSupplierItem
+      operationId: getSupplier
       parameters:
       - explode: false
         in: path
@@ -2118,7 +2118,7 @@ paths:
                 $ref: '#/components/schemas/Supplier-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Supplier:jsonld-read'
+                $ref: '#/components/schemas/Supplier-read-ld'
             text/html:
               schema:
                 $ref: '#/components/schemas/Supplier-read'
@@ -2129,7 +2129,7 @@ paths:
       tags:
       - Supplier
     patch:
-      operationId: patchSupplierItem
+      operationId: patchSupplier
       parameters:
       - explode: false
         in: path
@@ -2152,7 +2152,7 @@ paths:
                 $ref: '#/components/schemas/Supplier-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Supplier:jsonld-read'
+                $ref: '#/components/schemas/Supplier-read-ld'
             text/html:
               schema:
                 $ref: '#/components/schemas/Supplier-read'
@@ -2165,7 +2165,7 @@ paths:
       tags:
       - Supplier
     put:
-      operationId: putSupplierItem
+      operationId: putSupplier
       parameters:
       - explode: false
         in: path
@@ -2181,7 +2181,7 @@ paths:
               $ref: '#/components/schemas/Supplier-write'
           application/ld+json:
             schema:
-              $ref: '#/components/schemas/Supplier:jsonld-write'
+              $ref: '#/components/schemas/Supplier-write-ld'
           text/html:
             schema:
               $ref: '#/components/schemas/Supplier-write'
@@ -2194,7 +2194,7 @@ paths:
                 $ref: '#/components/schemas/Supplier-read'
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Supplier:jsonld-read'
+                $ref: '#/components/schemas/Supplier-read-ld'
             text/html:
               schema:
                 $ref: '#/components/schemas/Supplier-read'
@@ -2223,6 +2223,58 @@ components:
         street2: street2
         email: email
       properties:
+        city:
+          description: The address city
+          type: string
+        company:
+          description: The address company
+          type: string
+        countryCode:
+          description: The address country code (ISO 3166-1 alpha-2 format)
+          type: string
+        email:
+          description: The address email
+          type: string
+        houseNumber:
+          description: The address house number
+          type: string
+        id:
+          description: The address ID
+          type: integer
+        name:
+          description: The address name
+          type: string
+        phone:
+          description: The address phone
+          type: string
+        street:
+          description: The address street
+          type: string
+        street2:
+          description: The address street 2
+          type: string
+        zip:
+          description: The address zip
+          type: string
+      required:
+      - city
+      - countryCode
+      - name
+      - street
+      - zip
+      type: object
+    Address-read-ld:
+      description: Address entity
+      properties:
+        ld-context:
+          readOnly: true
+          type: string
+        ld-id:
+          readOnly: true
+          type: string
+        ld-type:
+          readOnly: true
+          type: string
         city:
           description: The address city
           type: string
@@ -2303,68 +2355,16 @@ components:
       - street
       - zip
       type: object
-    Address:jsonld-read:
+    Address-write-ld:
       description: Address entity
       properties:
-        json_context:
+        ld-context:
           readOnly: true
           type: string
-        json_id:
+        ld-id:
           readOnly: true
           type: string
-        json_type:
-          readOnly: true
-          type: string
-        city:
-          description: The address city
-          type: string
-        company:
-          description: The address company
-          type: string
-        countryCode:
-          description: The address country code (ISO 3166-1 alpha-2 format)
-          type: string
-        email:
-          description: The address email
-          type: string
-        houseNumber:
-          description: The address house number
-          type: string
-        id:
-          description: The address ID
-          type: integer
-        name:
-          description: The address name
-          type: string
-        phone:
-          description: The address phone
-          type: string
-        street:
-          description: The address street
-          type: string
-        street2:
-          description: The address street 2
-          type: string
-        zip:
-          description: The address zip
-          type: string
-      required:
-      - city
-      - countryCode
-      - name
-      - street
-      - zip
-      type: object
-    Address:jsonld-write:
-      description: Address entity
-      properties:
-        json_context:
-          readOnly: true
-          type: string
-        json_id:
-          readOnly: true
-          type: string
-        json_type:
+        ld-type:
           readOnly: true
           type: string
         city:
@@ -2417,16 +2417,16 @@ components:
           description: The carrier name
           type: string
       type: object
-    Carrier:jsonld-read:
+    Carrier-read-ld:
       description: Carrier entity
       properties:
-        json_context:
+        ld-context:
           readOnly: true
           type: string
-        json_id:
+        ld-id:
           readOnly: true
           type: string
-        json_type:
+        ld-type:
           readOnly: true
           type: string
         id:
@@ -2458,6 +2458,70 @@ components:
         sku: sku
         barcode: barcode
         quantityIncoming: 7
+      properties:
+        barcode:
+          description: The product barcode
+          type: string
+        channelReference:
+          description: The product channel reference (DEPRECATED)
+          type: string
+        costPrice:
+          description: The product cost price (Excluding taxes)
+          type: number
+        dimensionX:
+          description: The product dimension X in cm
+          type: number
+        dimensionY:
+          description: The product dimension Y in cm
+          type: number
+        dimensionZ:
+          description: The product dimension Z in cm
+          type: number
+        hsCode:
+          description: The product HS code
+          type: string
+        id:
+          description: The product ID
+          type: integer
+        name:
+          description: The product name
+          type: string
+        quantityAvailable:
+          description: The physical available product quantity
+          type: integer
+        quantityIncoming:
+          description: The incoming product quantity
+          type: integer
+        quantityOnHand:
+          description: The product quantity on hand
+          type: integer
+        quantityOutgoing:
+          description: The outgoing product quantity
+          type: integer
+        quantitySold:
+          description: The sold product quantity
+          type: integer
+        reference:
+          description: Your product reference (This could be your product ID)
+          type: string
+        sellingPrice:
+          description: The product selling price (Excluding taxes)
+          type: number
+        sku:
+          description: The product warehouse SKU
+          type: string
+        volume:
+          description: The product volume in L (Calculated using dimensions)
+          type: number
+        weight:
+          description: The product weight in kg
+          type: number
+      required:
+      - barcode
+      - name
+      type: object
+    Product-read-ld_collection:
+      description: Product entity
       properties:
         barcode:
           description: The product barcode
@@ -2608,6 +2672,82 @@ components:
       - barcode
       - name
       type: object
+    Product-read-ld_item:
+      description: Product entity
+      properties:
+        ld-context:
+          readOnly: true
+          type: string
+        ld-id:
+          readOnly: true
+          type: string
+        ld-type:
+          readOnly: true
+          type: string
+        barcode:
+          description: The product barcode
+          type: string
+        channelReference:
+          description: The product channel reference (DEPRECATED)
+          type: string
+        costPrice:
+          description: The product cost price (Excluding taxes)
+          type: number
+        dimensionX:
+          description: The product dimension X in cm
+          type: number
+        dimensionY:
+          description: The product dimension Y in cm
+          type: number
+        dimensionZ:
+          description: The product dimension Z in cm
+          type: number
+        hsCode:
+          description: The product HS code
+          type: string
+        id:
+          description: The product ID
+          type: integer
+        image:
+          description: The product image (As a base64 encoded string)
+          type: string
+        name:
+          description: The product name
+          type: string
+        quantityAvailable:
+          description: The physical available product quantity
+          type: integer
+        quantityIncoming:
+          description: The incoming product quantity
+          type: integer
+        quantityOnHand:
+          description: The product quantity on hand
+          type: integer
+        quantityOutgoing:
+          description: The outgoing product quantity
+          type: integer
+        quantitySold:
+          description: The sold product quantity
+          type: integer
+        reference:
+          description: Your product reference (This could be your product ID)
+          type: string
+        sellingPrice:
+          description: The product selling price (Excluding taxes)
+          type: number
+        sku:
+          description: The product warehouse SKU
+          type: string
+        volume:
+          description: The product volume in L (Calculated using dimensions)
+          type: number
+        weight:
+          description: The product weight in kg
+          type: number
+      required:
+      - barcode
+      - name
+      type: object
     Product-write:
       description: Product entity
       properties:
@@ -2651,156 +2791,16 @@ components:
       - barcode
       - name
       type: object
-    Product:jsonld-read_collection:
+    Product-write-ld:
       description: Product entity
       properties:
-        barcode:
-          description: The product barcode
-          type: string
-        channelReference:
-          description: The product channel reference (DEPRECATED)
-          type: string
-        costPrice:
-          description: The product cost price (Excluding taxes)
-          type: number
-        dimensionX:
-          description: The product dimension X in cm
-          type: number
-        dimensionY:
-          description: The product dimension Y in cm
-          type: number
-        dimensionZ:
-          description: The product dimension Z in cm
-          type: number
-        hsCode:
-          description: The product HS code
-          type: string
-        id:
-          description: The product ID
-          type: integer
-        name:
-          description: The product name
-          type: string
-        quantityAvailable:
-          description: The physical available product quantity
-          type: integer
-        quantityIncoming:
-          description: The incoming product quantity
-          type: integer
-        quantityOnHand:
-          description: The product quantity on hand
-          type: integer
-        quantityOutgoing:
-          description: The outgoing product quantity
-          type: integer
-        quantitySold:
-          description: The sold product quantity
-          type: integer
-        reference:
-          description: Your product reference (This could be your product ID)
-          type: string
-        sellingPrice:
-          description: The product selling price (Excluding taxes)
-          type: number
-        sku:
-          description: The product warehouse SKU
-          type: string
-        volume:
-          description: The product volume in L (Calculated using dimensions)
-          type: number
-        weight:
-          description: The product weight in kg
-          type: number
-      required:
-      - barcode
-      - name
-      type: object
-    Product:jsonld-read_item:
-      description: Product entity
-      properties:
-        json_context:
+        ld-context:
           readOnly: true
           type: string
-        json_id:
+        ld-id:
           readOnly: true
           type: string
-        json_type:
-          readOnly: true
-          type: string
-        barcode:
-          description: The product barcode
-          type: string
-        channelReference:
-          description: The product channel reference (DEPRECATED)
-          type: string
-        costPrice:
-          description: The product cost price (Excluding taxes)
-          type: number
-        dimensionX:
-          description: The product dimension X in cm
-          type: number
-        dimensionY:
-          description: The product dimension Y in cm
-          type: number
-        dimensionZ:
-          description: The product dimension Z in cm
-          type: number
-        hsCode:
-          description: The product HS code
-          type: string
-        id:
-          description: The product ID
-          type: integer
-        image:
-          description: The product image (As a base64 encoded string)
-          type: string
-        name:
-          description: The product name
-          type: string
-        quantityAvailable:
-          description: The physical available product quantity
-          type: integer
-        quantityIncoming:
-          description: The incoming product quantity
-          type: integer
-        quantityOnHand:
-          description: The product quantity on hand
-          type: integer
-        quantityOutgoing:
-          description: The outgoing product quantity
-          type: integer
-        quantitySold:
-          description: The sold product quantity
-          type: integer
-        reference:
-          description: Your product reference (This could be your product ID)
-          type: string
-        sellingPrice:
-          description: The product selling price (Excluding taxes)
-          type: number
-        sku:
-          description: The product warehouse SKU
-          type: string
-        volume:
-          description: The product volume in L (Calculated using dimensions)
-          type: number
-        weight:
-          description: The product weight in kg
-          type: number
-      required:
-      - barcode
-      - name
-      type: object
-    Product:jsonld-write:
-      description: Product entity
-      properties:
-        json_context:
-          readOnly: true
-          type: string
-        json_id:
-          readOnly: true
-          type: string
-        json_type:
+        ld-type:
           readOnly: true
           type: string
         barcode:
@@ -2868,6 +2868,35 @@ components:
       - plannedDate
       - supplierId
       type: object
+    Purchase-read-ld:
+      description: Purchase entity
+      properties:
+        ld-context:
+          readOnly: true
+          type: string
+        ld-id:
+          readOnly: true
+          type: string
+        ld-type:
+          readOnly: true
+          type: string
+        id:
+          description: The purchase ID
+          type: integer
+        name:
+          description: The purchase name
+          type: string
+        plannedDate:
+          description: The purchase planned delivery date
+          format: date-time
+          type: string
+        supplierId:
+          description: The purchase supplier ID
+          type: integer
+      required:
+      - plannedDate
+      - supplierId
+      type: object
     Purchase-write:
       description: Purchase entity
       properties:
@@ -2888,45 +2917,16 @@ components:
       - plannedDate
       - supplierId
       type: object
-    Purchase:jsonld-read:
+    Purchase-write-ld:
       description: Purchase entity
       properties:
-        json_context:
+        ld-context:
           readOnly: true
           type: string
-        json_id:
+        ld-id:
           readOnly: true
           type: string
-        json_type:
-          readOnly: true
-          type: string
-        id:
-          description: The purchase ID
-          type: integer
-        name:
-          description: The purchase name
-          type: string
-        plannedDate:
-          description: The purchase planned delivery date
-          format: date-time
-          type: string
-        supplierId:
-          description: The purchase supplier ID
-          type: integer
-      required:
-      - plannedDate
-      - supplierId
-      type: object
-    Purchase:jsonld-write:
-      description: Purchase entity
-      properties:
-        json_context:
-          readOnly: true
-          type: string
-        json_id:
-          readOnly: true
-          type: string
-        json_type:
+        ld-type:
           readOnly: true
           type: string
         channelReference:
@@ -2985,41 +2985,16 @@ components:
       - purchaseId
       - quantity
       type: object
-    PurchaseLine-write:
+    PurchaseLine-read-ld:
       description: Purchase Line entity
       properties:
-        description:
-          description: The purchase line description
-          type: string
-        plannedDate:
-          description: The purchase line planned delivery date
-          format: date-time
-          type: string
-        productId:
-          description: The product ID
-          type: integer
-        purchaseId:
-          description: The purchase ID
-          type: integer
-        quantity:
-          description: The purchase line quantity
-          type: integer
-      required:
-      - description
-      - productId
-      - purchaseId
-      - quantity
-      type: object
-    PurchaseLine:jsonld-read:
-      description: Purchase Line entity
-      properties:
-        json_context:
+        ld-context:
           readOnly: true
           type: string
-        json_id:
+        ld-id:
           readOnly: true
           type: string
-        json_type:
+        ld-type:
           readOnly: true
           type: string
         description:
@@ -3050,16 +3025,41 @@ components:
       - purchaseId
       - quantity
       type: object
-    PurchaseLine:jsonld-write:
+    PurchaseLine-write:
       description: Purchase Line entity
       properties:
-        json_context:
+        description:
+          description: The purchase line description
+          type: string
+        plannedDate:
+          description: The purchase line planned delivery date
+          format: date-time
+          type: string
+        productId:
+          description: The product ID
+          type: integer
+        purchaseId:
+          description: The purchase ID
+          type: integer
+        quantity:
+          description: The purchase line quantity
+          type: integer
+      required:
+      - description
+      - productId
+      - purchaseId
+      - quantity
+      type: object
+    PurchaseLine-write-ld:
+      description: Purchase Line entity
+      properties:
+        ld-context:
           readOnly: true
           type: string
-        json_id:
+        ld-id:
           readOnly: true
           type: string
-        json_type:
+        ld-type:
           readOnly: true
           type: string
         description:
@@ -3095,6 +3095,7 @@ components:
         shippingAddressId: 2
         id: 6
         carrierId: 0
+        type: b2c
         lineIds:
         - 5
         - 5
@@ -3136,42 +3137,28 @@ components:
           - ship
           - cancel
           type: string
+        type:
+          description: The sale type
+          enum:
+          - b2c
+          - b2b
+          - lvb
+          - fba
+          type: string
       required:
       - invoiceAddressId
       - shippingAddressId
       type: object
-    Sale-write:
+    Sale-read-ld:
       description: Sale entity
       properties:
-        carrierId:
-          description: The sale carrier ID
-          type: integer
-        channelReference:
-          description: The sale channel reference (DEPRECATED)
-          type: string
-        invoiceAddressId:
-          description: The sale invoice address ID
-          type: integer
-        reference:
-          description: Your sale reference (This could be your sale ID)
-          type: string
-        shippingAddressId:
-          description: The sale shipping address ID
-          type: integer
-      required:
-      - invoiceAddressId
-      - shippingAddressId
-      type: object
-    Sale:jsonld-read:
-      description: Sale entity
-      properties:
-        json_context:
+        ld-context:
           readOnly: true
           type: string
-        json_id:
+        ld-id:
           readOnly: true
           type: string
-        json_type:
+        ld-type:
           readOnly: true
           type: string
         carrierId:
@@ -3210,20 +3197,58 @@ components:
           - ship
           - cancel
           type: string
+        type:
+          description: The sale type
+          enum:
+          - b2c
+          - b2b
+          - lvb
+          - fba
+          type: string
       required:
       - invoiceAddressId
       - shippingAddressId
       type: object
-    Sale:jsonld-write:
+    Sale-write:
       description: Sale entity
       properties:
-        json_context:
+        carrierId:
+          description: The sale carrier ID
+          type: integer
+        channelReference:
+          description: The sale channel reference (DEPRECATED)
+          type: string
+        invoiceAddressId:
+          description: The sale invoice address ID
+          type: integer
+        reference:
+          description: Your sale reference (This could be your sale ID)
+          type: string
+        shippingAddressId:
+          description: The sale shipping address ID
+          type: integer
+        type:
+          description: The sale type
+          enum:
+          - b2c
+          - b2b
+          - lvb
+          - fba
+          type: string
+      required:
+      - invoiceAddressId
+      - shippingAddressId
+      type: object
+    Sale-write-ld:
+      description: Sale entity
+      properties:
+        ld-context:
           readOnly: true
           type: string
-        json_id:
+        ld-id:
           readOnly: true
           type: string
-        json_type:
+        ld-type:
           readOnly: true
           type: string
         carrierId:
@@ -3241,6 +3266,14 @@ components:
         shippingAddressId:
           description: The sale shipping address ID
           type: integer
+        type:
+          description: The sale type
+          enum:
+          - b2c
+          - b2b
+          - lvb
+          - fba
+          type: string
       required:
       - invoiceAddressId
       - shippingAddressId
@@ -3255,6 +3288,42 @@ components:
         description: description
         id: 0
       properties:
+        description:
+          description: The sale line description
+          type: string
+        id:
+          description: The sale line ID
+          type: integer
+        productId:
+          description: The product ID
+          type: integer
+        quantity:
+          description: The sale line quantity
+          type: integer
+        quantityDelivered:
+          description: The sale line quantity delivered
+          type: integer
+        saleId:
+          description: The sale ID
+          type: integer
+      required:
+      - description
+      - productId
+      - quantity
+      - saleId
+      type: object
+    SaleLine-read-ld:
+      description: Sale Line entity
+      properties:
+        ld-context:
+          readOnly: true
+          type: string
+        ld-id:
+          readOnly: true
+          type: string
+        ld-type:
+          readOnly: true
+          type: string
         description:
           description: The sale line description
           type: string
@@ -3300,52 +3369,16 @@ components:
       - quantity
       - saleId
       type: object
-    SaleLine:jsonld-read:
+    SaleLine-write-ld:
       description: Sale Line entity
       properties:
-        json_context:
+        ld-context:
           readOnly: true
           type: string
-        json_id:
+        ld-id:
           readOnly: true
           type: string
-        json_type:
-          readOnly: true
-          type: string
-        description:
-          description: The sale line description
-          type: string
-        id:
-          description: The sale line ID
-          type: integer
-        productId:
-          description: The product ID
-          type: integer
-        quantity:
-          description: The sale line quantity
-          type: integer
-        quantityDelivered:
-          description: The sale line quantity delivered
-          type: integer
-        saleId:
-          description: The sale ID
-          type: integer
-      required:
-      - description
-      - productId
-      - quantity
-      - saleId
-      type: object
-    SaleLine:jsonld-write:
-      description: Sale Line entity
-      properties:
-        json_context:
-          readOnly: true
-          type: string
-        json_id:
-          readOnly: true
-          type: string
-        json_type:
+        ld-type:
           readOnly: true
           type: string
         description:
@@ -3399,16 +3432,16 @@ components:
       - saleId
       - shippedAt
       type: object
-    Shipment:jsonld-read:
+    Shipment-read-ld:
       description: Shipment entity
       properties:
-        json_context:
+        ld-context:
           readOnly: true
           type: string
-        json_id:
+        ld-id:
           readOnly: true
           type: string
-        json_type:
+        ld-type:
           readOnly: true
           type: string
         carrierId:
@@ -3480,49 +3513,16 @@ components:
       required:
       - name
       type: object
-    Supplier-write:
+    Supplier-read-ld:
       description: Supplier entity
       properties:
-        city:
-          description: The supplier city
-          type: string
-        countryCode:
-          description: The supplier country code (ISO 3166-1 alpha-2 format)
-          type: string
-        email:
-          description: The supplier email
-          type: string
-        houseNumber:
-          description: The supplier house number
-          type: string
-        name:
-          description: The supplier name
-          type: string
-        phone:
-          description: The supplier phone
-          type: string
-        street:
-          description: The supplier street
-          type: string
-        street2:
-          description: The supplier street 2
-          type: string
-        zip:
-          description: The supplier zip
-          type: string
-      required:
-      - name
-      type: object
-    Supplier:jsonld-read:
-      description: Supplier entity
-      properties:
-        json_context:
+        ld-context:
           readOnly: true
           type: string
-        json_id:
+        ld-id:
           readOnly: true
           type: string
-        json_type:
+        ld-type:
           readOnly: true
           type: string
         city:
@@ -3558,16 +3558,49 @@ components:
       required:
       - name
       type: object
-    Supplier:jsonld-write:
+    Supplier-write:
       description: Supplier entity
       properties:
-        json_context:
+        city:
+          description: The supplier city
+          type: string
+        countryCode:
+          description: The supplier country code (ISO 3166-1 alpha-2 format)
+          type: string
+        email:
+          description: The supplier email
+          type: string
+        houseNumber:
+          description: The supplier house number
+          type: string
+        name:
+          description: The supplier name
+          type: string
+        phone:
+          description: The supplier phone
+          type: string
+        street:
+          description: The supplier street
+          type: string
+        street2:
+          description: The supplier street 2
+          type: string
+        zip:
+          description: The supplier zip
+          type: string
+      required:
+      - name
+      type: object
+    Supplier-write-ld:
+      description: Supplier entity
+      properties:
+        ld-context:
           readOnly: true
           type: string
-        json_id:
+        ld-id:
           readOnly: true
           type: string
-        json_type:
+        ld-type:
           readOnly: true
           type: string
         city:
@@ -3612,15 +3645,15 @@ components:
       - email
       - password
       type: object
-    User:jsonld-authenticate:
+    User-authenticate-ld:
       properties:
-        json_context:
+        ld-context:
           readOnly: true
           type: string
-        json_id:
+        ld-id:
           readOnly: true
           type: string
-        json_type:
+        ld-type:
           readOnly: true
           type: string
         email:

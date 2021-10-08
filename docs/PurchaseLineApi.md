@@ -4,17 +4,85 @@ All URIs are relative to *http://localhost/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetPurchaseLineCollection**](PurchaseLineApi.md#GetPurchaseLineCollection) | **Get** /purchase_lines | Retrieves the collection of PurchaseLine resources.
-[**GetPurchaseLineItem**](PurchaseLineApi.md#GetPurchaseLineItem) | **Get** /purchase_lines/{id} | Retrieves a PurchaseLine resource.
-[**PatchPurchaseLineItem**](PurchaseLineApi.md#PatchPurchaseLineItem) | **Patch** /purchase_lines/{id} | Updates the PurchaseLine resource.
-[**PostPurchaseLineCollection**](PurchaseLineApi.md#PostPurchaseLineCollection) | **Post** /purchase_lines | Creates a PurchaseLine resource.
-[**PutPurchaseLineItem**](PurchaseLineApi.md#PutPurchaseLineItem) | **Put** /purchase_lines/{id} | Replaces the PurchaseLine resource.
+[**GetPurchaseLine**](PurchaseLineApi.md#GetPurchaseLine) | **Get** /purchase_lines/{id} | Retrieves a PurchaseLine resource.
+[**GetPurchaseLines**](PurchaseLineApi.md#GetPurchaseLines) | **Get** /purchase_lines | Retrieves the collection of PurchaseLine resources.
+[**PatchPurchaseLine**](PurchaseLineApi.md#PatchPurchaseLine) | **Patch** /purchase_lines/{id} | Updates the PurchaseLine resource.
+[**PostPurchaseLine**](PurchaseLineApi.md#PostPurchaseLine) | **Post** /purchase_lines | Creates a PurchaseLine resource.
+[**PutPurchaseLine**](PurchaseLineApi.md#PutPurchaseLine) | **Put** /purchase_lines/{id} | Replaces the PurchaseLine resource.
 
 
 
-## GetPurchaseLineCollection
+## GetPurchaseLine
 
-> []PurchaseLineRead GetPurchaseLineCollection(ctx).PurchaseId(purchaseId).Page(page).Items(items).Execute()
+> PurchaseLineRead GetPurchaseLine(ctx, id).Execute()
+
+Retrieves a PurchaseLine resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    id := "id_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.PurchaseLineApi.GetPurchaseLine(context.Background(), id).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PurchaseLineApi.GetPurchaseLine``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetPurchaseLine`: PurchaseLineRead
+    fmt.Fprintf(os.Stdout, "Response from `PurchaseLineApi.GetPurchaseLine`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetPurchaseLineRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**PurchaseLineRead**](PurchaseLineRead.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, application/ld+json, text/html
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetPurchaseLines
+
+> []PurchaseLineRead GetPurchaseLines(ctx).PurchaseId(purchaseId).Page(page).Items(items).Execute()
 
 Retrieves the collection of PurchaseLine resources.
 
@@ -37,13 +105,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PurchaseLineApi.GetPurchaseLineCollection(context.Background()).PurchaseId(purchaseId).Page(page).Items(items).Execute()
+    resp, r, err := api_client.PurchaseLineApi.GetPurchaseLines(context.Background()).PurchaseId(purchaseId).Page(page).Items(items).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PurchaseLineApi.GetPurchaseLineCollection``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PurchaseLineApi.GetPurchaseLines``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetPurchaseLineCollection`: []PurchaseLineRead
-    fmt.Fprintf(os.Stdout, "Response from `PurchaseLineApi.GetPurchaseLineCollection`: %v\n", resp)
+    // response from `GetPurchaseLines`: []PurchaseLineRead
+    fmt.Fprintf(os.Stdout, "Response from `PurchaseLineApi.GetPurchaseLines`: %v\n", resp)
 }
 ```
 
@@ -53,7 +121,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetPurchaseLineCollectionRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetPurchaseLinesRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -64,7 +132,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]PurchaseLineRead**](PurchaseLine-read.md)
+[**[]PurchaseLineRead**](PurchaseLineRead.md)
 
 ### Authorization
 
@@ -80,77 +148,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetPurchaseLineItem
+## PatchPurchaseLine
 
-> PurchaseLineRead GetPurchaseLineItem(ctx, id).Execute()
-
-Retrieves a PurchaseLine resource.
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    id := "id_example" // string | 
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PurchaseLineApi.GetPurchaseLineItem(context.Background(), id).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PurchaseLineApi.GetPurchaseLineItem``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetPurchaseLineItem`: PurchaseLineRead
-    fmt.Fprintf(os.Stdout, "Response from `PurchaseLineApi.GetPurchaseLineItem`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetPurchaseLineItemRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
-[**PurchaseLineRead**](PurchaseLine-read.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json, application/ld+json, text/html
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## PatchPurchaseLineItem
-
-> PurchaseLineRead PatchPurchaseLineItem(ctx, id).PurchaseLineWrite(purchaseLineWrite).Execute()
+> PurchaseLineRead PatchPurchaseLine(ctx, id).PurchaseLineWrite(purchaseLineWrite).Execute()
 
 Updates the PurchaseLine resource.
 
@@ -172,13 +172,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PurchaseLineApi.PatchPurchaseLineItem(context.Background(), id).PurchaseLineWrite(purchaseLineWrite).Execute()
+    resp, r, err := api_client.PurchaseLineApi.PatchPurchaseLine(context.Background(), id).PurchaseLineWrite(purchaseLineWrite).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PurchaseLineApi.PatchPurchaseLineItem``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PurchaseLineApi.PatchPurchaseLine``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PatchPurchaseLineItem`: PurchaseLineRead
-    fmt.Fprintf(os.Stdout, "Response from `PurchaseLineApi.PatchPurchaseLineItem`: %v\n", resp)
+    // response from `PatchPurchaseLine`: PurchaseLineRead
+    fmt.Fprintf(os.Stdout, "Response from `PurchaseLineApi.PatchPurchaseLine`: %v\n", resp)
 }
 ```
 
@@ -192,7 +192,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiPatchPurchaseLineItemRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiPatchPurchaseLineRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -202,7 +202,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PurchaseLineRead**](PurchaseLine-read.md)
+[**PurchaseLineRead**](PurchaseLineRead.md)
 
 ### Authorization
 
@@ -218,9 +218,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## PostPurchaseLineCollection
+## PostPurchaseLine
 
-> PurchaseLineRead PostPurchaseLineCollection(ctx).PurchaseLineWrite(purchaseLineWrite).Execute()
+> PurchaseLineRead PostPurchaseLine(ctx).PurchaseLineWrite(purchaseLineWrite).Execute()
 
 Creates a PurchaseLine resource.
 
@@ -241,13 +241,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PurchaseLineApi.PostPurchaseLineCollection(context.Background()).PurchaseLineWrite(purchaseLineWrite).Execute()
+    resp, r, err := api_client.PurchaseLineApi.PostPurchaseLine(context.Background()).PurchaseLineWrite(purchaseLineWrite).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PurchaseLineApi.PostPurchaseLineCollection``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PurchaseLineApi.PostPurchaseLine``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PostPurchaseLineCollection`: PurchaseLineRead
-    fmt.Fprintf(os.Stdout, "Response from `PurchaseLineApi.PostPurchaseLineCollection`: %v\n", resp)
+    // response from `PostPurchaseLine`: PurchaseLineRead
+    fmt.Fprintf(os.Stdout, "Response from `PurchaseLineApi.PostPurchaseLine`: %v\n", resp)
 }
 ```
 
@@ -257,7 +257,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiPostPurchaseLineCollectionRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiPostPurchaseLineRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -266,7 +266,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PurchaseLineRead**](PurchaseLine-read.md)
+[**PurchaseLineRead**](PurchaseLineRead.md)
 
 ### Authorization
 
@@ -282,9 +282,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## PutPurchaseLineItem
+## PutPurchaseLine
 
-> PurchaseLineRead PutPurchaseLineItem(ctx, id).PurchaseLineWrite(purchaseLineWrite).Execute()
+> PurchaseLineRead PutPurchaseLine(ctx, id).PurchaseLineWrite(purchaseLineWrite).Execute()
 
 Replaces the PurchaseLine resource.
 
@@ -306,13 +306,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PurchaseLineApi.PutPurchaseLineItem(context.Background(), id).PurchaseLineWrite(purchaseLineWrite).Execute()
+    resp, r, err := api_client.PurchaseLineApi.PutPurchaseLine(context.Background(), id).PurchaseLineWrite(purchaseLineWrite).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PurchaseLineApi.PutPurchaseLineItem``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PurchaseLineApi.PutPurchaseLine``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PutPurchaseLineItem`: PurchaseLineRead
-    fmt.Fprintf(os.Stdout, "Response from `PurchaseLineApi.PutPurchaseLineItem`: %v\n", resp)
+    // response from `PutPurchaseLine`: PurchaseLineRead
+    fmt.Fprintf(os.Stdout, "Response from `PurchaseLineApi.PutPurchaseLine`: %v\n", resp)
 }
 ```
 
@@ -326,7 +326,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiPutPurchaseLineItemRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiPutPurchaseLineRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -336,7 +336,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PurchaseLineRead**](PurchaseLine-read.md)
+[**PurchaseLineRead**](PurchaseLineRead.md)
 
 ### Authorization
 

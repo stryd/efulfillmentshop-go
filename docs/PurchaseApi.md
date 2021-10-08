@@ -4,18 +4,18 @@ All URIs are relative to *http://localhost/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**DeletePurchaseItem**](PurchaseApi.md#DeletePurchaseItem) | **Delete** /purchases/{id} | Removes the Purchase resource.
-[**GetPurchaseCollection**](PurchaseApi.md#GetPurchaseCollection) | **Get** /purchases | Retrieves the collection of Purchase resources.
-[**GetPurchaseItem**](PurchaseApi.md#GetPurchaseItem) | **Get** /purchases/{id} | Retrieves a Purchase resource.
-[**PatchPurchaseItem**](PurchaseApi.md#PatchPurchaseItem) | **Patch** /purchases/{id} | Updates the Purchase resource.
-[**PostPurchaseCollection**](PurchaseApi.md#PostPurchaseCollection) | **Post** /purchases | Creates a Purchase resource.
-[**PutPurchaseItem**](PurchaseApi.md#PutPurchaseItem) | **Put** /purchases/{id} | Replaces the Purchase resource.
+[**DeletePurchase**](PurchaseApi.md#DeletePurchase) | **Delete** /purchases/{id} | Removes the Purchase resource.
+[**GetPurchase**](PurchaseApi.md#GetPurchase) | **Get** /purchases/{id} | Retrieves a Purchase resource.
+[**GetPurchases**](PurchaseApi.md#GetPurchases) | **Get** /purchases | Retrieves the collection of Purchase resources.
+[**PatchPurchase**](PurchaseApi.md#PatchPurchase) | **Patch** /purchases/{id} | Updates the Purchase resource.
+[**PostPurchase**](PurchaseApi.md#PostPurchase) | **Post** /purchases | Creates a Purchase resource.
+[**PutPurchase**](PurchaseApi.md#PutPurchase) | **Put** /purchases/{id} | Replaces the Purchase resource.
 
 
 
-## DeletePurchaseItem
+## DeletePurchase
 
-> DeletePurchaseItem(ctx, id).Execute()
+> DeletePurchase(ctx, id).Execute()
 
 Removes the Purchase resource.
 
@@ -36,9 +36,9 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PurchaseApi.DeletePurchaseItem(context.Background(), id).Execute()
+    resp, r, err := api_client.PurchaseApi.DeletePurchase(context.Background(), id).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PurchaseApi.DeletePurchaseItem``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PurchaseApi.DeletePurchase``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -54,7 +54,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiDeletePurchaseItemRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiDeletePurchaseRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -79,9 +79,77 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetPurchaseCollection
+## GetPurchase
 
-> []PurchaseRead GetPurchaseCollection(ctx).ChannelReference(channelReference).Reference(reference).Page(page).Items(items).Execute()
+> PurchaseRead GetPurchase(ctx, id).Execute()
+
+Retrieves a Purchase resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    id := "id_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.PurchaseApi.GetPurchase(context.Background(), id).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PurchaseApi.GetPurchase``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetPurchase`: PurchaseRead
+    fmt.Fprintf(os.Stdout, "Response from `PurchaseApi.GetPurchase`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetPurchaseRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**PurchaseRead**](PurchaseRead.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, application/ld+json, text/html
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetPurchases
+
+> []PurchaseRead GetPurchases(ctx).ChannelReference(channelReference).Reference(reference).Page(page).Items(items).Execute()
 
 Retrieves the collection of Purchase resources.
 
@@ -105,13 +173,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PurchaseApi.GetPurchaseCollection(context.Background()).ChannelReference(channelReference).Reference(reference).Page(page).Items(items).Execute()
+    resp, r, err := api_client.PurchaseApi.GetPurchases(context.Background()).ChannelReference(channelReference).Reference(reference).Page(page).Items(items).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PurchaseApi.GetPurchaseCollection``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PurchaseApi.GetPurchases``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetPurchaseCollection`: []PurchaseRead
-    fmt.Fprintf(os.Stdout, "Response from `PurchaseApi.GetPurchaseCollection`: %v\n", resp)
+    // response from `GetPurchases`: []PurchaseRead
+    fmt.Fprintf(os.Stdout, "Response from `PurchaseApi.GetPurchases`: %v\n", resp)
 }
 ```
 
@@ -121,7 +189,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetPurchaseCollectionRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetPurchasesRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -133,7 +201,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]PurchaseRead**](Purchase-read.md)
+[**[]PurchaseRead**](PurchaseRead.md)
 
 ### Authorization
 
@@ -149,77 +217,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetPurchaseItem
+## PatchPurchase
 
-> PurchaseRead GetPurchaseItem(ctx, id).Execute()
-
-Retrieves a Purchase resource.
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    id := "id_example" // string | 
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PurchaseApi.GetPurchaseItem(context.Background(), id).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PurchaseApi.GetPurchaseItem``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetPurchaseItem`: PurchaseRead
-    fmt.Fprintf(os.Stdout, "Response from `PurchaseApi.GetPurchaseItem`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetPurchaseItemRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
-[**PurchaseRead**](Purchase-read.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json, application/ld+json, text/html
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## PatchPurchaseItem
-
-> PurchaseRead PatchPurchaseItem(ctx, id).PurchaseWrite(purchaseWrite).Execute()
+> PurchaseRead PatchPurchase(ctx, id).PurchaseWrite(purchaseWrite).Execute()
 
 Updates the Purchase resource.
 
@@ -242,13 +242,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PurchaseApi.PatchPurchaseItem(context.Background(), id).PurchaseWrite(purchaseWrite).Execute()
+    resp, r, err := api_client.PurchaseApi.PatchPurchase(context.Background(), id).PurchaseWrite(purchaseWrite).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PurchaseApi.PatchPurchaseItem``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PurchaseApi.PatchPurchase``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PatchPurchaseItem`: PurchaseRead
-    fmt.Fprintf(os.Stdout, "Response from `PurchaseApi.PatchPurchaseItem`: %v\n", resp)
+    // response from `PatchPurchase`: PurchaseRead
+    fmt.Fprintf(os.Stdout, "Response from `PurchaseApi.PatchPurchase`: %v\n", resp)
 }
 ```
 
@@ -262,7 +262,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiPatchPurchaseItemRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiPatchPurchaseRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -272,7 +272,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PurchaseRead**](Purchase-read.md)
+[**PurchaseRead**](PurchaseRead.md)
 
 ### Authorization
 
@@ -288,9 +288,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## PostPurchaseCollection
+## PostPurchase
 
-> PurchaseRead PostPurchaseCollection(ctx).PurchaseWrite(purchaseWrite).Execute()
+> PurchaseRead PostPurchase(ctx).PurchaseWrite(purchaseWrite).Execute()
 
 Creates a Purchase resource.
 
@@ -312,13 +312,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PurchaseApi.PostPurchaseCollection(context.Background()).PurchaseWrite(purchaseWrite).Execute()
+    resp, r, err := api_client.PurchaseApi.PostPurchase(context.Background()).PurchaseWrite(purchaseWrite).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PurchaseApi.PostPurchaseCollection``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PurchaseApi.PostPurchase``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PostPurchaseCollection`: PurchaseRead
-    fmt.Fprintf(os.Stdout, "Response from `PurchaseApi.PostPurchaseCollection`: %v\n", resp)
+    // response from `PostPurchase`: PurchaseRead
+    fmt.Fprintf(os.Stdout, "Response from `PurchaseApi.PostPurchase`: %v\n", resp)
 }
 ```
 
@@ -328,7 +328,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiPostPurchaseCollectionRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiPostPurchaseRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -337,7 +337,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PurchaseRead**](Purchase-read.md)
+[**PurchaseRead**](PurchaseRead.md)
 
 ### Authorization
 
@@ -353,9 +353,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## PutPurchaseItem
+## PutPurchase
 
-> PurchaseRead PutPurchaseItem(ctx, id).PurchaseWrite(purchaseWrite).Execute()
+> PurchaseRead PutPurchase(ctx, id).PurchaseWrite(purchaseWrite).Execute()
 
 Replaces the Purchase resource.
 
@@ -378,13 +378,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PurchaseApi.PutPurchaseItem(context.Background(), id).PurchaseWrite(purchaseWrite).Execute()
+    resp, r, err := api_client.PurchaseApi.PutPurchase(context.Background(), id).PurchaseWrite(purchaseWrite).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PurchaseApi.PutPurchaseItem``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PurchaseApi.PutPurchase``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PutPurchaseItem`: PurchaseRead
-    fmt.Fprintf(os.Stdout, "Response from `PurchaseApi.PutPurchaseItem`: %v\n", resp)
+    // response from `PutPurchase`: PurchaseRead
+    fmt.Fprintf(os.Stdout, "Response from `PurchaseApi.PutPurchase`: %v\n", resp)
 }
 ```
 
@@ -398,7 +398,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiPutPurchaseItemRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiPutPurchaseRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -408,7 +408,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PurchaseRead**](Purchase-read.md)
+[**PurchaseRead**](PurchaseRead.md)
 
 ### Authorization
 
