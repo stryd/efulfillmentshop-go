@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **InvoiceAddressId** | **int32** | The sale invoice address ID | 
 **Reference** | Pointer to **string** | Your sale reference (This could be your sale ID) | [optional] 
 **ShippingAddressId** | **int32** | The sale shipping address ID | 
+**Type** | Pointer to **string** | The sale type | [optional] 
 
 ## Methods
 
@@ -143,6 +144,31 @@ and a boolean to check if the value has been set.
 
 SetShippingAddressId sets ShippingAddressId field to given value.
 
+
+### GetType
+
+`func (o *SaleWrite) GetType() string`
+
+GetType returns the Type field if non-nil, zero value otherwise.
+
+### GetTypeOk
+
+`func (o *SaleWrite) GetTypeOk() (*string, bool)`
+
+GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetType
+
+`func (o *SaleWrite) SetType(v string)`
+
+SetType sets Type field to given value.
+
+### HasType
+
+`func (o *SaleWrite) HasType() bool`
+
+HasType returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

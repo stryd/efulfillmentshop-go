@@ -4,18 +4,18 @@ All URIs are relative to *http://localhost/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**DeleteProductItem**](ProductApi.md#DeleteProductItem) | **Delete** /products/{id} | Removes the Product resource.
-[**GetProductCollection**](ProductApi.md#GetProductCollection) | **Get** /products | Retrieves the collection of Product resources.
-[**GetProductItem**](ProductApi.md#GetProductItem) | **Get** /products/{id} | Retrieves a Product resource.
-[**PatchProductItem**](ProductApi.md#PatchProductItem) | **Patch** /products/{id} | Updates the Product resource.
-[**PostProductCollection**](ProductApi.md#PostProductCollection) | **Post** /products | Creates a Product resource.
-[**PutProductItem**](ProductApi.md#PutProductItem) | **Put** /products/{id} | Replaces the Product resource.
+[**DeleteProduct**](ProductApi.md#DeleteProduct) | **Delete** /products/{id} | Removes the Product resource.
+[**GetProduct**](ProductApi.md#GetProduct) | **Get** /products/{id} | Retrieves a Product resource.
+[**GetProducts**](ProductApi.md#GetProducts) | **Get** /products | Retrieves the collection of Product resources.
+[**PatchProduct**](ProductApi.md#PatchProduct) | **Patch** /products/{id} | Updates the Product resource.
+[**PostProduct**](ProductApi.md#PostProduct) | **Post** /products | Creates a Product resource.
+[**PutProduct**](ProductApi.md#PutProduct) | **Put** /products/{id} | Replaces the Product resource.
 
 
 
-## DeleteProductItem
+## DeleteProduct
 
-> DeleteProductItem(ctx, id).Execute()
+> DeleteProduct(ctx, id).Execute()
 
 Removes the Product resource.
 
@@ -36,9 +36,9 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ProductApi.DeleteProductItem(context.Background(), id).Execute()
+    resp, r, err := api_client.ProductApi.DeleteProduct(context.Background(), id).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ProductApi.DeleteProductItem``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ProductApi.DeleteProduct``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -54,7 +54,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiDeleteProductItemRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiDeleteProductRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -79,9 +79,77 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetProductCollection
+## GetProduct
 
-> []ProductReadCollection GetProductCollection(ctx).Name(name).Sku(sku).Barcode(barcode).ChannelReference(channelReference).Reference(reference).Page(page).Items(items).Execute()
+> ProductReadItem GetProduct(ctx, id).Execute()
+
+Retrieves a Product resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    id := "id_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.ProductApi.GetProduct(context.Background(), id).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ProductApi.GetProduct``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetProduct`: ProductReadItem
+    fmt.Fprintf(os.Stdout, "Response from `ProductApi.GetProduct`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetProductRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**ProductReadItem**](ProductReadItem.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, application/ld+json, text/html
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetProducts
+
+> []ProductReadCollection GetProducts(ctx).Name(name).Sku(sku).Barcode(barcode).ChannelReference(channelReference).Reference(reference).Page(page).Items(items).Execute()
 
 Retrieves the collection of Product resources.
 
@@ -108,13 +176,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ProductApi.GetProductCollection(context.Background()).Name(name).Sku(sku).Barcode(barcode).ChannelReference(channelReference).Reference(reference).Page(page).Items(items).Execute()
+    resp, r, err := api_client.ProductApi.GetProducts(context.Background()).Name(name).Sku(sku).Barcode(barcode).ChannelReference(channelReference).Reference(reference).Page(page).Items(items).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ProductApi.GetProductCollection``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ProductApi.GetProducts``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetProductCollection`: []ProductReadCollection
-    fmt.Fprintf(os.Stdout, "Response from `ProductApi.GetProductCollection`: %v\n", resp)
+    // response from `GetProducts`: []ProductReadCollection
+    fmt.Fprintf(os.Stdout, "Response from `ProductApi.GetProducts`: %v\n", resp)
 }
 ```
 
@@ -124,7 +192,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetProductCollectionRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetProductsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -139,7 +207,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]ProductReadCollection**](Product-read_collection.md)
+[**[]ProductReadCollection**](ProductReadCollection.md)
 
 ### Authorization
 
@@ -155,77 +223,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetProductItem
+## PatchProduct
 
-> ProductReadItem GetProductItem(ctx, id).Execute()
-
-Retrieves a Product resource.
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    id := "id_example" // string | 
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ProductApi.GetProductItem(context.Background(), id).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ProductApi.GetProductItem``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetProductItem`: ProductReadItem
-    fmt.Fprintf(os.Stdout, "Response from `ProductApi.GetProductItem`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGetProductItemRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
-[**ProductReadItem**](Product-read_item.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json, application/ld+json, text/html
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## PatchProductItem
-
-> ProductReadItem PatchProductItem(ctx, id).ProductWrite(productWrite).Execute()
+> ProductReadItem PatchProduct(ctx, id).ProductWrite(productWrite).Execute()
 
 Updates the Product resource.
 
@@ -247,13 +247,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ProductApi.PatchProductItem(context.Background(), id).ProductWrite(productWrite).Execute()
+    resp, r, err := api_client.ProductApi.PatchProduct(context.Background(), id).ProductWrite(productWrite).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ProductApi.PatchProductItem``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ProductApi.PatchProduct``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PatchProductItem`: ProductReadItem
-    fmt.Fprintf(os.Stdout, "Response from `ProductApi.PatchProductItem`: %v\n", resp)
+    // response from `PatchProduct`: ProductReadItem
+    fmt.Fprintf(os.Stdout, "Response from `ProductApi.PatchProduct`: %v\n", resp)
 }
 ```
 
@@ -267,7 +267,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiPatchProductItemRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiPatchProductRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -277,7 +277,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ProductReadItem**](Product-read_item.md)
+[**ProductReadItem**](ProductReadItem.md)
 
 ### Authorization
 
@@ -293,9 +293,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## PostProductCollection
+## PostProduct
 
-> ProductReadItem PostProductCollection(ctx).ProductWrite(productWrite).Execute()
+> ProductReadItem PostProduct(ctx).ProductWrite(productWrite).Execute()
 
 Creates a Product resource.
 
@@ -316,13 +316,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ProductApi.PostProductCollection(context.Background()).ProductWrite(productWrite).Execute()
+    resp, r, err := api_client.ProductApi.PostProduct(context.Background()).ProductWrite(productWrite).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ProductApi.PostProductCollection``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ProductApi.PostProduct``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PostProductCollection`: ProductReadItem
-    fmt.Fprintf(os.Stdout, "Response from `ProductApi.PostProductCollection`: %v\n", resp)
+    // response from `PostProduct`: ProductReadItem
+    fmt.Fprintf(os.Stdout, "Response from `ProductApi.PostProduct`: %v\n", resp)
 }
 ```
 
@@ -332,7 +332,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiPostProductCollectionRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiPostProductRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -341,7 +341,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ProductReadItem**](Product-read_item.md)
+[**ProductReadItem**](ProductReadItem.md)
 
 ### Authorization
 
@@ -357,9 +357,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## PutProductItem
+## PutProduct
 
-> ProductReadItem PutProductItem(ctx, id).ProductWrite(productWrite).Execute()
+> ProductReadItem PutProduct(ctx, id).ProductWrite(productWrite).Execute()
 
 Replaces the Product resource.
 
@@ -381,13 +381,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ProductApi.PutProductItem(context.Background(), id).ProductWrite(productWrite).Execute()
+    resp, r, err := api_client.ProductApi.PutProduct(context.Background(), id).ProductWrite(productWrite).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ProductApi.PutProductItem``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ProductApi.PutProduct``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `PutProductItem`: ProductReadItem
-    fmt.Fprintf(os.Stdout, "Response from `ProductApi.PutProductItem`: %v\n", resp)
+    // response from `PutProduct`: ProductReadItem
+    fmt.Fprintf(os.Stdout, "Response from `ProductApi.PutProduct`: %v\n", resp)
 }
 ```
 
@@ -401,7 +401,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiPutProductItemRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiPutProductRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -411,7 +411,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ProductReadItem**](Product-read_item.md)
+[**ProductReadItem**](ProductReadItem.md)
 
 ### Authorization
 

@@ -1,10 +1,78 @@
 {
-  "basePath": "/v1",
   "components": {
     "schemas": {
       "Address-read": {
         "description": "Address entity",
         "properties": {
+          "city": {
+            "description": "The address city",
+            "type": "string"
+          },
+          "company": {
+            "description": "The address company",
+            "type": "string"
+          },
+          "countryCode": {
+            "description": "The address country code (ISO 3166-1 alpha-2 format)",
+            "type": "string"
+          },
+          "email": {
+            "description": "The address email",
+            "type": "string"
+          },
+          "houseNumber": {
+            "description": "The address house number",
+            "type": "string"
+          },
+          "id": {
+            "description": "The address ID",
+            "type": "integer"
+          },
+          "name": {
+            "description": "The address name",
+            "type": "string"
+          },
+          "phone": {
+            "description": "The address phone",
+            "type": "string"
+          },
+          "street": {
+            "description": "The address street",
+            "type": "string"
+          },
+          "street2": {
+            "description": "The address street 2",
+            "type": "string"
+          },
+          "zip": {
+            "description": "The address zip",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "street",
+          "zip",
+          "city",
+          "countryCode"
+        ],
+        "type": "object"
+      },
+      "Address-read-ld": {
+        "description": "Address entity",
+        "properties": {
+          "ld-context": {
+            "readOnly": true,
+            "type": "string"
+          },
+          "ld-id": {
+            "readOnly": true,
+            "type": "string"
+          },
+          "ld-type": {
+            "readOnly": true,
+            "type": "string"
+          },
           "city": {
             "description": "The address city",
             "type": "string"
@@ -112,87 +180,18 @@
         ],
         "type": "object"
       },
-      "Address:jsonld-read": {
+      "Address-write-ld": {
         "description": "Address entity",
         "properties": {
-          "json_context": {
+          "ld-context": {
             "readOnly": true,
             "type": "string"
           },
-          "json_id": {
+          "ld-id": {
             "readOnly": true,
             "type": "string"
           },
-          "json_type": {
-            "readOnly": true,
-            "type": "string"
-          },
-          "city": {
-            "description": "The address city",
-            "type": "string"
-          },
-          "company": {
-            "description": "The address company",
-            "type": "string"
-          },
-          "countryCode": {
-            "description": "The address country code (ISO 3166-1 alpha-2 format)",
-            "type": "string"
-          },
-          "email": {
-            "description": "The address email",
-            "type": "string"
-          },
-          "houseNumber": {
-            "description": "The address house number",
-            "type": "string"
-          },
-          "id": {
-            "description": "The address ID",
-            "type": "integer"
-          },
-          "name": {
-            "description": "The address name",
-            "type": "string"
-          },
-          "phone": {
-            "description": "The address phone",
-            "type": "string"
-          },
-          "street": {
-            "description": "The address street",
-            "type": "string"
-          },
-          "street2": {
-            "description": "The address street 2",
-            "type": "string"
-          },
-          "zip": {
-            "description": "The address zip",
-            "type": "string"
-          }
-        },
-        "required": [
-          "name",
-          "street",
-          "zip",
-          "city",
-          "countryCode"
-        ],
-        "type": "object"
-      },
-      "Address:jsonld-write": {
-        "description": "Address entity",
-        "properties": {
-          "json_context": {
-            "readOnly": true,
-            "type": "string"
-          },
-          "json_id": {
-            "readOnly": true,
-            "type": "string"
-          },
-          "json_type": {
+          "ld-type": {
             "readOnly": true,
             "type": "string"
           },
@@ -260,18 +259,18 @@
         },
         "type": "object"
       },
-      "Carrier:jsonld-read": {
+      "Carrier-read-ld": {
         "description": "Carrier entity",
         "properties": {
-          "json_context": {
+          "ld-context": {
             "readOnly": true,
             "type": "string"
           },
-          "json_id": {
+          "ld-id": {
             "readOnly": true,
             "type": "string"
           },
-          "json_type": {
+          "ld-type": {
             "readOnly": true,
             "type": "string"
           },
@@ -286,46 +285,6 @@
         },
         "type": "object"
       },
-      "Channel-read": {
-        "description": "Channel entity",
-        "properties": {
-          "id": {
-            "description": "The channel ID",
-            "type": "integer"
-          },
-          "name": {
-            "description": "The channel name",
-            "type": "string"
-          }
-        },
-        "type": "object"
-      },
-      "Channel:jsonld-read": {
-        "description": "Channel entity",
-        "properties": {
-          "json_context": {
-            "readOnly": true,
-            "type": "string"
-          },
-          "json_id": {
-            "readOnly": true,
-            "type": "string"
-          },
-          "json_type": {
-            "readOnly": true,
-            "type": "string"
-          },
-          "id": {
-            "description": "The channel ID",
-            "type": "integer"
-          },
-          "name": {
-            "description": "The channel name",
-            "type": "string"
-          }
-        },
-        "type": "object"
-      },
       "Product-read_collection": {
         "description": "Product entity",
         "properties": {
@@ -333,16 +292,8 @@
             "description": "The product barcode",
             "type": "string"
           },
-          "channelId": {
-            "description": "The product channel",
-            "type": "integer"
-          },
           "channelReference": {
-            "description": "The product channel reference",
-            "type": "string"
-          },
-          "channelSku": {
-            "description": "The product channel SKU",
+            "description": "The product channel reference (DEPRECATED)",
             "type": "string"
           },
           "costPrice": {
@@ -393,6 +344,10 @@
             "description": "The sold product quantity",
             "type": "integer"
           },
+          "reference": {
+            "description": "Your product reference (This could be your product ID)",
+            "type": "string"
+          },
           "sellingPrice": {
             "description": "The product selling price (Excluding taxes)",
             "type": "number"
@@ -412,9 +367,93 @@
         },
         "required": [
           "name",
-          "barcode",
-          "channelId",
-          "channelReference"
+          "barcode"
+        ],
+        "type": "object"
+      },
+      "Product-read-ld_collection": {
+        "description": "Product entity",
+        "properties": {
+          "barcode": {
+            "description": "The product barcode",
+            "type": "string"
+          },
+          "channelReference": {
+            "description": "The product channel reference (DEPRECATED)",
+            "type": "string"
+          },
+          "costPrice": {
+            "description": "The product cost price (Excluding taxes)",
+            "type": "number"
+          },
+          "dimensionX": {
+            "description": "The product dimension X in cm",
+            "type": "number"
+          },
+          "dimensionY": {
+            "description": "The product dimension Y in cm",
+            "type": "number"
+          },
+          "dimensionZ": {
+            "description": "The product dimension Z in cm",
+            "type": "number"
+          },
+          "hsCode": {
+            "description": "The product HS code",
+            "type": "string"
+          },
+          "id": {
+            "description": "The product ID",
+            "type": "integer"
+          },
+          "name": {
+            "description": "The product name",
+            "type": "string"
+          },
+          "quantityAvailable": {
+            "description": "The physical available product quantity",
+            "type": "integer"
+          },
+          "quantityIncoming": {
+            "description": "The incoming product quantity",
+            "type": "integer"
+          },
+          "quantityOnHand": {
+            "description": "The product quantity on hand",
+            "type": "integer"
+          },
+          "quantityOutgoing": {
+            "description": "The outgoing product quantity",
+            "type": "integer"
+          },
+          "quantitySold": {
+            "description": "The sold product quantity",
+            "type": "integer"
+          },
+          "reference": {
+            "description": "Your product reference (This could be your product ID)",
+            "type": "string"
+          },
+          "sellingPrice": {
+            "description": "The product selling price (Excluding taxes)",
+            "type": "number"
+          },
+          "sku": {
+            "description": "The product warehouse SKU",
+            "type": "string"
+          },
+          "volume": {
+            "description": "The product volume in L (Calculated using dimensions)",
+            "type": "number"
+          },
+          "weight": {
+            "description": "The product weight in kg",
+            "type": "number"
+          }
+        },
+        "required": [
+          "name",
+          "barcode"
         ],
         "type": "object"
       },
@@ -425,16 +464,8 @@
             "description": "The product barcode",
             "type": "string"
           },
-          "channelId": {
-            "description": "The product channel",
-            "type": "integer"
-          },
           "channelReference": {
-            "description": "The product channel reference",
-            "type": "string"
-          },
-          "channelSku": {
-            "description": "The product channel SKU",
+            "description": "The product channel reference (DEPRECATED)",
             "type": "string"
           },
           "costPrice": {
@@ -489,6 +520,10 @@
             "description": "The sold product quantity",
             "type": "integer"
           },
+          "reference": {
+            "description": "Your product reference (This could be your product ID)",
+            "type": "string"
+          },
           "sellingPrice": {
             "description": "The product selling price (Excluding taxes)",
             "type": "number"
@@ -508,9 +543,109 @@
         },
         "required": [
           "name",
-          "barcode",
-          "channelId",
-          "channelReference"
+          "barcode"
+        ],
+        "type": "object"
+      },
+      "Product-read-ld_item": {
+        "description": "Product entity",
+        "properties": {
+          "ld-context": {
+            "readOnly": true,
+            "type": "string"
+          },
+          "ld-id": {
+            "readOnly": true,
+            "type": "string"
+          },
+          "ld-type": {
+            "readOnly": true,
+            "type": "string"
+          },
+          "barcode": {
+            "description": "The product barcode",
+            "type": "string"
+          },
+          "channelReference": {
+            "description": "The product channel reference (DEPRECATED)",
+            "type": "string"
+          },
+          "costPrice": {
+            "description": "The product cost price (Excluding taxes)",
+            "type": "number"
+          },
+          "dimensionX": {
+            "description": "The product dimension X in cm",
+            "type": "number"
+          },
+          "dimensionY": {
+            "description": "The product dimension Y in cm",
+            "type": "number"
+          },
+          "dimensionZ": {
+            "description": "The product dimension Z in cm",
+            "type": "number"
+          },
+          "hsCode": {
+            "description": "The product HS code",
+            "type": "string"
+          },
+          "id": {
+            "description": "The product ID",
+            "type": "integer"
+          },
+          "image": {
+            "description": "The product image (As a base64 encoded string)",
+            "type": "string"
+          },
+          "name": {
+            "description": "The product name",
+            "type": "string"
+          },
+          "quantityAvailable": {
+            "description": "The physical available product quantity",
+            "type": "integer"
+          },
+          "quantityIncoming": {
+            "description": "The incoming product quantity",
+            "type": "integer"
+          },
+          "quantityOnHand": {
+            "description": "The product quantity on hand",
+            "type": "integer"
+          },
+          "quantityOutgoing": {
+            "description": "The outgoing product quantity",
+            "type": "integer"
+          },
+          "quantitySold": {
+            "description": "The sold product quantity",
+            "type": "integer"
+          },
+          "reference": {
+            "description": "Your product reference (This could be your product ID)",
+            "type": "string"
+          },
+          "sellingPrice": {
+            "description": "The product selling price (Excluding taxes)",
+            "type": "number"
+          },
+          "sku": {
+            "description": "The product warehouse SKU",
+            "type": "string"
+          },
+          "volume": {
+            "description": "The product volume in L (Calculated using dimensions)",
+            "type": "number"
+          },
+          "weight": {
+            "description": "The product weight in kg",
+            "type": "number"
+          }
+        },
+        "required": [
+          "name",
+          "barcode"
         ],
         "type": "object"
       },
@@ -521,16 +656,8 @@
             "description": "The product barcode",
             "type": "string"
           },
-          "channelId": {
-            "description": "The product channel",
-            "type": "integer"
-          },
           "channelReference": {
-            "description": "The product channel reference",
-            "type": "string"
-          },
-          "channelSku": {
-            "description": "The product channel SKU",
+            "description": "The product channel reference (DEPRECATED)",
             "type": "string"
           },
           "costPrice": {
@@ -561,6 +688,10 @@
             "description": "The product name",
             "type": "string"
           },
+          "reference": {
+            "description": "Your product reference (This could be your product ID)",
+            "type": "string"
+          },
           "sellingPrice": {
             "description": "The product selling price (Excluding taxes)",
             "type": "number"
@@ -572,116 +703,22 @@
         },
         "required": [
           "name",
-          "barcode",
-          "channelId",
-          "channelReference"
+          "barcode"
         ],
         "type": "object"
       },
-      "Product:jsonld-read_collection": {
+      "Product-write-ld": {
         "description": "Product entity",
         "properties": {
-          "barcode": {
-            "description": "The product barcode",
-            "type": "string"
-          },
-          "channelId": {
-            "description": "The product channel",
-            "type": "integer"
-          },
-          "channelReference": {
-            "description": "The product channel reference",
-            "type": "string"
-          },
-          "channelSku": {
-            "description": "The product channel SKU",
-            "type": "string"
-          },
-          "costPrice": {
-            "description": "The product cost price (Excluding taxes)",
-            "type": "number"
-          },
-          "dimensionX": {
-            "description": "The product dimension X in cm",
-            "type": "number"
-          },
-          "dimensionY": {
-            "description": "The product dimension Y in cm",
-            "type": "number"
-          },
-          "dimensionZ": {
-            "description": "The product dimension Z in cm",
-            "type": "number"
-          },
-          "hsCode": {
-            "description": "The product HS code",
-            "type": "string"
-          },
-          "id": {
-            "description": "The product ID",
-            "type": "integer"
-          },
-          "name": {
-            "description": "The product name",
-            "type": "string"
-          },
-          "quantityAvailable": {
-            "description": "The physical available product quantity",
-            "type": "integer"
-          },
-          "quantityIncoming": {
-            "description": "The incoming product quantity",
-            "type": "integer"
-          },
-          "quantityOnHand": {
-            "description": "The product quantity on hand",
-            "type": "integer"
-          },
-          "quantityOutgoing": {
-            "description": "The outgoing product quantity",
-            "type": "integer"
-          },
-          "quantitySold": {
-            "description": "The sold product quantity",
-            "type": "integer"
-          },
-          "sellingPrice": {
-            "description": "The product selling price (Excluding taxes)",
-            "type": "number"
-          },
-          "sku": {
-            "description": "The product warehouse SKU",
-            "type": "string"
-          },
-          "volume": {
-            "description": "The product volume in L (Calculated using dimensions)",
-            "type": "number"
-          },
-          "weight": {
-            "description": "The product weight in kg",
-            "type": "number"
-          }
-        },
-        "required": [
-          "name",
-          "barcode",
-          "channelId",
-          "channelReference"
-        ],
-        "type": "object"
-      },
-      "Product:jsonld-read_item": {
-        "description": "Product entity",
-        "properties": {
-          "json_context": {
+          "ld-context": {
             "readOnly": true,
             "type": "string"
           },
-          "json_id": {
+          "ld-id": {
             "readOnly": true,
             "type": "string"
           },
-          "json_type": {
+          "ld-type": {
             "readOnly": true,
             "type": "string"
           },
@@ -689,124 +726,8 @@
             "description": "The product barcode",
             "type": "string"
           },
-          "channelId": {
-            "description": "The product channel",
-            "type": "integer"
-          },
           "channelReference": {
-            "description": "The product channel reference",
-            "type": "string"
-          },
-          "channelSku": {
-            "description": "The product channel SKU",
-            "type": "string"
-          },
-          "costPrice": {
-            "description": "The product cost price (Excluding taxes)",
-            "type": "number"
-          },
-          "dimensionX": {
-            "description": "The product dimension X in cm",
-            "type": "number"
-          },
-          "dimensionY": {
-            "description": "The product dimension Y in cm",
-            "type": "number"
-          },
-          "dimensionZ": {
-            "description": "The product dimension Z in cm",
-            "type": "number"
-          },
-          "hsCode": {
-            "description": "The product HS code",
-            "type": "string"
-          },
-          "id": {
-            "description": "The product ID",
-            "type": "integer"
-          },
-          "image": {
-            "description": "The product image (As a base64 encoded string)",
-            "type": "string"
-          },
-          "name": {
-            "description": "The product name",
-            "type": "string"
-          },
-          "quantityAvailable": {
-            "description": "The physical available product quantity",
-            "type": "integer"
-          },
-          "quantityIncoming": {
-            "description": "The incoming product quantity",
-            "type": "integer"
-          },
-          "quantityOnHand": {
-            "description": "The product quantity on hand",
-            "type": "integer"
-          },
-          "quantityOutgoing": {
-            "description": "The outgoing product quantity",
-            "type": "integer"
-          },
-          "quantitySold": {
-            "description": "The sold product quantity",
-            "type": "integer"
-          },
-          "sellingPrice": {
-            "description": "The product selling price (Excluding taxes)",
-            "type": "number"
-          },
-          "sku": {
-            "description": "The product warehouse SKU",
-            "type": "string"
-          },
-          "volume": {
-            "description": "The product volume in L (Calculated using dimensions)",
-            "type": "number"
-          },
-          "weight": {
-            "description": "The product weight in kg",
-            "type": "number"
-          }
-        },
-        "required": [
-          "name",
-          "barcode",
-          "channelId",
-          "channelReference"
-        ],
-        "type": "object"
-      },
-      "Product:jsonld-write": {
-        "description": "Product entity",
-        "properties": {
-          "json_context": {
-            "readOnly": true,
-            "type": "string"
-          },
-          "json_id": {
-            "readOnly": true,
-            "type": "string"
-          },
-          "json_type": {
-            "readOnly": true,
-            "type": "string"
-          },
-          "barcode": {
-            "description": "The product barcode",
-            "type": "string"
-          },
-          "channelId": {
-            "description": "The product channel",
-            "type": "integer"
-          },
-          "channelReference": {
-            "description": "The product channel reference",
-            "type": "string"
-          },
-          "channelSku": {
-            "description": "The product channel SKU",
+            "description": "The product channel reference (DEPRECATED)",
             "type": "string"
           },
           "costPrice": {
@@ -837,6 +758,10 @@
             "description": "The product name",
             "type": "string"
           },
+          "reference": {
+            "description": "Your product reference (This could be your product ID)",
+            "type": "string"
+          },
           "sellingPrice": {
             "description": "The product selling price (Excluding taxes)",
             "type": "number"
@@ -848,21 +773,50 @@
         },
         "required": [
           "name",
-          "barcode",
-          "channelId",
-          "channelReference"
+          "barcode"
         ],
         "type": "object"
       },
       "Purchase-read": {
         "description": "Purchase entity",
         "properties": {
-          "channelId": {
-            "description": "The purchase channel",
+          "id": {
+            "description": "The purchase ID",
             "type": "integer"
           },
-          "channelReference": {
-            "description": "The purchase channel reference",
+          "name": {
+            "description": "The purchase name",
+            "type": "string"
+          },
+          "plannedDate": {
+            "description": "The purchase planned delivery date",
+            "format": "date-time",
+            "type": "string"
+          },
+          "supplierId": {
+            "description": "The purchase supplier ID",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "plannedDate",
+          "supplierId"
+        ],
+        "type": "object"
+      },
+      "Purchase-read-ld": {
+        "description": "Purchase entity",
+        "properties": {
+          "ld-context": {
+            "readOnly": true,
+            "type": "string"
+          },
+          "ld-id": {
+            "readOnly": true,
+            "type": "string"
+          },
+          "ld-type": {
+            "readOnly": true,
             "type": "string"
           },
           "id": {
@@ -884,8 +838,6 @@
           }
         },
         "required": [
-          "channelId",
-          "channelReference",
           "plannedDate",
           "supplierId"
         ],
@@ -894,17 +846,17 @@
       "Purchase-write": {
         "description": "Purchase entity",
         "properties": {
-          "channelId": {
-            "description": "The purchase channel",
-            "type": "integer"
-          },
           "channelReference": {
-            "description": "The purchase channel reference",
+            "description": "The purchase channel reference (DEPRECATED)",
             "type": "string"
           },
           "plannedDate": {
             "description": "The purchase planned delivery date",
             "format": "date-time",
+            "type": "string"
+          },
+          "reference": {
+            "description": "Your purchase reference (This could be your purchase ID)",
             "type": "string"
           },
           "supplierId": {
@@ -913,47 +865,37 @@
           }
         },
         "required": [
-          "channelId",
-          "channelReference",
           "plannedDate",
           "supplierId"
         ],
         "type": "object"
       },
-      "Purchase:jsonld-read": {
+      "Purchase-write-ld": {
         "description": "Purchase entity",
         "properties": {
-          "json_context": {
+          "ld-context": {
             "readOnly": true,
             "type": "string"
           },
-          "json_id": {
+          "ld-id": {
             "readOnly": true,
             "type": "string"
           },
-          "json_type": {
+          "ld-type": {
             "readOnly": true,
             "type": "string"
-          },
-          "channelId": {
-            "description": "The purchase channel",
-            "type": "integer"
           },
           "channelReference": {
-            "description": "The purchase channel reference",
-            "type": "string"
-          },
-          "id": {
-            "description": "The purchase ID",
-            "type": "integer"
-          },
-          "name": {
-            "description": "The purchase name",
+            "description": "The purchase channel reference (DEPRECATED)",
             "type": "string"
           },
           "plannedDate": {
             "description": "The purchase planned delivery date",
             "format": "date-time",
+            "type": "string"
+          },
+          "reference": {
+            "description": "Your purchase reference (This could be your purchase ID)",
             "type": "string"
           },
           "supplierId": {
@@ -962,49 +904,6 @@
           }
         },
         "required": [
-          "channelId",
-          "channelReference",
-          "plannedDate",
-          "supplierId"
-        ],
-        "type": "object"
-      },
-      "Purchase:jsonld-write": {
-        "description": "Purchase entity",
-        "properties": {
-          "json_context": {
-            "readOnly": true,
-            "type": "string"
-          },
-          "json_id": {
-            "readOnly": true,
-            "type": "string"
-          },
-          "json_type": {
-            "readOnly": true,
-            "type": "string"
-          },
-          "channelId": {
-            "description": "The purchase channel",
-            "type": "integer"
-          },
-          "channelReference": {
-            "description": "The purchase channel reference",
-            "type": "string"
-          },
-          "plannedDate": {
-            "description": "The purchase planned delivery date",
-            "format": "date-time",
-            "type": "string"
-          },
-          "supplierId": {
-            "description": "The purchase supplier ID",
-            "type": "integer"
-          }
-        },
-        "required": [
-          "channelId",
-          "channelReference",
           "plannedDate",
           "supplierId"
         ],
@@ -1013,6 +912,59 @@
       "PurchaseLine-read": {
         "description": "Purchase Line entity",
         "properties": {
+          "description": {
+            "description": "The purchase line description",
+            "type": "string"
+          },
+          "id": {
+            "description": "The purchase line ID",
+            "type": "integer"
+          },
+          "plannedDate": {
+            "description": "The purchase line planned delivery date",
+            "format": "date-time",
+            "type": "string"
+          },
+          "productId": {
+            "description": "The product ID",
+            "type": "integer"
+          },
+          "purchaseId": {
+            "description": "The purchase ID",
+            "type": "integer"
+          },
+          "qtyReceived": {
+            "description": "The purchase line quantity received",
+            "type": "integer"
+          },
+          "quantity": {
+            "description": "The purchase line quantity",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "description",
+          "quantity",
+          "productId",
+          "purchaseId"
+        ],
+        "type": "object"
+      },
+      "PurchaseLine-read-ld": {
+        "description": "Purchase Line entity",
+        "properties": {
+          "ld-context": {
+            "readOnly": true,
+            "type": "string"
+          },
+          "ld-id": {
+            "readOnly": true,
+            "type": "string"
+          },
+          "ld-type": {
+            "readOnly": true,
+            "type": "string"
+          },
           "description": {
             "description": "The purchase line description",
             "type": "string"
@@ -1084,71 +1036,18 @@
         ],
         "type": "object"
       },
-      "PurchaseLine:jsonld-read": {
+      "PurchaseLine-write-ld": {
         "description": "Purchase Line entity",
         "properties": {
-          "json_context": {
+          "ld-context": {
             "readOnly": true,
             "type": "string"
           },
-          "json_id": {
+          "ld-id": {
             "readOnly": true,
             "type": "string"
           },
-          "json_type": {
-            "readOnly": true,
-            "type": "string"
-          },
-          "description": {
-            "description": "The purchase line description",
-            "type": "string"
-          },
-          "id": {
-            "description": "The purchase line ID",
-            "type": "integer"
-          },
-          "plannedDate": {
-            "description": "The purchase line planned delivery date",
-            "format": "date-time",
-            "type": "string"
-          },
-          "productId": {
-            "description": "The product ID",
-            "type": "integer"
-          },
-          "purchaseId": {
-            "description": "The purchase ID",
-            "type": "integer"
-          },
-          "qtyReceived": {
-            "description": "The purchase line quantity received",
-            "type": "integer"
-          },
-          "quantity": {
-            "description": "The purchase line quantity",
-            "type": "integer"
-          }
-        },
-        "required": [
-          "description",
-          "quantity",
-          "productId",
-          "purchaseId"
-        ],
-        "type": "object"
-      },
-      "PurchaseLine:jsonld-write": {
-        "description": "Purchase Line entity",
-        "properties": {
-          "json_context": {
-            "readOnly": true,
-            "type": "string"
-          },
-          "json_id": {
-            "readOnly": true,
-            "type": "string"
-          },
-          "json_type": {
+          "ld-type": {
             "readOnly": true,
             "type": "string"
           },
@@ -1189,13 +1088,84 @@
             "description": "The sale carrier ID",
             "type": "integer"
           },
-          "channelId": {
-            "description": "The sale channel",
+          "id": {
+            "description": "The sale ID",
             "type": "integer"
           },
-          "channelReference": {
-            "description": "The sale channel reference",
+          "invoiceAddressId": {
+            "description": "The sale invoice address ID",
+            "type": "integer"
+          },
+          "lineIds": {
+            "description": "The sale line IDs",
+            "items": {
+              "type": "integer"
+            },
+            "type": "array"
+          },
+          "name": {
+            "description": "The sale name",
             "type": "string"
+          },
+          "shipmentIds": {
+            "description": "The sale shipment IDs",
+            "items": {
+              "type": "integer"
+            },
+            "type": "array"
+          },
+          "shippingAddressId": {
+            "description": "The sale shipping address ID",
+            "type": "integer"
+          },
+          "status": {
+            "description": "The sale warehouse status",
+            "enum": [
+              "none",
+              "hold",
+              "stock",
+              "pick",
+              "pack",
+              "ship",
+              "cancel"
+            ],
+            "type": "string"
+          },
+          "type": {
+            "description": "The sale type",
+            "enum": [
+              "b2c",
+              "b2b",
+              "lvb",
+              "fba"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "invoiceAddressId",
+          "shippingAddressId"
+        ],
+        "type": "object"
+      },
+      "Sale-read-ld": {
+        "description": "Sale entity",
+        "properties": {
+          "ld-context": {
+            "readOnly": true,
+            "type": "string"
+          },
+          "ld-id": {
+            "readOnly": true,
+            "type": "string"
+          },
+          "ld-type": {
+            "readOnly": true,
+            "type": "string"
+          },
+          "carrierId": {
+            "description": "The sale carrier ID",
+            "type": "integer"
           },
           "id": {
             "description": "The sale ID",
@@ -1235,14 +1205,23 @@
               "stock",
               "pick",
               "pack",
-              "ship"
+              "ship",
+              "cancel"
+            ],
+            "type": "string"
+          },
+          "type": {
+            "description": "The sale type",
+            "enum": [
+              "b2c",
+              "b2b",
+              "lvb",
+              "fba"
             ],
             "type": "string"
           }
         },
         "required": [
-          "channelId",
-          "channelReference",
           "invoiceAddressId",
           "shippingAddressId"
         ],
@@ -1255,121 +1234,51 @@
             "description": "The sale carrier ID",
             "type": "integer"
           },
-          "channelId": {
-            "description": "The sale channel",
-            "type": "integer"
-          },
           "channelReference": {
-            "description": "The sale channel reference",
+            "description": "The sale channel reference (DEPRECATED)",
             "type": "string"
           },
           "invoiceAddressId": {
             "description": "The sale invoice address ID",
             "type": "integer"
           },
-          "shippingAddressId": {
-            "description": "The sale shipping address ID",
-            "type": "integer"
-          }
-        },
-        "required": [
-          "channelId",
-          "channelReference",
-          "invoiceAddressId",
-          "shippingAddressId"
-        ],
-        "type": "object"
-      },
-      "Sale:jsonld-read": {
-        "description": "Sale entity",
-        "properties": {
-          "json_context": {
-            "readOnly": true,
+          "reference": {
+            "description": "Your sale reference (This could be your sale ID)",
             "type": "string"
-          },
-          "json_id": {
-            "readOnly": true,
-            "type": "string"
-          },
-          "json_type": {
-            "readOnly": true,
-            "type": "string"
-          },
-          "carrierId": {
-            "description": "The sale carrier ID",
-            "type": "integer"
-          },
-          "channelId": {
-            "description": "The sale channel",
-            "type": "integer"
-          },
-          "channelReference": {
-            "description": "The sale channel reference",
-            "type": "string"
-          },
-          "id": {
-            "description": "The sale ID",
-            "type": "integer"
-          },
-          "invoiceAddressId": {
-            "description": "The sale invoice address ID",
-            "type": "integer"
-          },
-          "lineIds": {
-            "description": "The sale line IDs",
-            "items": {
-              "type": "integer"
-            },
-            "type": "array"
-          },
-          "name": {
-            "description": "The sale name",
-            "type": "string"
-          },
-          "shipmentIds": {
-            "description": "The sale shipment IDs",
-            "items": {
-              "type": "integer"
-            },
-            "type": "array"
           },
           "shippingAddressId": {
             "description": "The sale shipping address ID",
             "type": "integer"
           },
-          "status": {
-            "description": "The sale warehouse status",
+          "type": {
+            "description": "The sale type",
             "enum": [
-              "none",
-              "hold",
-              "stock",
-              "pick",
-              "pack",
-              "ship"
+              "b2c",
+              "b2b",
+              "lvb",
+              "fba"
             ],
             "type": "string"
           }
         },
         "required": [
-          "channelId",
-          "channelReference",
           "invoiceAddressId",
           "shippingAddressId"
         ],
         "type": "object"
       },
-      "Sale:jsonld-write": {
+      "Sale-write-ld": {
         "description": "Sale entity",
         "properties": {
-          "json_context": {
+          "ld-context": {
             "readOnly": true,
             "type": "string"
           },
-          "json_id": {
+          "ld-id": {
             "readOnly": true,
             "type": "string"
           },
-          "json_type": {
+          "ld-type": {
             "readOnly": true,
             "type": "string"
           },
@@ -1377,26 +1286,34 @@
             "description": "The sale carrier ID",
             "type": "integer"
           },
-          "channelId": {
-            "description": "The sale channel",
-            "type": "integer"
-          },
           "channelReference": {
-            "description": "The sale channel reference",
+            "description": "The sale channel reference (DEPRECATED)",
             "type": "string"
           },
           "invoiceAddressId": {
             "description": "The sale invoice address ID",
             "type": "integer"
           },
+          "reference": {
+            "description": "Your sale reference (This could be your sale ID)",
+            "type": "string"
+          },
           "shippingAddressId": {
             "description": "The sale shipping address ID",
             "type": "integer"
+          },
+          "type": {
+            "description": "The sale type",
+            "enum": [
+              "b2c",
+              "b2b",
+              "lvb",
+              "fba"
+            ],
+            "type": "string"
           }
         },
         "required": [
-          "channelId",
-          "channelReference",
           "invoiceAddressId",
           "shippingAddressId"
         ],
@@ -1405,6 +1322,54 @@
       "SaleLine-read": {
         "description": "Sale Line entity",
         "properties": {
+          "description": {
+            "description": "The sale line description",
+            "type": "string"
+          },
+          "id": {
+            "description": "The sale line ID",
+            "type": "integer"
+          },
+          "productId": {
+            "description": "The product ID",
+            "type": "integer"
+          },
+          "quantity": {
+            "description": "The sale line quantity",
+            "type": "integer"
+          },
+          "quantityDelivered": {
+            "description": "The sale line quantity delivered",
+            "type": "integer"
+          },
+          "saleId": {
+            "description": "The sale ID",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "description",
+          "quantity",
+          "productId",
+          "saleId"
+        ],
+        "type": "object"
+      },
+      "SaleLine-read-ld": {
+        "description": "Sale Line entity",
+        "properties": {
+          "ld-context": {
+            "readOnly": true,
+            "type": "string"
+          },
+          "ld-id": {
+            "readOnly": true,
+            "type": "string"
+          },
+          "ld-type": {
+            "readOnly": true,
+            "type": "string"
+          },
           "description": {
             "description": "The sale line description",
             "type": "string"
@@ -1466,66 +1431,18 @@
         ],
         "type": "object"
       },
-      "SaleLine:jsonld-read": {
+      "SaleLine-write-ld": {
         "description": "Sale Line entity",
         "properties": {
-          "json_context": {
+          "ld-context": {
             "readOnly": true,
             "type": "string"
           },
-          "json_id": {
+          "ld-id": {
             "readOnly": true,
             "type": "string"
           },
-          "json_type": {
-            "readOnly": true,
-            "type": "string"
-          },
-          "description": {
-            "description": "The sale line description",
-            "type": "string"
-          },
-          "id": {
-            "description": "The sale line ID",
-            "type": "integer"
-          },
-          "productId": {
-            "description": "The product ID",
-            "type": "integer"
-          },
-          "quantity": {
-            "description": "The sale line quantity",
-            "type": "integer"
-          },
-          "quantityDelivered": {
-            "description": "The sale line quantity delivered",
-            "type": "integer"
-          },
-          "saleId": {
-            "description": "The sale ID",
-            "type": "integer"
-          }
-        },
-        "required": [
-          "description",
-          "quantity",
-          "productId",
-          "saleId"
-        ],
-        "type": "object"
-      },
-      "SaleLine:jsonld-write": {
-        "description": "Sale Line entity",
-        "properties": {
-          "json_context": {
-            "readOnly": true,
-            "type": "string"
-          },
-          "json_id": {
-            "readOnly": true,
-            "type": "string"
-          },
-          "json_type": {
+          "ld-type": {
             "readOnly": true,
             "type": "string"
           },
@@ -1588,18 +1505,18 @@
         ],
         "type": "object"
       },
-      "Shipment:jsonld-read": {
+      "Shipment-read-ld": {
         "description": "Shipment entity",
         "properties": {
-          "json_context": {
+          "ld-context": {
             "readOnly": true,
             "type": "string"
           },
-          "json_id": {
+          "ld-id": {
             "readOnly": true,
             "type": "string"
           },
-          "json_type": {
+          "ld-type": {
             "readOnly": true,
             "type": "string"
           },
@@ -1637,6 +1554,67 @@
       "Supplier-read": {
         "description": "Supplier entity",
         "properties": {
+          "city": {
+            "description": "The supplier city",
+            "type": "string"
+          },
+          "countryCode": {
+            "description": "The supplier country code (ISO 3166-1 alpha-2 format)",
+            "type": "string"
+          },
+          "email": {
+            "description": "The supplier email",
+            "type": "string"
+          },
+          "houseNumber": {
+            "description": "The supplier house number",
+            "type": "string"
+          },
+          "id": {
+            "description": "The supplier ID",
+            "type": "integer"
+          },
+          "name": {
+            "description": "The supplier name",
+            "type": "string"
+          },
+          "phone": {
+            "description": "The supplier phone",
+            "type": "string"
+          },
+          "street": {
+            "description": "The supplier street",
+            "type": "string"
+          },
+          "street2": {
+            "description": "The supplier street 2",
+            "type": "string"
+          },
+          "zip": {
+            "description": "The supplier zip",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "type": "object"
+      },
+      "Supplier-read-ld": {
+        "description": "Supplier entity",
+        "properties": {
+          "ld-context": {
+            "readOnly": true,
+            "type": "string"
+          },
+          "ld-id": {
+            "readOnly": true,
+            "type": "string"
+          },
+          "ld-type": {
+            "readOnly": true,
+            "type": "string"
+          },
           "city": {
             "description": "The supplier city",
             "type": "string"
@@ -1728,79 +1706,18 @@
         ],
         "type": "object"
       },
-      "Supplier:jsonld-read": {
+      "Supplier-write-ld": {
         "description": "Supplier entity",
         "properties": {
-          "json_context": {
+          "ld-context": {
             "readOnly": true,
             "type": "string"
           },
-          "json_id": {
+          "ld-id": {
             "readOnly": true,
             "type": "string"
           },
-          "json_type": {
-            "readOnly": true,
-            "type": "string"
-          },
-          "city": {
-            "description": "The supplier city",
-            "type": "string"
-          },
-          "countryCode": {
-            "description": "The supplier country code (ISO 3166-1 alpha-2 format)",
-            "type": "string"
-          },
-          "email": {
-            "description": "The supplier email",
-            "type": "string"
-          },
-          "houseNumber": {
-            "description": "The supplier house number",
-            "type": "string"
-          },
-          "id": {
-            "description": "The supplier ID",
-            "type": "integer"
-          },
-          "name": {
-            "description": "The supplier name",
-            "type": "string"
-          },
-          "phone": {
-            "description": "The supplier phone",
-            "type": "string"
-          },
-          "street": {
-            "description": "The supplier street",
-            "type": "string"
-          },
-          "street2": {
-            "description": "The supplier street 2",
-            "type": "string"
-          },
-          "zip": {
-            "description": "The supplier zip",
-            "type": "string"
-          }
-        },
-        "required": [
-          "name"
-        ],
-        "type": "object"
-      },
-      "Supplier:jsonld-write": {
-        "description": "Supplier entity",
-        "properties": {
-          "json_context": {
-            "readOnly": true,
-            "type": "string"
-          },
-          "json_id": {
-            "readOnly": true,
-            "type": "string"
-          },
-          "json_type": {
+          "ld-type": {
             "readOnly": true,
             "type": "string"
           },
@@ -1864,18 +1781,18 @@
         ],
         "type": "object"
       },
-      "User:jsonld-authenticate": {
+      "User-authenticate-ld": {
         "description": "",
         "properties": {
-          "json_context": {
+          "ld-context": {
             "readOnly": true,
             "type": "string"
           },
-          "json_id": {
+          "ld-id": {
             "readOnly": true,
             "type": "string"
           },
-          "json_type": {
+          "ld-type": {
             "readOnly": true,
             "type": "string"
           },
@@ -1906,13 +1823,13 @@
   "info": {
     "description": "The E-fulfilment Shop API allows you to integrate your service with our warehouse.",
     "title": "E-fulfilment Shop API",
-    "version": "1.2.0"
+    "version": "1.4.0"
   },
   "openapi": "3.0.2",
   "paths": {
     "/addresses": {
       "get": {
-        "operationId": "getAddressCollection",
+        "operationId": "getAddresss",
         "parameters": [
           {
             "description": "The collection page number",
@@ -1952,19 +1869,19 @@
                   "properties": {
                     "hydra:member": {
                       "items": {
-                        "$ref": "#/components/schemas/Address:jsonld-read"
+                        "$ref": "#/components/schemas/Address-read-ld"
                       },
                       "type": "array"
                     },
                     "hydra:search": {
                       "properties": {
-                        "@type": {
+                        "ld-type": {
                           "type": "string"
                         },
                         "hydra:mapping": {
                           "items": {
                             "properties": {
-                              "@type": {
+                              "ld-type": {
                                 "type": "string"
                               },
                               "property": {
@@ -1996,11 +1913,11 @@
                     },
                     "hydra:view": {
                       "properties": {
-                        "@id": {
+                        "ld-id": {
                           "format": "iri-reference",
                           "type": "string"
                         },
-                        "@type": {
+                        "ld-type": {
                           "type": "string"
                         },
                         "hydra:first": {
@@ -2043,7 +1960,7 @@
         ]
       },
       "post": {
-        "operationId": "postAddressCollection",
+        "operationId": "postAddress",
         "requestBody": {
           "content": {
             "application/json": {
@@ -2053,7 +1970,7 @@
             },
             "application/ld+json": {
               "schema": {
-                "$ref": "#/components/schemas/Address:jsonld-write"
+                "$ref": "#/components/schemas/Address-write-ld"
               }
             },
             "text/html": {
@@ -2074,7 +1991,7 @@
               },
               "application/ld+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Address:jsonld-read"
+                  "$ref": "#/components/schemas/Address-read-ld"
                 }
               },
               "text/html": {
@@ -2085,9 +2002,9 @@
             },
             "description": "Address resource created",
             "links": {
-              "GetAddressItem": {
+              "GetAddress": {
                 "description": "The `id` value returned in the response can be used as the `id` parameter in `GET /addresses/{id}`.",
-                "operationId": "getAddressItem",
+                "operationId": "getAddress",
                 "parameters": {
                   "id": "$response.body#/id"
                 }
@@ -2109,7 +2026,7 @@
     },
     "/addresses/{id}": {
       "delete": {
-        "operationId": "deleteAddressItem",
+        "operationId": "deleteAddress",
         "parameters": [
           {
             "in": "path",
@@ -2134,7 +2051,7 @@
         ]
       },
       "get": {
-        "operationId": "getAddressItem",
+        "operationId": "getAddress",
         "parameters": [
           {
             "in": "path",
@@ -2155,7 +2072,7 @@
               },
               "application/ld+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Address:jsonld-read"
+                  "$ref": "#/components/schemas/Address-read-ld"
                 }
               },
               "text/html": {
@@ -2176,7 +2093,7 @@
         ]
       },
       "patch": {
-        "operationId": "patchAddressItem",
+        "operationId": "patchAddress",
         "parameters": [
           {
             "in": "path",
@@ -2207,7 +2124,7 @@
               },
               "application/ld+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Address:jsonld-read"
+                  "$ref": "#/components/schemas/Address-read-ld"
                 }
               },
               "text/html": {
@@ -2231,7 +2148,7 @@
         ]
       },
       "put": {
-        "operationId": "putAddressItem",
+        "operationId": "putAddress",
         "parameters": [
           {
             "in": "path",
@@ -2251,7 +2168,7 @@
             },
             "application/ld+json": {
               "schema": {
-                "$ref": "#/components/schemas/Address:jsonld-write"
+                "$ref": "#/components/schemas/Address-write-ld"
               }
             },
             "text/html": {
@@ -2272,7 +2189,7 @@
               },
               "application/ld+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Address:jsonld-read"
+                  "$ref": "#/components/schemas/Address-read-ld"
                 }
               },
               "text/html": {
@@ -2308,7 +2225,7 @@
             },
             "application/ld+json": {
               "schema": {
-                "$ref": "#/components/schemas/User:jsonld-authenticate"
+                "$ref": "#/components/schemas/User-authenticate-ld"
               }
             }
           }
@@ -2357,7 +2274,7 @@
     },
     "/carriers": {
       "get": {
-        "operationId": "getCarrierCollection",
+        "operationId": "getCarriers",
         "parameters": [
           {
             "description": "The collection page number",
@@ -2397,19 +2314,19 @@
                   "properties": {
                     "hydra:member": {
                       "items": {
-                        "$ref": "#/components/schemas/Carrier:jsonld-read"
+                        "$ref": "#/components/schemas/Carrier-read-ld"
                       },
                       "type": "array"
                     },
                     "hydra:search": {
                       "properties": {
-                        "@type": {
+                        "ld-type": {
                           "type": "string"
                         },
                         "hydra:mapping": {
                           "items": {
                             "properties": {
-                              "@type": {
+                              "ld-type": {
                                 "type": "string"
                               },
                               "property": {
@@ -2441,11 +2358,11 @@
                     },
                     "hydra:view": {
                       "properties": {
-                        "@id": {
+                        "ld-id": {
                           "format": "iri-reference",
                           "type": "string"
                         },
-                        "@type": {
+                        "ld-type": {
                           "type": "string"
                         },
                         "hydra:first": {
@@ -2490,7 +2407,7 @@
     },
     "/carriers/{id}": {
       "get": {
-        "operationId": "getCarrierItem",
+        "operationId": "getCarrier",
         "parameters": [
           {
             "in": "path",
@@ -2511,7 +2428,7 @@
               },
               "application/ld+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Carrier:jsonld-read"
+                  "$ref": "#/components/schemas/Carrier-read-ld"
                 }
               },
               "text/html": {
@@ -2532,186 +2449,9 @@
         ]
       }
     },
-    "/channels": {
-      "get": {
-        "operationId": "getChannelCollection",
-        "parameters": [
-          {
-            "description": "The collection page number",
-            "in": "query",
-            "name": "page",
-            "required": false,
-            "schema": {
-              "default": 1,
-              "type": "integer"
-            }
-          },
-          {
-            "description": "The number of items per page",
-            "in": "query",
-            "name": "items",
-            "required": false,
-            "schema": {
-              "default": 30,
-              "minimum": 0,
-              "type": "integer"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/Channel-read"
-                  },
-                  "type": "array"
-                }
-              },
-              "application/ld+json": {
-                "schema": {
-                  "properties": {
-                    "hydra:member": {
-                      "items": {
-                        "$ref": "#/components/schemas/Channel:jsonld-read"
-                      },
-                      "type": "array"
-                    },
-                    "hydra:search": {
-                      "properties": {
-                        "@type": {
-                          "type": "string"
-                        },
-                        "hydra:mapping": {
-                          "items": {
-                            "properties": {
-                              "@type": {
-                                "type": "string"
-                              },
-                              "property": {
-                                "type": "string"
-                              },
-                              "required": {
-                                "type": "boolean"
-                              },
-                              "variable": {
-                                "type": "string"
-                              }
-                            },
-                            "type": "object"
-                          },
-                          "type": "array"
-                        },
-                        "hydra:template": {
-                          "type": "string"
-                        },
-                        "hydra:variableRepresentation": {
-                          "type": "string"
-                        }
-                      },
-                      "type": "object"
-                    },
-                    "hydra:totalItems": {
-                      "minimum": 0,
-                      "type": "integer"
-                    },
-                    "hydra:view": {
-                      "properties": {
-                        "@id": {
-                          "format": "iri-reference",
-                          "type": "string"
-                        },
-                        "@type": {
-                          "type": "string"
-                        },
-                        "hydra:first": {
-                          "format": "iri-reference",
-                          "type": "string"
-                        },
-                        "hydra:last": {
-                          "format": "iri-reference",
-                          "type": "string"
-                        },
-                        "hydra:next": {
-                          "format": "iri-reference",
-                          "type": "string"
-                        }
-                      },
-                      "type": "object"
-                    }
-                  },
-                  "required": [
-                    "hydra:member"
-                  ],
-                  "type": "object"
-                }
-              },
-              "text/html": {
-                "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/Channel-read"
-                  },
-                  "type": "array"
-                }
-              }
-            },
-            "description": "Channel collection response"
-          }
-        },
-        "summary": "Retrieves the collection of Channel resources.",
-        "tags": [
-          "Channel"
-        ]
-      }
-    },
-    "/channels/{id}": {
-      "get": {
-        "operationId": "getChannelItem",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Channel-read"
-                }
-              },
-              "application/ld+json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Channel:jsonld-read"
-                }
-              },
-              "text/html": {
-                "schema": {
-                  "$ref": "#/components/schemas/Channel-read"
-                }
-              }
-            },
-            "description": "Channel resource response"
-          },
-          "404": {
-            "description": "Resource not found"
-          }
-        },
-        "summary": "Retrieves a Channel resource.",
-        "tags": [
-          "Channel"
-        ]
-      }
-    },
     "/products": {
       "get": {
-        "operationId": "getProductCollection",
+        "operationId": "getProducts",
         "parameters": [
           {
             "description": "The product name",
@@ -2741,16 +2481,7 @@
             }
           },
           {
-            "description": "The product channel",
-            "in": "query",
-            "name": "channelId",
-            "required": false,
-            "schema": {
-              "type": "integer"
-            }
-          },
-          {
-            "description": "The product channel reference",
+            "description": "The product channel reference (DEPRECATED)",
             "in": "query",
             "name": "channelReference",
             "required": false,
@@ -2759,9 +2490,9 @@
             }
           },
           {
-            "description": "The product channel SKU",
+            "description": "Your product reference (This could be your product ID)",
             "in": "query",
-            "name": "channelSku",
+            "name": "reference",
             "required": false,
             "schema": {
               "type": "string"
@@ -2805,19 +2536,19 @@
                   "properties": {
                     "hydra:member": {
                       "items": {
-                        "$ref": "#/components/schemas/Product:jsonld-read_collection"
+                        "$ref": "#/components/schemas/Product-read-ld_collection"
                       },
                       "type": "array"
                     },
                     "hydra:search": {
                       "properties": {
-                        "@type": {
+                        "ld-type": {
                           "type": "string"
                         },
                         "hydra:mapping": {
                           "items": {
                             "properties": {
-                              "@type": {
+                              "ld-type": {
                                 "type": "string"
                               },
                               "property": {
@@ -2849,11 +2580,11 @@
                     },
                     "hydra:view": {
                       "properties": {
-                        "@id": {
+                        "ld-id": {
                           "format": "iri-reference",
                           "type": "string"
                         },
-                        "@type": {
+                        "ld-type": {
                           "type": "string"
                         },
                         "hydra:first": {
@@ -2896,7 +2627,7 @@
         ]
       },
       "post": {
-        "operationId": "postProductCollection",
+        "operationId": "postProduct",
         "requestBody": {
           "content": {
             "application/json": {
@@ -2906,7 +2637,7 @@
             },
             "application/ld+json": {
               "schema": {
-                "$ref": "#/components/schemas/Product:jsonld-write"
+                "$ref": "#/components/schemas/Product-write-ld"
               }
             },
             "text/html": {
@@ -2927,7 +2658,7 @@
               },
               "application/ld+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Product:jsonld-read_item"
+                  "$ref": "#/components/schemas/Product-read-ld_item"
                 }
               },
               "text/html": {
@@ -2938,9 +2669,9 @@
             },
             "description": "Product resource created",
             "links": {
-              "GetProductItem": {
+              "GetProduct": {
                 "description": "The `id` value returned in the response can be used as the `id` parameter in `GET /products/{id}`.",
-                "operationId": "getProductItem",
+                "operationId": "getProduct",
                 "parameters": {
                   "id": "$response.body#/id"
                 }
@@ -2962,7 +2693,7 @@
     },
     "/products/{id}": {
       "delete": {
-        "operationId": "deleteProductItem",
+        "operationId": "deleteProduct",
         "parameters": [
           {
             "in": "path",
@@ -2987,7 +2718,7 @@
         ]
       },
       "get": {
-        "operationId": "getProductItem",
+        "operationId": "getProduct",
         "parameters": [
           {
             "in": "path",
@@ -3008,7 +2739,7 @@
               },
               "application/ld+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Product:jsonld-read_item"
+                  "$ref": "#/components/schemas/Product-read-ld_item"
                 }
               },
               "text/html": {
@@ -3029,7 +2760,7 @@
         ]
       },
       "patch": {
-        "operationId": "patchProductItem",
+        "operationId": "patchProduct",
         "parameters": [
           {
             "in": "path",
@@ -3060,7 +2791,7 @@
               },
               "application/ld+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Product:jsonld-read_item"
+                  "$ref": "#/components/schemas/Product-read-ld_item"
                 }
               },
               "text/html": {
@@ -3084,7 +2815,7 @@
         ]
       },
       "put": {
-        "operationId": "putProductItem",
+        "operationId": "putProduct",
         "parameters": [
           {
             "in": "path",
@@ -3104,7 +2835,7 @@
             },
             "application/ld+json": {
               "schema": {
-                "$ref": "#/components/schemas/Product:jsonld-write"
+                "$ref": "#/components/schemas/Product-write-ld"
               }
             },
             "text/html": {
@@ -3125,7 +2856,7 @@
               },
               "application/ld+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Product:jsonld-read_item"
+                  "$ref": "#/components/schemas/Product-read-ld_item"
                 }
               },
               "text/html": {
@@ -3151,7 +2882,7 @@
     },
     "/purchase_lines": {
       "get": {
-        "operationId": "getPurchaseLineCollection",
+        "operationId": "getPurchaseLines",
         "parameters": [
           {
             "description": "The purchase ID",
@@ -3200,19 +2931,19 @@
                   "properties": {
                     "hydra:member": {
                       "items": {
-                        "$ref": "#/components/schemas/PurchaseLine:jsonld-read"
+                        "$ref": "#/components/schemas/PurchaseLine-read-ld"
                       },
                       "type": "array"
                     },
                     "hydra:search": {
                       "properties": {
-                        "@type": {
+                        "ld-type": {
                           "type": "string"
                         },
                         "hydra:mapping": {
                           "items": {
                             "properties": {
-                              "@type": {
+                              "ld-type": {
                                 "type": "string"
                               },
                               "property": {
@@ -3244,11 +2975,11 @@
                     },
                     "hydra:view": {
                       "properties": {
-                        "@id": {
+                        "ld-id": {
                           "format": "iri-reference",
                           "type": "string"
                         },
-                        "@type": {
+                        "ld-type": {
                           "type": "string"
                         },
                         "hydra:first": {
@@ -3291,7 +3022,7 @@
         ]
       },
       "post": {
-        "operationId": "postPurchaseLineCollection",
+        "operationId": "postPurchaseLine",
         "requestBody": {
           "content": {
             "application/json": {
@@ -3301,7 +3032,7 @@
             },
             "application/ld+json": {
               "schema": {
-                "$ref": "#/components/schemas/PurchaseLine:jsonld-write"
+                "$ref": "#/components/schemas/PurchaseLine-write-ld"
               }
             },
             "text/html": {
@@ -3322,7 +3053,7 @@
               },
               "application/ld+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PurchaseLine:jsonld-read"
+                  "$ref": "#/components/schemas/PurchaseLine-read-ld"
                 }
               },
               "text/html": {
@@ -3333,9 +3064,9 @@
             },
             "description": "PurchaseLine resource created",
             "links": {
-              "GetPurchaseLineItem": {
+              "GetPurchaseLine": {
                 "description": "The `id` value returned in the response can be used as the `id` parameter in `GET /purchase_lines/{id}`.",
-                "operationId": "getPurchaseLineItem",
+                "operationId": "getPurchaseLine",
                 "parameters": {
                   "id": "$response.body#/id"
                 }
@@ -3357,7 +3088,7 @@
     },
     "/purchase_lines/{id}": {
       "get": {
-        "operationId": "getPurchaseLineItem",
+        "operationId": "getPurchaseLine",
         "parameters": [
           {
             "in": "path",
@@ -3378,7 +3109,7 @@
               },
               "application/ld+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PurchaseLine:jsonld-read"
+                  "$ref": "#/components/schemas/PurchaseLine-read-ld"
                 }
               },
               "text/html": {
@@ -3399,7 +3130,7 @@
         ]
       },
       "patch": {
-        "operationId": "patchPurchaseLineItem",
+        "operationId": "patchPurchaseLine",
         "parameters": [
           {
             "in": "path",
@@ -3430,7 +3161,7 @@
               },
               "application/ld+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PurchaseLine:jsonld-read"
+                  "$ref": "#/components/schemas/PurchaseLine-read-ld"
                 }
               },
               "text/html": {
@@ -3454,7 +3185,7 @@
         ]
       },
       "put": {
-        "operationId": "putPurchaseLineItem",
+        "operationId": "putPurchaseLine",
         "parameters": [
           {
             "in": "path",
@@ -3474,7 +3205,7 @@
             },
             "application/ld+json": {
               "schema": {
-                "$ref": "#/components/schemas/PurchaseLine:jsonld-write"
+                "$ref": "#/components/schemas/PurchaseLine-write-ld"
               }
             },
             "text/html": {
@@ -3495,7 +3226,7 @@
               },
               "application/ld+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PurchaseLine:jsonld-read"
+                  "$ref": "#/components/schemas/PurchaseLine-read-ld"
                 }
               },
               "text/html": {
@@ -3521,21 +3252,21 @@
     },
     "/purchases": {
       "get": {
-        "operationId": "getPurchaseCollection",
+        "operationId": "getPurchases",
         "parameters": [
           {
-            "description": "The purchase channel",
+            "description": "The purchase channel reference (DEPRECATED)",
             "in": "query",
-            "name": "channelId",
+            "name": "channelReference",
             "required": false,
             "schema": {
-              "type": "integer"
+              "type": "string"
             }
           },
           {
-            "description": "The purchase channel reference",
+            "description": "Your purchase reference (This could be your purchase ID)",
             "in": "query",
-            "name": "channelReference",
+            "name": "reference",
             "required": false,
             "schema": {
               "type": "string"
@@ -3579,19 +3310,19 @@
                   "properties": {
                     "hydra:member": {
                       "items": {
-                        "$ref": "#/components/schemas/Purchase:jsonld-read"
+                        "$ref": "#/components/schemas/Purchase-read-ld"
                       },
                       "type": "array"
                     },
                     "hydra:search": {
                       "properties": {
-                        "@type": {
+                        "ld-type": {
                           "type": "string"
                         },
                         "hydra:mapping": {
                           "items": {
                             "properties": {
-                              "@type": {
+                              "ld-type": {
                                 "type": "string"
                               },
                               "property": {
@@ -3623,11 +3354,11 @@
                     },
                     "hydra:view": {
                       "properties": {
-                        "@id": {
+                        "ld-id": {
                           "format": "iri-reference",
                           "type": "string"
                         },
-                        "@type": {
+                        "ld-type": {
                           "type": "string"
                         },
                         "hydra:first": {
@@ -3670,7 +3401,7 @@
         ]
       },
       "post": {
-        "operationId": "postPurchaseCollection",
+        "operationId": "postPurchase",
         "requestBody": {
           "content": {
             "application/json": {
@@ -3680,7 +3411,7 @@
             },
             "application/ld+json": {
               "schema": {
-                "$ref": "#/components/schemas/Purchase:jsonld-write"
+                "$ref": "#/components/schemas/Purchase-write-ld"
               }
             },
             "text/html": {
@@ -3701,7 +3432,7 @@
               },
               "application/ld+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Purchase:jsonld-read"
+                  "$ref": "#/components/schemas/Purchase-read-ld"
                 }
               },
               "text/html": {
@@ -3712,9 +3443,9 @@
             },
             "description": "Purchase resource created",
             "links": {
-              "GetPurchaseItem": {
+              "GetPurchase": {
                 "description": "The `id` value returned in the response can be used as the `id` parameter in `GET /purchases/{id}`.",
-                "operationId": "getPurchaseItem",
+                "operationId": "getPurchase",
                 "parameters": {
                   "id": "$response.body#/id"
                 }
@@ -3736,7 +3467,7 @@
     },
     "/purchases/{id}": {
       "delete": {
-        "operationId": "deletePurchaseItem",
+        "operationId": "deletePurchase",
         "parameters": [
           {
             "in": "path",
@@ -3761,7 +3492,7 @@
         ]
       },
       "get": {
-        "operationId": "getPurchaseItem",
+        "operationId": "getPurchase",
         "parameters": [
           {
             "in": "path",
@@ -3782,7 +3513,7 @@
               },
               "application/ld+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Purchase:jsonld-read"
+                  "$ref": "#/components/schemas/Purchase-read-ld"
                 }
               },
               "text/html": {
@@ -3803,7 +3534,7 @@
         ]
       },
       "patch": {
-        "operationId": "patchPurchaseItem",
+        "operationId": "patchPurchase",
         "parameters": [
           {
             "in": "path",
@@ -3834,7 +3565,7 @@
               },
               "application/ld+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Purchase:jsonld-read"
+                  "$ref": "#/components/schemas/Purchase-read-ld"
                 }
               },
               "text/html": {
@@ -3858,7 +3589,7 @@
         ]
       },
       "put": {
-        "operationId": "putPurchaseItem",
+        "operationId": "putPurchase",
         "parameters": [
           {
             "in": "path",
@@ -3878,7 +3609,7 @@
             },
             "application/ld+json": {
               "schema": {
-                "$ref": "#/components/schemas/Purchase:jsonld-write"
+                "$ref": "#/components/schemas/Purchase-write-ld"
               }
             },
             "text/html": {
@@ -3899,7 +3630,7 @@
               },
               "application/ld+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Purchase:jsonld-read"
+                  "$ref": "#/components/schemas/Purchase-read-ld"
                 }
               },
               "text/html": {
@@ -3925,7 +3656,7 @@
     },
     "/sale_lines": {
       "get": {
-        "operationId": "getSaleLineCollection",
+        "operationId": "getSaleLines",
         "parameters": [
           {
             "description": "The sale ID",
@@ -3974,19 +3705,19 @@
                   "properties": {
                     "hydra:member": {
                       "items": {
-                        "$ref": "#/components/schemas/SaleLine:jsonld-read"
+                        "$ref": "#/components/schemas/SaleLine-read-ld"
                       },
                       "type": "array"
                     },
                     "hydra:search": {
                       "properties": {
-                        "@type": {
+                        "ld-type": {
                           "type": "string"
                         },
                         "hydra:mapping": {
                           "items": {
                             "properties": {
-                              "@type": {
+                              "ld-type": {
                                 "type": "string"
                               },
                               "property": {
@@ -4018,11 +3749,11 @@
                     },
                     "hydra:view": {
                       "properties": {
-                        "@id": {
+                        "ld-id": {
                           "format": "iri-reference",
                           "type": "string"
                         },
-                        "@type": {
+                        "ld-type": {
                           "type": "string"
                         },
                         "hydra:first": {
@@ -4065,7 +3796,7 @@
         ]
       },
       "post": {
-        "operationId": "postSaleLineCollection",
+        "operationId": "postSaleLine",
         "requestBody": {
           "content": {
             "application/json": {
@@ -4075,7 +3806,7 @@
             },
             "application/ld+json": {
               "schema": {
-                "$ref": "#/components/schemas/SaleLine:jsonld-write"
+                "$ref": "#/components/schemas/SaleLine-write-ld"
               }
             },
             "text/html": {
@@ -4096,7 +3827,7 @@
               },
               "application/ld+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SaleLine:jsonld-read"
+                  "$ref": "#/components/schemas/SaleLine-read-ld"
                 }
               },
               "text/html": {
@@ -4107,9 +3838,9 @@
             },
             "description": "SaleLine resource created",
             "links": {
-              "GetSaleLineItem": {
+              "GetSaleLine": {
                 "description": "The `id` value returned in the response can be used as the `id` parameter in `GET /sale_lines/{id}`.",
-                "operationId": "getSaleLineItem",
+                "operationId": "getSaleLine",
                 "parameters": {
                   "id": "$response.body#/id"
                 }
@@ -4131,7 +3862,7 @@
     },
     "/sale_lines/{id}": {
       "get": {
-        "operationId": "getSaleLineItem",
+        "operationId": "getSaleLine",
         "parameters": [
           {
             "in": "path",
@@ -4152,7 +3883,7 @@
               },
               "application/ld+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SaleLine:jsonld-read"
+                  "$ref": "#/components/schemas/SaleLine-read-ld"
                 }
               },
               "text/html": {
@@ -4173,7 +3904,7 @@
         ]
       },
       "patch": {
-        "operationId": "patchSaleLineItem",
+        "operationId": "patchSaleLine",
         "parameters": [
           {
             "in": "path",
@@ -4204,7 +3935,7 @@
               },
               "application/ld+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SaleLine:jsonld-read"
+                  "$ref": "#/components/schemas/SaleLine-read-ld"
                 }
               },
               "text/html": {
@@ -4228,7 +3959,7 @@
         ]
       },
       "put": {
-        "operationId": "putSaleLineItem",
+        "operationId": "putSaleLine",
         "parameters": [
           {
             "in": "path",
@@ -4248,7 +3979,7 @@
             },
             "application/ld+json": {
               "schema": {
-                "$ref": "#/components/schemas/SaleLine:jsonld-write"
+                "$ref": "#/components/schemas/SaleLine-write-ld"
               }
             },
             "text/html": {
@@ -4269,7 +4000,7 @@
               },
               "application/ld+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SaleLine:jsonld-read"
+                  "$ref": "#/components/schemas/SaleLine-read-ld"
                 }
               },
               "text/html": {
@@ -4295,21 +4026,21 @@
     },
     "/sales": {
       "get": {
-        "operationId": "getSaleCollection",
+        "operationId": "getSales",
         "parameters": [
           {
-            "description": "The sale channel",
+            "description": "The sale channel reference (DEPRECATED)",
             "in": "query",
-            "name": "channelId",
+            "name": "channelReference",
             "required": false,
             "schema": {
-              "type": "integer"
+              "type": "string"
             }
           },
           {
-            "description": "The sale channel reference",
+            "description": "Your sale reference (This could be your sale ID)",
             "in": "query",
-            "name": "channelReference",
+            "name": "reference",
             "required": false,
             "schema": {
               "type": "string"
@@ -4353,19 +4084,19 @@
                   "properties": {
                     "hydra:member": {
                       "items": {
-                        "$ref": "#/components/schemas/Sale:jsonld-read"
+                        "$ref": "#/components/schemas/Sale-read-ld"
                       },
                       "type": "array"
                     },
                     "hydra:search": {
                       "properties": {
-                        "@type": {
+                        "ld-type": {
                           "type": "string"
                         },
                         "hydra:mapping": {
                           "items": {
                             "properties": {
-                              "@type": {
+                              "ld-type": {
                                 "type": "string"
                               },
                               "property": {
@@ -4397,11 +4128,11 @@
                     },
                     "hydra:view": {
                       "properties": {
-                        "@id": {
+                        "ld-id": {
                           "format": "iri-reference",
                           "type": "string"
                         },
-                        "@type": {
+                        "ld-type": {
                           "type": "string"
                         },
                         "hydra:first": {
@@ -4444,7 +4175,7 @@
         ]
       },
       "post": {
-        "operationId": "postSaleCollection",
+        "operationId": "postSale",
         "requestBody": {
           "content": {
             "application/json": {
@@ -4454,7 +4185,7 @@
             },
             "application/ld+json": {
               "schema": {
-                "$ref": "#/components/schemas/Sale:jsonld-write"
+                "$ref": "#/components/schemas/Sale-write-ld"
               }
             },
             "text/html": {
@@ -4475,7 +4206,7 @@
               },
               "application/ld+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Sale:jsonld-read"
+                  "$ref": "#/components/schemas/Sale-read-ld"
                 }
               },
               "text/html": {
@@ -4486,9 +4217,9 @@
             },
             "description": "Sale resource created",
             "links": {
-              "GetSaleItem": {
+              "GetSale": {
                 "description": "The `id` value returned in the response can be used as the `id` parameter in `GET /sales/{id}`.",
-                "operationId": "getSaleItem",
+                "operationId": "getSale",
                 "parameters": {
                   "id": "$response.body#/id"
                 }
@@ -4509,8 +4240,33 @@
       }
     },
     "/sales/{id}": {
+      "delete": {
+        "operationId": "deleteSale",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Sale resource deleted"
+          },
+          "404": {
+            "description": "Resource not found"
+          }
+        },
+        "summary": "Removes the Sale resource.",
+        "tags": [
+          "Sale"
+        ]
+      },
       "get": {
-        "operationId": "getSaleItem",
+        "operationId": "getSale",
         "parameters": [
           {
             "in": "path",
@@ -4531,7 +4287,7 @@
               },
               "application/ld+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Sale:jsonld-read"
+                  "$ref": "#/components/schemas/Sale-read-ld"
                 }
               },
               "text/html": {
@@ -4547,6 +4303,176 @@
           }
         },
         "summary": "Retrieves a Sale resource.",
+        "tags": [
+          "Sale"
+        ]
+      },
+      "patch": {
+        "operationId": "patchSale",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/merge-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Sale-write"
+              }
+            }
+          },
+          "description": "The updated Sale resource"
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Sale-read"
+                }
+              },
+              "application/ld+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Sale-read-ld"
+                }
+              },
+              "text/html": {
+                "schema": {
+                  "$ref": "#/components/schemas/Sale-read"
+                }
+              }
+            },
+            "description": "Sale resource updated"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "404": {
+            "description": "Resource not found"
+          }
+        },
+        "summary": "Updates the Sale resource.",
+        "tags": [
+          "Sale"
+        ]
+      },
+      "put": {
+        "operationId": "putSale",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Sale-write"
+              }
+            },
+            "application/ld+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Sale-write-ld"
+              }
+            },
+            "text/html": {
+              "schema": {
+                "$ref": "#/components/schemas/Sale-write"
+              }
+            }
+          },
+          "description": "The updated Sale resource"
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Sale-read"
+                }
+              },
+              "application/ld+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Sale-read-ld"
+                }
+              },
+              "text/html": {
+                "schema": {
+                  "$ref": "#/components/schemas/Sale-read"
+                }
+              }
+            },
+            "description": "Sale resource updated"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "404": {
+            "description": "Resource not found"
+          }
+        },
+        "summary": "Replaces the Sale resource.",
+        "tags": [
+          "Sale"
+        ]
+      }
+    },
+    "/sales/{id}/cancel": {
+      "post": {
+        "operationId": "cancelSale",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            },
+            "application/ld+json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Sale-read"
+                }
+              },
+              "application/ld+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Sale-read-ld"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "Cancels a sale.",
         "tags": [
           "Sale"
         ]
@@ -4589,10 +4515,11 @@
               },
               "application/ld+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Sale:jsonld-read"
+                  "$ref": "#/components/schemas/Sale-read-ld"
                 }
               }
-            }
+            },
+            "description": ""
           }
         },
         "summary": "Confirms a sale.",
@@ -4603,7 +4530,7 @@
     },
     "/shipments": {
       "get": {
-        "operationId": "getShipmentCollection",
+        "operationId": "getShipments",
         "parameters": [
           {
             "description": "The sale ID",
@@ -4652,19 +4579,19 @@
                   "properties": {
                     "hydra:member": {
                       "items": {
-                        "$ref": "#/components/schemas/Shipment:jsonld-read"
+                        "$ref": "#/components/schemas/Shipment-read-ld"
                       },
                       "type": "array"
                     },
                     "hydra:search": {
                       "properties": {
-                        "@type": {
+                        "ld-type": {
                           "type": "string"
                         },
                         "hydra:mapping": {
                           "items": {
                             "properties": {
-                              "@type": {
+                              "ld-type": {
                                 "type": "string"
                               },
                               "property": {
@@ -4696,11 +4623,11 @@
                     },
                     "hydra:view": {
                       "properties": {
-                        "@id": {
+                        "ld-id": {
                           "format": "iri-reference",
                           "type": "string"
                         },
-                        "@type": {
+                        "ld-type": {
                           "type": "string"
                         },
                         "hydra:first": {
@@ -4745,7 +4672,7 @@
     },
     "/shipments/{id}": {
       "get": {
-        "operationId": "getShipmentItem",
+        "operationId": "getShipment",
         "parameters": [
           {
             "in": "path",
@@ -4766,7 +4693,7 @@
               },
               "application/ld+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Shipment:jsonld-read"
+                  "$ref": "#/components/schemas/Shipment-read-ld"
                 }
               },
               "text/html": {
@@ -4789,7 +4716,7 @@
     },
     "/suppliers": {
       "get": {
-        "operationId": "getSupplierCollection",
+        "operationId": "getSuppliers",
         "parameters": [
           {
             "description": "The collection page number",
@@ -4829,19 +4756,19 @@
                   "properties": {
                     "hydra:member": {
                       "items": {
-                        "$ref": "#/components/schemas/Supplier:jsonld-read"
+                        "$ref": "#/components/schemas/Supplier-read-ld"
                       },
                       "type": "array"
                     },
                     "hydra:search": {
                       "properties": {
-                        "@type": {
+                        "ld-type": {
                           "type": "string"
                         },
                         "hydra:mapping": {
                           "items": {
                             "properties": {
-                              "@type": {
+                              "ld-type": {
                                 "type": "string"
                               },
                               "property": {
@@ -4873,11 +4800,11 @@
                     },
                     "hydra:view": {
                       "properties": {
-                        "@id": {
+                        "ld-id": {
                           "format": "iri-reference",
                           "type": "string"
                         },
-                        "@type": {
+                        "ld-type": {
                           "type": "string"
                         },
                         "hydra:first": {
@@ -4920,7 +4847,7 @@
         ]
       },
       "post": {
-        "operationId": "postSupplierCollection",
+        "operationId": "postSupplier",
         "requestBody": {
           "content": {
             "application/json": {
@@ -4930,7 +4857,7 @@
             },
             "application/ld+json": {
               "schema": {
-                "$ref": "#/components/schemas/Supplier:jsonld-write"
+                "$ref": "#/components/schemas/Supplier-write-ld"
               }
             },
             "text/html": {
@@ -4951,7 +4878,7 @@
               },
               "application/ld+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Supplier:jsonld-read"
+                  "$ref": "#/components/schemas/Supplier-read-ld"
                 }
               },
               "text/html": {
@@ -4962,9 +4889,9 @@
             },
             "description": "Supplier resource created",
             "links": {
-              "GetSupplierItem": {
+              "GetSupplier": {
                 "description": "The `id` value returned in the response can be used as the `id` parameter in `GET /suppliers/{id}`.",
-                "operationId": "getSupplierItem",
+                "operationId": "getSupplier",
                 "parameters": {
                   "id": "$response.body#/id"
                 }
@@ -4986,7 +4913,7 @@
     },
     "/suppliers/{id}": {
       "delete": {
-        "operationId": "deleteSupplierItem",
+        "operationId": "deleteSupplier",
         "parameters": [
           {
             "in": "path",
@@ -5011,7 +4938,7 @@
         ]
       },
       "get": {
-        "operationId": "getSupplierItem",
+        "operationId": "getSupplier",
         "parameters": [
           {
             "in": "path",
@@ -5032,7 +4959,7 @@
               },
               "application/ld+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Supplier:jsonld-read"
+                  "$ref": "#/components/schemas/Supplier-read-ld"
                 }
               },
               "text/html": {
@@ -5053,7 +4980,7 @@
         ]
       },
       "patch": {
-        "operationId": "patchSupplierItem",
+        "operationId": "patchSupplier",
         "parameters": [
           {
             "in": "path",
@@ -5084,7 +5011,7 @@
               },
               "application/ld+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Supplier:jsonld-read"
+                  "$ref": "#/components/schemas/Supplier-read-ld"
                 }
               },
               "text/html": {
@@ -5108,7 +5035,7 @@
         ]
       },
       "put": {
-        "operationId": "putSupplierItem",
+        "operationId": "putSupplier",
         "parameters": [
           {
             "in": "path",
@@ -5128,7 +5055,7 @@
             },
             "application/ld+json": {
               "schema": {
-                "$ref": "#/components/schemas/Supplier:jsonld-write"
+                "$ref": "#/components/schemas/Supplier-write-ld"
               }
             },
             "text/html": {
@@ -5149,7 +5076,7 @@
               },
               "application/ld+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Supplier:jsonld-read"
+                  "$ref": "#/components/schemas/Supplier-read-ld"
                 }
               },
               "text/html": {
